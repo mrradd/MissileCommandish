@@ -1,38 +1,54 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 /*******************************************************************************
- * SpawnManager *
- * Spawning of the weapon.
+ * class PauseMenuUIManager *
+ * Handles Pause Menu functionality.
 *******************************************************************************/
-public class SpawnManager : MonoBehaviour
+public class PauseMenuUIManager : MonoBehaviour
   {
-  /*****************************************************************************
-   * Unity Methods
-  *****************************************************************************/
-  /*****************************************************************************
-   * Start *
-  *****************************************************************************/
-  private void Start()
-    {
+  
+  /** Player's current score. */
+  public Text currentScoreText;
 
-    }
+  /** Bonus from cities. */
+  public Text cityBonusText;
+
+  /** Bonus from launchers. */
+  public Text launcherBonusText;
+
+  /** Bonus from rockets. */
+  public Text rocketBonusText;
 
   /*****************************************************************************
    * Methods
   *****************************************************************************/
   /*****************************************************************************
-   * spawn *
-   * Sets the initial position of the weapon based on a random spawn point
-   * pertaining to its tag.
+   * handleMainMenu *
+   * Handler for when the Main Menu button is pressed.
   *****************************************************************************/
-  public void spawn()
+  public void handleMainMenu()
     {
-    if(gameObject.tag == "EnemyRocket")
-      {
-      GameObject[] list = GameManager.instance.enemyRocketSpawnPoints;
-      gameObject.transform.position = list[Random.Range(0, list.Length)].transform.position;
-      }
+    Debug.Log("handleMainMenu");
+    }
+
+  /*****************************************************************************
+   * handleResume *
+   * Handler for when the Resume button is pressed.
+  *****************************************************************************/
+  public void handleResume()
+    {
+    GameManager.toggleCamera(1);
+    }
+
+  /*****************************************************************************
+   * handleResume *
+   * Handler for when the Restart button is pressed.
+  *****************************************************************************/
+  public void handleRestart()
+    {
+    GameManager.restartGame();
     }
   }

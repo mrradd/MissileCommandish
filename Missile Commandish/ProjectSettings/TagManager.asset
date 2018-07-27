@@ -6,6 +6,9 @@ TagManager:
   tags:
   - EnemyRocket
   - PlayerRocket
+  - PlayerExplosion
+  - EnemyExoplosion
+  - PauseCamera
   layers:
   - Default
   - TransparentFX
@@ -15,12 +18,12 @@ TagManager:
   - UI
   - 
   - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - EnemyWeapons
+  - PlayerWeapons
+  - PlayerExplosions
+  - EnemyExplosions
+  - Grass
+  - Buildings
   - 
   - 
   - 

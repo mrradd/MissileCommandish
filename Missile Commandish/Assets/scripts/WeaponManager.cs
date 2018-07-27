@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /*******************************************************************************
- * WeaponManager *
+ * class WeaponManager *
  * Handles weapon functionality like spawning.
 *******************************************************************************/
 public class WeaponManager : MonoBehaviour

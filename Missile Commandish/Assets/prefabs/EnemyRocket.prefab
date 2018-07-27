@@ -20,11 +20,14 @@ GameObject:
   m_Component:
   - component: {fileID: 4193638879259186}
   - component: {fileID: 212341610454294772}
-  - component: {fileID: 60708200745616182}
   - component: {fileID: 50354417709053284}
   - component: {fileID: 114000886750462700}
   - component: {fileID: 114770913742624668}
-  m_Layer: 0
+  - component: {fileID: 114945885034176214}
+  - component: {fileID: 60371721233420828}
+  - component: {fileID: 114467830385687994}
+  - component: {fileID: 114825256142461528}
+  m_Layer: 8
   m_Name: EnemyRocket
   m_TagString: EnemyRocket
   m_Icon: {fileID: 0}
@@ -38,7 +41,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1776160738303724}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -34.6, y: 2.8, z: 0}
+  m_LocalPosition: {x: -48.796402, y: -19.734493, z: 0}
   m_LocalScale: {x: 1.5, y: 1.5, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -58,13 +61,13 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!60 &60708200745616182
+--- !u!60 &60371721233420828
 PolygonCollider2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -73,7 +76,7 @@ PolygonCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -127,6 +130,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7851499f7e5504faf90a422dbc6e7cd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  weaponData: {fileID: 114770913742624668}
+--- !u!114 &114467830385687994
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1776160738303724}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b54f5b5a77334ec898c06be3ed9586d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponData: {fileID: 114770913742624668}
 --- !u!114 &114770913742624668
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -138,6 +154,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59b64ccd826a341e68d22d209e0d350f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pointsValue: 100
+  speed: 40
+  target: {x: 0, y: 0, z: 0}
+--- !u!114 &114825256142461528
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1776160738303724}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a1026faa3edff4ae7a3badc8ec24162a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponData: {fileID: 114770913742624668}
+  timeLimit: 3
+--- !u!114 &114945885034176214
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1776160738303724}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6282d087b9f114b3ab5e4127dd781af2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  explosion: {fileID: 1875439062609962, guid: 18c5854905d4748f3bd995156ec112e7, type: 2}
+  weaponData: {fileID: 114770913742624668}
+  weaponDestroyer: {fileID: 114825256142461528}
 --- !u!212 &212341610454294772
 SpriteRenderer:
   m_ObjectHideFlags: 1

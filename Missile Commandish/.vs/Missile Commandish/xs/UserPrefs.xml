@@ -1,14 +1,17 @@
 ﻿<Properties StartupConfiguration="{6C091239-DAB8-778A-8662-C15EA5EF5834}|">
   <MonoDevelop.Ide.ItemProperties.Missile_220Commandish PreferredExecutionTarget="Unity.Editor" />
   <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="Unity.Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/scripts/GameManager.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/scripts/MainMenuManager.cs">
     <Files>
-      <File FileName="Assets/scripts/GameManager.cs" Line="30" Column="3" />
-      <File FileName="Assets/scripts/BaseData.cs" Line="5" Column="1" />
-      <File FileName="Assets/scripts/WeaponManager.cs" Line="5" Column="9" />
-      <File FileName="Assets/scripts/Propulsion.cs" Line="11" Column="3" />
-      <File FileName="Assets/scripts/SpawnManager.cs" Line="32" Column="30" />
-      <File FileName="Assets/scripts/WeaponData.cs" Line="13" Column="18" />
+      <File FileName="Assets/scripts/GameManager.cs" Line="253" Column="6" />
+      <File FileName="Assets/scripts/InputController.cs" Line="19" Column="40" />
+      <File FileName="Assets/scripts/AIController.cs" Line="19" Column="30" />
+      <File FileName="Assets/scripts/InGameUIManager.cs" Line="30" Column="1" />
+      <File FileName="Assets/scripts/PauseMenuUIManager.cs" Line="37" Column="19" />
+      <File FileName="Assets/scripts/Propulsion.cs" Line="7" Column="21" />
+      <File FileName="Assets/scripts/EnemyRocket.cs" Line="33" Column="19" />
+      <File FileName="Assets/scripts/LevelClearedUIManager.cs" Line="42" Column="31" />
+      <File FileName="Assets/scripts/MainMenuManager.cs" Line="10" Column="14" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
