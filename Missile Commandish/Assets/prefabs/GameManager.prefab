@@ -51,6 +51,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 408209c3bcc284290a318c7e3e6df491, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inGameUIManager: {fileID: 0}
+  levelClearedCamera: {fileID: 0}
+  levelClearedObject: {fileID: 0}
+  levelClearedUIManager: {fileID: 0}
+  mainCamera: {fileID: 0}
+  mainGameObject: {fileID: 0}
+  pauseCamera: {fileID: 0}
+  pauseMenuObject: {fileID: 0}
+  pauseMenuUIManager: {fileID: 0}
   enemyRocketSpawnPoints:
   - {fileID: 0}
   - {fileID: 0}
@@ -67,10 +76,46 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  playerRocketCount: 0
+  mirvSpawnPoints:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  cities:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  launchers:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  activeEnemyWeapons: 0
+  currentWave: 1
+  enemyWeaponCounter: 0
+  maxEnemyWeaponCount: 1
+  maxPlayerRocketCount: 30
+  playerRocketCounter: 0
   playerScore: 0
-  playerRocket: {fileID: 0}
-  enemyRocket: {fileID: 1776160738303724, guid: c93c3c22457024666b8e2614d4b09c35,
-    type: 2}
+  cityBonus: 100
+  launcherBonus: 100
+  rocketBonus: 25
   leftBoundary: {fileID: 0}
   rightBoundary: {fileID: 0}
+  mirvSplitThreshold: {fileID: 0}
+  playAreaLeft: {fileID: 0}
+  playAreaRight: {fileID: 0}
+  playAreaTop: {fileID: 0}
+  playAreaBottom: {fileID: 0}
+  levelClearedTimeLimit: 1
+  gamePaused: 0

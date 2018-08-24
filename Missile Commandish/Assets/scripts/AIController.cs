@@ -18,7 +18,7 @@ public class AIController : MonoBehaviour
     {
     if(!GameManager.instance.gamePaused && GameManager.instance.enemyWeaponCounter > 0)
       {
-      launchRocket();
+      spawnEnemyWeapon();
       }
     }
 
@@ -26,17 +26,31 @@ public class AIController : MonoBehaviour
    * Methods
   *****************************************************************************/
   /*****************************************************************************
-   * launchRocket *
-   * Randomly tries to spawn an Enemy Rocket from a Random Enemy Rocket Spawn
-   * Point.
+   * spawnEnemyWeapon *
+   * Randomly tries to spawn an Enemy Weapon from a random Enemy Spawn Point.
   *****************************************************************************/
-  protected void launchRocket()
+  protected void spawnEnemyWeapon()
     {
     int trigger = (int)Random.Range(0f, 125.0f);
     if(trigger == 1)
       {
-      int index = (int)Random.Range(0f, GameManager.enemyRocketSpawners.Length);
-      GameManager.enemyRocketSpawners[index].spawn();
+      trigger = (int)Random.Range(0f, 100.0f);
+
+      ///** Launch Enemy Rocket. */
+      //if(trigger >= 1 && trigger <= 66)
+      //  {
+      //  int index = (int)Random.Range(0f, GameManager.enemyRocketSpawners.Length);
+      //  GameManager.enemyRocketSpawners[index].spawn();        
+      //  }
+
+      ///** Launch MIRV. */
+      //else if(trigger >= 67 && trigger <= 100)
+        //{
+        //int index = (int)Random.Range(0f, GameManager.mirvRocketSpawners.Length);
+        //GameManager.mirvRocketSpawners[index].spawn();
+        //}
+      int index = (int)Random.Range(0f, GameManager.mirvRocketSpawners.Length);
+      GameManager.mirvRocketSpawners[index].spawn();
       }
     }
   }

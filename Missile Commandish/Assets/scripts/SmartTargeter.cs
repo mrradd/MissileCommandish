@@ -3,40 +3,36 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /*******************************************************************************
- * class PlayerRocket *
- * Handles Player Rocket functionality.
+ * class SmartTargeter *
+ * Randomly finds a live building and sets it as the target.
 *******************************************************************************/
-public class PlayerRocket : Rocket
+public class SmartTargeter : Targeter
   {
   /*****************************************************************************
    * Unity Methods *
   *****************************************************************************/
-  /*****************************************************************************
-   * Start *
-  *****************************************************************************/
   protected override void Start()
     {
     base.Start();
-    updateWeaponCounts();
     }
 
   /*****************************************************************************
-   * OnCollisionEnter2D *
+   * Methods
   *****************************************************************************/
-  protected override void OnTriggerEnter2D(Collider2D collision)
+  /*****************************************************************************
+   * findTarget *
+   * Searches for a live building.
+  *****************************************************************************/
+  public override void findTarget()
     {
-    base.OnTriggerEnter2D(collision);
-    }
+    List<GameObject> buildings = GameManager.activeBuildings;
 
-  /*****************************************************************************
-   * Methods 
-  *****************************************************************************/
-  /*****************************************************************************
-   * updateWeaponCounts *
-   * Updates the weapon counts.
-  *****************************************************************************/
-  protected override void updateWeaponCounts()
-    {
-    GameManager.updatePlayerRocketCount(-1);
+    int i = Random.Range(0, buildings.Count);
+
+    Debug.Log("SmartTarget: " + buildings[i].name);
+
+    weaponData.target = buildings[i].transform.position;
+
+    rotateTowardTarget();
     }
   }

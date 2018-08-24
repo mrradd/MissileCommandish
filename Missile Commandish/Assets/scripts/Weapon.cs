@@ -59,9 +59,22 @@ public class Weapon : MonoBehaviour
   /*****************************************************************************
    * Methods
   *****************************************************************************/
+  /*****************************************************************************
+   * playExplosionAnimation *
+   * Plays the explosion animation.
+  *****************************************************************************/
   protected void playExplosionAnimation()
     {
     /** Instantiate Explosion animation object. */
     Instantiate(explosion, gameObject.transform.position, Quaternion.identity);
+    }
+
+  /*****************************************************************************
+   * updateWeaponCounts *
+   * Updates the weapon counts.
+  *****************************************************************************/
+  protected virtual void updateWeaponCounts()
+    {
+    /** Does nothing. */
     }
   }

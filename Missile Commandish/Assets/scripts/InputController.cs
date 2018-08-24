@@ -23,13 +23,6 @@ public class InputController : MonoBehaviour
         {
         launchRocket();
         }
-
-      //TODO CH  TESTING LAUNCHIN ROCKETS
-      if(Input.GetKeyDown(KeyCode.Space))
-        {
-        int i = Random.Range(0, GameManager.instance.enemyRocketSpawnPoints.Length - 1);
-        GameManager.instance.enemyRocketSpawnPoints[i].spawn();
-        }
       }
     }
 
@@ -56,14 +49,14 @@ public class InputController : MonoBehaviour
       {
       SpawnPoint   launcherToUse = null;
       float        shortestDist  = 1000f;
-      SpawnPoint[] spawnPoints   = GameManager.instance.launchers;
+      GameObject[] spawnPoints   = GameManager.instance.launchers;
 
-      foreach(SpawnPoint l in spawnPoints)
+      foreach(GameObject l in spawnPoints)
         {
         float d = Vector3.Distance(target, l.transform.position);
-        if(shortestDist > d && l.gameObject.activeInHierarchy)
+        if(shortestDist > d && l.activeInHierarchy)
           {
-          launcherToUse = l;
+          launcherToUse = l.GetComponent<SpawnPoint>();
           shortestDist = d;
           }
         }
@@ -71,7 +64,6 @@ public class InputController : MonoBehaviour
       /** Launch a rocket. */
       if(launcherToUse != null)
         {
-        //TODO CH  DECREMENT PLAYER ROCKET COUNT
         launcherToUse.spawn();
         }
       }

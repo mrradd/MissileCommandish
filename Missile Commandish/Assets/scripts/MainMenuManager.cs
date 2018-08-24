@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 /*******************************************************************************
  * class MainMenuManager *
@@ -9,7 +10,6 @@ using UnityEngine.UI;
 *******************************************************************************/
 public class MainMenuManager : MonoBehaviour
   {
-
   /*****************************************************************************
    * Methods
   *****************************************************************************/
@@ -20,6 +20,7 @@ public class MainMenuManager : MonoBehaviour
   public void playGame()
     {
     Debug.Log("playGame");
+    SceneManager.LoadScene("MainGameScene");
     }
 
   /*****************************************************************************
@@ -29,5 +30,6 @@ public class MainMenuManager : MonoBehaviour
   public void quit()
     {
     Debug.Log("quit");
+    Application.Quit();
     }
   }

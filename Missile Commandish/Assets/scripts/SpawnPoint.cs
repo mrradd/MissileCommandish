@@ -10,7 +10,7 @@ public class SpawnPoint : MonoBehaviour
   {
   /** Game object to spawn. */
   public GameObject obj;
-
+  //TODO CH  FINISH MIRV
   /*****************************************************************************
    * Methods
   *****************************************************************************/

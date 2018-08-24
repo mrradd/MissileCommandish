@@ -28,7 +28,7 @@ public class InGameUIManager : MonoBehaviour
   public void handlePause()
     {
     Debug.Log("Pause pushed.");
-    GameManager.instance.pauseMenuUIManager.currentScoreText.text = "Current Score\n" + GameManager.instance.playerScore;
+    GameManager.instance.pauseMenuUIManager.updateText();
     GameManager.toggleCamera(2);
     }
 

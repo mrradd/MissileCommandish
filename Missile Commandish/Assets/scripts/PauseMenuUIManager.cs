@@ -13,15 +13,6 @@ public class PauseMenuUIManager : MonoBehaviour
   /** Player's current score. */
   public Text currentScoreText;
 
-  /** Bonus from cities. */
-  public Text cityBonusText;
-
-  /** Bonus from launchers. */
-  public Text launcherBonusText;
-
-  /** Bonus from rockets. */
-  public Text rocketBonusText;
-
   /*****************************************************************************
    * Methods
   *****************************************************************************/
@@ -31,7 +22,8 @@ public class PauseMenuUIManager : MonoBehaviour
   *****************************************************************************/
   public void handleMainMenu()
     {
-    Debug.Log("handleMainMenu");
+    Debug.Log("pm::handleMainMenu");
+    GameManager.mainMenu();
     }
 
   /*****************************************************************************
@@ -40,6 +32,7 @@ public class PauseMenuUIManager : MonoBehaviour
   *****************************************************************************/
   public void handleResume()
     {
+    Debug.Log("pm::handleResume");
     GameManager.toggleCamera(1);
     }
 
@@ -49,6 +42,16 @@ public class PauseMenuUIManager : MonoBehaviour
   *****************************************************************************/
   public void handleRestart()
     {
+    Debug.Log("pm::handleRestart");
     GameManager.restartGame();
+    }
+
+  /*****************************************************************************
+   * updateText *
+   * Updates the UI text.
+  *****************************************************************************/
+  public void updateText()
+    {
+    currentScoreText.text = "Current Score\n" + GameManager.instance.playerScore;
     }
   }

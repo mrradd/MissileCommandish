@@ -187,7 +187,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 333fedccb28c24ee68c2bae4d54137c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerRocketCount: {fileID: 114273948517681288}
+  playerRocketCountText: {fileID: 114273948517681288}
   playerScoreText: {fileID: 114108308200092294}
   threatsText: {fileID: 114405140198515760}
 --- !u!114 &114069325846557620
@@ -518,7 +518,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 3
+  m_SortingOrder: 1
   m_TargetDisplay: 0
 --- !u!224 &224025199131141816
 RectTransform:
@@ -553,7 +553,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.125, y: 0.083666675}
   m_AnchorMax: {x: 0.125, y: 0.083666675}
-  m_AnchoredPosition: {x: 0, y: -0.0029907227}
+  m_AnchoredPosition: {x: 0, y: -0.0029296875}
   m_SizeDelta: {x: 132.9, y: 22.699997}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224354025603993270
@@ -590,7 +590,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.87000006, y: 0.083666675}
   m_AnchorMax: {x: 0.87000006, y: 0.083666675}
-  m_AnchoredPosition: {x: 0, y: -0.35003662}
+  m_AnchoredPosition: {x: 0, y: -0.35009766}
   m_SizeDelta: {x: 133.9, y: 22.699997}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224799292027301004

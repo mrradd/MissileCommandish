@@ -3,40 +3,45 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /*******************************************************************************
- * class PlayerRocket *
- * Handles Player Rocket functionality.
+ * class MIRV *
+ * Handles MIRV functionality. A MIRV launches multiple smaller rockets, and
+ * targets active cities and launchers.
 *******************************************************************************/
-public class PlayerRocket : Rocket
+public class MIRV : EnemyRocket
   {
+  /** Spawner for missile launching. */ public SpawnPoint spawnPoint;
+  /** Number of missiles to spawn. */   public int        numberOfBabies;
+
+  /** Babies launched flag. */ protected bool hadBabies;
+
   /*****************************************************************************
    * Unity Methods *
   *****************************************************************************/
   /*****************************************************************************
-   * Start *
+   * Update *
   *****************************************************************************/
-  protected override void Start()
+  protected override void Update()
     {
-    base.Start();
-    updateWeaponCounts();
-    }
-
-  /*****************************************************************************
-   * OnCollisionEnter2D *
-  *****************************************************************************/
-  protected override void OnTriggerEnter2D(Collider2D collision)
-    {
-    base.OnTriggerEnter2D(collision);
+    base.Update();
+    launchBabies();
     }
 
   /*****************************************************************************
    * Methods 
   *****************************************************************************/
   /*****************************************************************************
-   * updateWeaponCounts *
-   * Updates the weapon counts.
+   * launchBabies *
+   * Launches multiple smaller missiles.
   *****************************************************************************/
-  protected override void updateWeaponCounts()
+  protected void launchBabies()
     {
-    GameManager.updatePlayerRocketCount(-1);
+    float triggerY = (int)Random.Range(GameManager.playAreaTopY, GameManager.mirvThresholdY);
+
+    if(!hadBabies && transform.position.y <= triggerY)
+      {
+      hadBabies = true;
+      for(int i = 0; i < numberOfBabies; i++)
+        spawnPoint.spawn();
+      }
     }
   }

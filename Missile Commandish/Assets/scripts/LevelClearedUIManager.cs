@@ -30,7 +30,8 @@ public class LevelClearedUIManager : MonoBehaviour
   *****************************************************************************/
   public void handleQuit()
     {
-    Debug.Log("handleMainMenu");
+    Debug.Log("lc::handleQuit");
+    GameManager.mainMenu();
     }
 
   /*****************************************************************************
@@ -39,6 +40,7 @@ public class LevelClearedUIManager : MonoBehaviour
   *****************************************************************************/
   public void handleContinue()
     {
+    Debug.Log("lc::handleContinue");
     GameManager.startNextLevel();
     }
 
@@ -48,6 +50,26 @@ public class LevelClearedUIManager : MonoBehaviour
   *****************************************************************************/
   public void handleRestart()
     {
+    Debug.Log("lc::handleRestart");
     GameManager.restartGame();
+    }
+
+  /*****************************************************************************
+   * updateText *
+   * Updates the UI text.
+  *****************************************************************************/
+  public void updateText()
+    {
+    int cityBonus     = GameManager.instance.cityBonus     * GameManager.activeCityCount;
+    int launcherBonus = GameManager.instance.launcherBonus * GameManager.activeLauncherCount;
+    int rocketBonus   = GameManager.instance.rocketBonus   * GameManager.instance.playerRocketCounter;
+
+    GameManager.updatePlayerScore(cityBonus + launcherBonus + rocketBonus);
+
+    cityBonusText.text     = GameManager.instance.cityBonus     + " x " + GameManager.activeCityCount              + " = " + cityBonus;
+    launcherBonusText.text = GameManager.instance.launcherBonus + " x " + GameManager.activeLauncherCount          + " = " + launcherBonus;
+    rocketBonusText.text   = GameManager.instance.rocketBonus   + " x " + GameManager.instance.playerRocketCounter + " = " + rocketBonus;
+
+    totalScoreText.text = "Total Score: " + GameManager.instance.playerScore;
     }
   }

@@ -3,30 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /*******************************************************************************
- * class PlayerRocket *
- * Handles Player Rocket functionality.
+ * class MIRV *
+ * A missile launched from a MIRV.
 *******************************************************************************/
-public class PlayerRocket : Rocket
+public class MIRVBaby : EnemyRocket
   {
   /*****************************************************************************
    * Unity Methods *
   *****************************************************************************/
-  /*****************************************************************************
-   * Start *
-  *****************************************************************************/
-  protected override void Start()
-    {
-    base.Start();
-    updateWeaponCounts();
-    }
-
-  /*****************************************************************************
-   * OnCollisionEnter2D *
-  *****************************************************************************/
-  protected override void OnTriggerEnter2D(Collider2D collision)
-    {
-    base.OnTriggerEnter2D(collision);
-    }
 
   /*****************************************************************************
    * Methods 
@@ -37,6 +21,6 @@ public class PlayerRocket : Rocket
   *****************************************************************************/
   protected override void updateWeaponCounts()
     {
-    GameManager.updatePlayerRocketCount(-1);
+    GameManager.updateActiveEnemyWeaponCount(1);
     }
   }

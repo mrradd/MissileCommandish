@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-//TODO CH  MAKE COUNTERS FOR ACTIVE CITIES, LAUNCHERS, AND ENEMY WEAPONS. OBJECTS SHOULD TAKE CARE OF UPDATING THE COUNTERS ON
-//INSTANTIATION AND DESTRUCTION.
 /*******************************************************************************
  * class GameManager *
  * Manages global game properties and behavior.
@@ -14,23 +12,22 @@ using UnityEngine.SceneManagement;
 *******************************************************************************/
 public class GameManager : MonoBehaviour
   {
+  public static string ENEMY_EXPLOSION_TAG  = "EnemyExplosion";
   public static string PLAYER_EXPLOSION_TAG = "PlayerExplosion";
   public static string PLAYER_ROCKET_TAG    = "PlayerRocket";
 
   /** Instance of the GameManager. */
   public static GameManager instance;
 
-  /** Active Enemy threats counter. */
-  public int activeEnemyWeapons = 0;
-
-  /** Current wave/level. */
-  public int currentWave = 1;
-
+  [Header("Misc")]
   /** UI manager for the game. */
   public InGameUIManager inGameUIManager;
 
   /** Level Cleared Camera. */
   public Camera levelClearedCamera;
+
+  /** Level cleared. */
+  public GameObject levelClearedObject;
 
   /** UI manager for the level cleared menu. */
   public LevelClearedUIManager levelClearedUIManager;
@@ -38,8 +35,14 @@ public class GameManager : MonoBehaviour
   /** Main Camera. */
   public Camera mainCamera;
 
+  /** Main game. */
+  public GameObject mainGameObject;
+
   /** Pause Camera. */
   public Camera pauseCamera;
+
+  /** Pause Menu. */
+  public GameObject pauseMenuObject;
 
   /** UI manager for the pause menu. */
   public PauseMenuUIManager pauseMenuUIManager;
@@ -48,14 +51,23 @@ public class GameManager : MonoBehaviour
   /** Spawn points for Enemy Rockets. */
   public SpawnPoint[] enemyRocketSpawnPoints;
 
+  /** Spawn points for MIRVs. */
+  public SpawnPoint[] mirvSpawnPoints;
+
   [Header("Buildings")]
   /** City list. */
   public GameObject[] cities;
 
   /** Spawn points for Player Rockets. */
-  public SpawnPoint[] launchers;
+  public GameObject[] launchers;
 
   [Header("Stats")]
+  /** Active Enemy threats counter. */
+  public int activeEnemyWeapons = 0;
+
+  /** Current wave/level. */
+  public int currentWave = 1;
+
   /** Enemy weapon counter. */
   public int enemyWeaponCounter = 0;
 
@@ -71,10 +83,22 @@ public class GameManager : MonoBehaviour
   /** Current Player Score. */
   public int playerScore = 0;
 
+  [Header("Bonus Values")]
+  /** Bonus points for remaining cities. */
+  public int cityBonus;
+
+  /** Bonus points for remaining launchers. */
+  public int launcherBonus;
+
+  /** Bonus points for remaining player rockets. */
+  public int rocketBonus;
+
   [Header("Boundaries")]
   /** Enemy Rocket target boundaries. */
   public GameObject leftBoundary;
   public GameObject rightBoundary;
+
+  public GameObject mirvSplitThreshold;
 
   /** Play area boundaries. */
   public GameObject playAreaLeft;
@@ -88,13 +112,18 @@ public class GameManager : MonoBehaviour
   [Header("Flags")]
   public bool gamePaused;
 
-  protected float mLevelClearedTimer;
+  protected float mTransitionTimer;
+  protected bool  mNoCitiesLeft;
+  protected bool  mNoLaunchersLeft;
 
   /*****************************************************************************
    * Accessors
   *****************************************************************************/
   /** Enemy Rocket Spawn Points */
   public static SpawnPoint[] enemyRocketSpawners { get { return instance.enemyRocketSpawnPoints; } }
+
+  /** MIRV Spawn Points. */
+  public static SpawnPoint[] mirvRocketSpawners { get { return instance.mirvSpawnPoints; } }
 
   /** Boundaries. */
   /** Right X boundary. */
@@ -105,6 +134,9 @@ public class GameManager : MonoBehaviour
 
   /** Floor Y boundary. */
   public static float floorY          { get { return instance.rightBoundary.transform.position.y; } }
+
+  /** MIRV Y boundary. */
+  public static float mirvThresholdY  { get { return instance.mirvSplitThreshold.transform.position.y; } }
 
   /** Play area left X boundary. */
   public static float playAreaLeftX   { get { return instance.playAreaLeft.transform.position.x;  }}
@@ -117,6 +149,36 @@ public class GameManager : MonoBehaviour
 
   /** Play area bottom Y boundary. */
   public static float playAreaBottomY { get { return instance.playAreaBottom.transform.position.y; } }
+
+  /** Check active. */
+  /** Returns a list of all active buildings. */
+  public static List<GameObject> activeBuildings
+    {
+    get
+      {
+      List<GameObject> list = new List<GameObject>();
+
+      for(int i = 0; ; i++)
+        {
+        /** Add cities to the list. */
+        if(i < instance.cities.Length && instance.cities[i].activeSelf)
+          {
+          list.Add(instance.cities[i]);
+          }
+          
+        /** Add launchers to the list. */
+        if(i < instance.launchers.Length && instance.launchers[i].activeSelf)
+          {
+          list.Add(instance.launchers[i]);
+          }
+
+        if(i > instance.cities.Length && i > instance.launchers.Length)
+          break;
+        }
+
+      return list;
+      }
+    }
 
   /** Returns active City count. */
   public static int activeCityCount
@@ -181,11 +243,14 @@ public class GameManager : MonoBehaviour
   *****************************************************************************/
   private void Update()
     {
-    if(checkWin())
-      handleLevelCleared();
+    if(!instance.gamePaused)
+      {
+      if(checkWin())
+        levelCleared();
 
-    if(checkLose())
-      Debug.Log("Level lost.");
+      if(checkLose())
+        gameOver();      
+      }
     }
 
   /*****************************************************************************
@@ -197,7 +262,9 @@ public class GameManager : MonoBehaviour
   *****************************************************************************/
   public static bool checkLose()
     {
-    return activeCityCount <= 0 || activeLauncherCount <= 0;
+    instance.mNoCitiesLeft = activeCityCount <= 0;
+    instance.mNoLaunchersLeft = activeLauncherCount <= 0;
+    return instance.mNoCitiesLeft || instance.mNoLaunchersLeft;
     }
 
   /*****************************************************************************
@@ -215,15 +282,43 @@ public class GameManager : MonoBehaviour
    * levelCleared *
    * Handles when the level is cleared.
   *****************************************************************************/
-  public static void handleLevelCleared()
+  public static void levelCleared()
     {
-    instance.mLevelClearedTimer += Time.deltaTime;
+    instance.mTransitionTimer += Time.deltaTime;
 
     /** Delay level cleared, so the transition is not abrupt. */
-    if(instance.mLevelClearedTimer >= instance.levelClearedTimeLimit && instance.mainCamera.gameObject.activeSelf)
+    if(instance.mTransitionTimer >= instance.levelClearedTimeLimit && instance.mainCamera.gameObject.activeSelf)
       {
+      Debug.Log("levelCleared");
+      instance.levelClearedUIManager.updateText();
       toggleCamera(3);
       }
+    }
+
+  /*****************************************************************************
+   * gameOver *
+   * Transitions to the Game Over screen.
+  *****************************************************************************/
+  public static void gameOver()
+    {
+    instance.mTransitionTimer += Time.deltaTime;
+
+    if(instance.mTransitionTimer >= instance.levelClearedTimeLimit)
+      {
+      Debug.Log("gameOver");
+      saveFinalStats();
+      SceneManager.LoadScene("GameOverScene");      
+      }
+    }
+
+  /*****************************************************************************
+   * handleMainMenu *
+   * Transitions to the Main Menu.
+  *****************************************************************************/
+  public static void mainMenu()
+    {
+    Debug.Log("mainMenu");
+    SceneManager.LoadScene("MainMenuScene");
     }
 
   /*****************************************************************************
@@ -232,17 +327,20 @@ public class GameManager : MonoBehaviour
   *****************************************************************************/
   public static void restartGame()
     {
+    Debug.Log("restartGame");
     SceneManager.LoadScene("MainGameScene");
-    //instance.mLevelClearedTimer  = 0f;
-    //instance.enemyWeaponCounter  = 0;
-    //instance.playerRocketCounter = 0;
-    //instance.playerScore         = 0;
+    }
 
-    //instance.inGameUIManager.updateThreatCount(instance.enemyWeaponCounter);
-    //instance.inGameUIManager.updatePlayerRocketCountText(instance.playerRocketCounter);
-    //instance.inGameUIManager.updatePlayerScoreText(instance.playerScore);
-
-    //toggleCamera(1);
+  /*****************************************************************************
+   * saveFinalStats *
+   * Saves the final stats like score and reason for losing.
+  *****************************************************************************/
+  public static void saveFinalStats()
+    {
+    PlayerPrefs.SetInt("PlayerScore", instance.playerScore);
+    PlayerPrefs.SetInt("NoCitiesLeft", instance.mNoCitiesLeft ? 1 : 0);
+    PlayerPrefs.SetInt("NoLaunchersLeft", instance.mNoLaunchersLeft ? 1 : 0);
+    PlayerPrefs.Save();
     }
 
   /*****************************************************************************
@@ -251,7 +349,7 @@ public class GameManager : MonoBehaviour
   *****************************************************************************/
   public static void startNextLevel()
     {
-    instance.mLevelClearedTimer  = 0f;
+    instance.mTransitionTimer  = 0f;
     instance.enemyWeaponCounter  = instance.maxEnemyWeaponCount;
     instance.playerRocketCounter = instance.maxPlayerRocketCount;
     instance.currentWave++;
@@ -272,21 +370,32 @@ public class GameManager : MonoBehaviour
   public static void toggleCamera(int camera)
     {
     instance.gamePaused = true;
+
     instance.mainCamera.gameObject.SetActive(false);
     instance.pauseCamera.gameObject.SetActive(false);
     instance.levelClearedCamera.gameObject.SetActive(false);
 
+    instance.pauseMenuObject.SetActive(false);
+    instance.levelClearedObject.SetActive(false);
+    instance.mainGameObject.SetActive(false);
+
     switch(camera)
       {
       case 1:
+        Debug.Log("toggleCamera " + "1");
         instance.mainCamera.gameObject.SetActive(true);
+        instance.mainGameObject.SetActive(true);
         instance.gamePaused = false;
         break;
       case 2:
+        Debug.Log("toggleCamera " + "2");
         instance.pauseCamera.gameObject.SetActive(true);
+        instance.pauseMenuObject.SetActive(true);
         break;
       case 3:
+        Debug.Log("toggleCamera " + "3");
         instance.levelClearedCamera.gameObject.SetActive(true);
+        instance.levelClearedObject.SetActive(true);
         break;
       }
     }
