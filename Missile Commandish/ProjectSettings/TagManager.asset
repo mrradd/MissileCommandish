@@ -9,6 +9,8 @@ TagManager:
   - PlayerExplosion
   - EnemyExoplosion
   - PauseCamera
+  - BlueBomber
+  - Bomb
   layers:
   - Default
   - TransparentFX

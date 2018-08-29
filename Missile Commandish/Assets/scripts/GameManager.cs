@@ -48,6 +48,9 @@ public class GameManager : MonoBehaviour
   public PauseMenuUIManager pauseMenuUIManager;
 
   [Header("Enemy Spawnpoints")]
+  /** Spawn points for Bombers. */
+  public SpawnPoint[] bomberSpawnPoints;
+
   /** Spawn points for Enemy Rockets. */
   public SpawnPoint[] enemyRocketSpawnPoints;
 
@@ -119,6 +122,9 @@ public class GameManager : MonoBehaviour
   /*****************************************************************************
    * Accessors
   *****************************************************************************/
+  /** Enemy Rocket Spawn Points */
+  public static SpawnPoint[] bomberSpawners { get { return instance.bomberSpawnPoints; } }
+
   /** Enemy Rocket Spawn Points */
   public static SpawnPoint[] enemyRocketSpawners { get { return instance.enemyRocketSpawnPoints; } }
 

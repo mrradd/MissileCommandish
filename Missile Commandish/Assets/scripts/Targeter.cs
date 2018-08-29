@@ -43,7 +43,7 @@ public class Targeter : MonoBehaviour
    * rotateTowardTarget *
    * Rotates the weapon toward its target.
   *****************************************************************************/
-  protected void rotateTowardTarget()
+  public void rotateTowardTarget()
     {
     Vector2 localPosition = gameObject.transform.localPosition;
     Vector2 offset        = new Vector2(weaponData.target.x - localPosition.x,

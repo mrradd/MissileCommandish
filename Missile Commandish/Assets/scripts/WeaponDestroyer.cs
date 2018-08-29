@@ -13,7 +13,10 @@ public class WeaponDestroyer : MonoBehaviour
   public WeaponData weaponData;
 
   /** Time limit. */
-  public float timeLimit;
+  public float timeLimit = 2;
+
+  /** Destruction on collision must be handled elsewhere. */
+  public bool collisionOverride = false;
 
   /*****************************************************************************
    * Unity Methods *
@@ -32,7 +35,8 @@ public class WeaponDestroyer : MonoBehaviour
   *****************************************************************************/
   void OnTriggerEnter2D(Collider2D collision)
     {
-    destroy();
+    if(!collisionOverride)
+      destroy();
     }
 
   /*****************************************************************************

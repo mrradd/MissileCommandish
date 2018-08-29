@@ -49,8 +49,8 @@ public class AIController : MonoBehaviour
         //int index = (int)Random.Range(0f, GameManager.mirvRocketSpawners.Length);
         //GameManager.mirvRocketSpawners[index].spawn();
         //}
-      int index = (int)Random.Range(0f, GameManager.mirvRocketSpawners.Length);
-      GameManager.mirvRocketSpawners[index].spawn();
+        int index = (int)Random.Range(0f, GameManager.enemyRocketSpawners.Length);
+        GameManager.enemyRocketSpawners[index].spawn();
       }
     }
   }

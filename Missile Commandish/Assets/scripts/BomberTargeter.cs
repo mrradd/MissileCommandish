@@ -3,23 +3,28 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /*******************************************************************************
- * class SpawnPoint *
- * Spawns an object
+ * class BomberTargeter *
+ * Targets the farside of the screen.
 *******************************************************************************/
-public class SpawnPoint : MonoBehaviour
+public class BomberTargeter : Targeter
   {
-  /** Game object to spawn. */
-  public GameObject obj;
+  /*****************************************************************************
+   * Unity Methods *
+  *****************************************************************************/
+  protected override void Start()
+    {
+    base.Start();
+    }
 
   /*****************************************************************************
    * Methods
   *****************************************************************************/
   /*****************************************************************************
-   * spawn *
-   * Spawns an object at this position.
+   * findTarget *
+   * Targets the opposite side of the screen.
   *****************************************************************************/
-  public GameObject spawn()
+  public override void findTarget()
     {
-    return Instantiate(obj, gameObject.transform.position, Quaternion.identity);
+    weaponData.target = new Vector3(-gameObject.transform.position.x, gameObject.transform.position.y, 0);
     }
   }
