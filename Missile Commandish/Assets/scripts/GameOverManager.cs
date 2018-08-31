@@ -10,14 +10,25 @@ using UnityEngine.SceneManagement;
 *******************************************************************************/
 public class GameOverManager : MonoBehaviour
   {
+  public AudioSource audioSource;
   public Text finalScoreText;
   public Text reasonForLosingText;
+  public VoiceSoundManager voiceSoundManager;
+
+  public bool playedGameOverSound;
 
   /*****************************************************************************
    * Unity Methods
   *****************************************************************************/
+  /*****************************************************************************
+   * Start
+  *****************************************************************************/
   private void Start()
     {
+    /** HACK: For some reason I couldn't get the voice sounds prefab AudioSource
+     * to be seen as active, so I am setting one here. */
+    voiceSoundManager.audioSource = audioSource;
+
     bool citiesLost = PlayerPrefs.GetInt("NoCitiesLeft") > 0;
     bool launchersLost = PlayerPrefs.GetInt("NoLaunchersLeft") > 0;
 
@@ -31,6 +42,17 @@ public class GameOverManager : MonoBehaviour
       reasonForLosingText.text = "All launchers lost!";
     else if(citiesLost && launchersLost)
       reasonForLosingText.text = "All cities and launchers lost!";
+    }
+
+  /*****************************************************************************
+   * Update
+  *****************************************************************************/
+  private void Update()
+    {
+    if(!playedGameOverSound)
+      {
+      playedGameOverSound = voiceSoundManager.playGameOver();
+      }
     }
 
   /*****************************************************************************

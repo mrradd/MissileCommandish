@@ -12,6 +12,7 @@ TagManager:
   - BlueBomber
   - Bomb
   - PlayerExplosionParticle
+  - BuildingExplosion
   layers:
   - Default
   - TransparentFX

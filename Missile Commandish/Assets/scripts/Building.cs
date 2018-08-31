@@ -8,6 +8,9 @@ using UnityEngine;
 *******************************************************************************/
 public class Building : MonoBehaviour
   {
+  /** Explosion animation to instantiate on death. */
+  public GameObject explosion;
+
   /** Flaming animation. */
   public GameObject flamingAnimation;
 
@@ -18,13 +21,17 @@ public class Building : MonoBehaviour
     {
     /** Adjust the position of the flaming building object. */
     Vector3 pos = gameObject.transform.position;
+
+    /** Instantiate explosion animation object. */
+    Instantiate(explosion, pos, Quaternion.identity);
+
     pos.y += 2.5f;
 
     /** Instantiate flaming building animation object. */
-    GameObject obj = Instantiate(flamingAnimation, pos, Quaternion.identity);
+    GameObject flameObj = Instantiate(flamingAnimation, pos, Quaternion.identity);
 
     /** Set the name of the flaming building for future reference. */
-    obj.name = gameObject.name + "-Flames";
+    flameObj.name = gameObject.name + "-Flames";
 
     /** Deactivate building. */
     gameObject.SetActive(false);

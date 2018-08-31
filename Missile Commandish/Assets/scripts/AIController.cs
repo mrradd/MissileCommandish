@@ -32,7 +32,7 @@ public class AIController : MonoBehaviour
   protected void spawnEnemyWeapon()
     {
     int trigger = (int)Random.Range(0f, 125.0f);
-    if(trigger == 1)
+    if(trigger == 1 || GameManager.instance.gameLost || GameManager.instance.playerRocketCounter <= 0)
       {
       trigger = (int)Random.Range(0f, 100.0f);
 

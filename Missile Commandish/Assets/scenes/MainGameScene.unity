@@ -343,6 +343,40 @@ Prefab:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 112153819}
+    - target: {fileID: 224642463577289362, guid: 88c436200342e4dacb7cbc21a934e6b2,
+        type: 2}
+      propertyPath: m_AnchoredPosition.y
+      value: 1.6098633
+      objectReference: {fileID: 0}
+    - target: {fileID: 224642463577289362, guid: 88c436200342e4dacb7cbc21a934e6b2,
+        type: 2}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224642463577289362, guid: 88c436200342e4dacb7cbc21a934e6b2,
+        type: 2}
+      propertyPath: m_AnchorMax.y
+      value: 0.97400004
+      objectReference: {fileID: 0}
+    - target: {fileID: 224642463577289362, guid: 88c436200342e4dacb7cbc21a934e6b2,
+        type: 2}
+      propertyPath: m_SizeDelta.y
+      value: 22.700012
+      objectReference: {fileID: 0}
+    - target: {fileID: 224642463577289362, guid: 88c436200342e4dacb7cbc21a934e6b2,
+        type: 2}
+      propertyPath: m_AnchorMin.y
+      value: 0.97400004
+      objectReference: {fileID: 0}
+    - target: {fileID: 114829799736805358, guid: 88c436200342e4dacb7cbc21a934e6b2,
+        type: 2}
+      propertyPath: m_Text
+      value: 'Missiles: 999999'
+      objectReference: {fileID: 0}
+    - target: {fileID: 1355253674345330, guid: 88c436200342e4dacb7cbc21a934e6b2, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 88c436200342e4dacb7cbc21a934e6b2, type: 2}
   m_IsPrefabParent: 0
@@ -1081,6 +1115,42 @@ Prefab:
       propertyPath: bomberSpawnPoints.Array.data[3]
       value: 
       objectReference: {fileID: 57585738}
+    - target: {fileID: 114780088854221446, guid: 78b28f5346eaf4291867134080773727,
+        type: 2}
+      propertyPath: audioSource
+      value: 
+      objectReference: {fileID: 1801572855}
+    - target: {fileID: 114780088854221446, guid: 78b28f5346eaf4291867134080773727,
+        type: 2}
+      propertyPath: dangerAC
+      value: 
+      objectReference: {fileID: 8300000, guid: 44e19d152870743a599385c728459226, type: 3}
+    - target: {fileID: 114780088854221446, guid: 78b28f5346eaf4291867134080773727,
+        type: 2}
+      propertyPath: missilesDepleatedAC
+      value: 
+      objectReference: {fileID: 8300000, guid: b471ce33c09c645988045489e931f5ab, type: 3}
+    - target: {fileID: 114780088854221446, guid: 78b28f5346eaf4291867134080773727,
+        type: 2}
+      propertyPath: maxPlayerRocketCount
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114780088854221446, guid: 78b28f5346eaf4291867134080773727,
+        type: 2}
+      propertyPath: voiceSoundManager
+      value: 
+      objectReference: {fileID: 114849268498478484, guid: ddbddac78832f4793befa8fcac97e059,
+        type: 2}
+    - target: {fileID: 114780088854221446, guid: 78b28f5346eaf4291867134080773727,
+        type: 2}
+      propertyPath: levelClearedTimeLimit
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114780088854221446, guid: 78b28f5346eaf4291867134080773727,
+        type: 2}
+      propertyPath: maxEnemyWeaponCount
+      value: 30
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 78b28f5346eaf4291867134080773727, type: 2}
   m_IsPrefabParent: 0
@@ -1113,6 +1183,107 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 301460184}
   m_Script: {fileID: 11500000, guid: 962cd24ed783a440798c33021d3df889, type: 3}
+--- !u!1 &1801572854 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1128697989793396, guid: 78b28f5346eaf4291867134080773727,
+    type: 2}
+  m_PrefabInternal: {fileID: 1521465345}
+--- !u!82 &1801572855
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1801572854}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 243419265020099816, guid: 8b9744c7a3d11411eafdf0a40c6f1d9f,
+    type: 2}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &1818497272
 GameObject:
   m_ObjectHideFlags: 0

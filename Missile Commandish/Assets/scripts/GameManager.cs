@@ -114,6 +114,13 @@ public class GameManager : MonoBehaviour
 
   [Header("Flags")]
   public bool gamePaused;
+  public bool gameLost;
+  public bool playedMissilesDepleated;
+  public bool playedDanger;
+
+  [Header("Audio")]
+  public VoiceSoundManager voiceSoundManager;
+  public AudioSource audioSource;
 
   protected float mTransitionTimer;
   protected bool  mNoCitiesLeft;
@@ -242,6 +249,11 @@ public class GameManager : MonoBehaviour
     instance.inGameUIManager.updatePlayerScoreText(instance.playerScore);
     instance.inGameUIManager.updateThreatCount(instance.enemyWeaponCounter);
     instance.inGameUIManager.updatePlayerRocketCountText(instance.maxPlayerRocketCount);
+
+
+    /** HACK: For some reason I couldn't get the voice sounds prefab AudioSource
+     * to be seen as active, so I am setting one here. */
+    voiceSoundManager.audioSource = audioSource;
     }
 
   /*****************************************************************************
@@ -251,11 +263,26 @@ public class GameManager : MonoBehaviour
     {
     if(!instance.gamePaused)
       {
+      /** Play no missile warning. */
+      if(!instance.playedMissilesDepleated && instance.playerRocketCounter <= 0)
+        {
+        instance.playedMissilesDepleated = instance.voiceSoundManager.playMissilesDepleated();
+        }
+
+      /** Play danger warning. */
+      if(!instance.playedDanger && (activeCityCount <= 1 || activeLauncherCount <= 1))
+        {
+        instance.playedDanger = instance.voiceSoundManager.playDanger();
+        }
+      }
+
+    if(instance.mainCamera.gameObject.activeSelf)
+      {
       if(checkWin())
         levelCleared();
 
       if(checkLose())
-        gameOver();      
+        gameOver();
       }
     }
 
@@ -285,6 +312,24 @@ public class GameManager : MonoBehaviour
     }
 
   /*****************************************************************************
+   * gameOver *
+   * Transitions to the Game Over screen.
+  *****************************************************************************/
+  public static void gameOver()
+    {
+    instance.gameLost = true;
+
+    instance.mTransitionTimer += Time.deltaTime;
+
+    if(instance.mTransitionTimer >= instance.levelClearedTimeLimit && instance.activeEnemyWeapons <= 0)
+      {
+      Debug.Log("gameOver");
+      saveFinalStats();
+      SceneManager.LoadScene("GameOverScene");
+      }
+    }
+
+  /*****************************************************************************
    * levelCleared *
    * Handles when the level is cleared.
   *****************************************************************************/
@@ -298,22 +343,6 @@ public class GameManager : MonoBehaviour
       Debug.Log("levelCleared");
       instance.levelClearedUIManager.updateText();
       toggleCamera(3);
-      }
-    }
-
-  /*****************************************************************************
-   * gameOver *
-   * Transitions to the Game Over screen.
-  *****************************************************************************/
-  public static void gameOver()
-    {
-    instance.mTransitionTimer += Time.deltaTime;
-
-    if(instance.mTransitionTimer >= instance.levelClearedTimeLimit)
-      {
-      Debug.Log("gameOver");
-      saveFinalStats();
-      SceneManager.LoadScene("GameOverScene");      
       }
     }
 
@@ -355,9 +384,12 @@ public class GameManager : MonoBehaviour
   *****************************************************************************/
   public static void startNextLevel()
     {
-    instance.mTransitionTimer  = 0f;
+    instance.mTransitionTimer    = 0f;
     instance.enemyWeaponCounter  = instance.maxEnemyWeaponCount;
     instance.playerRocketCounter = instance.maxPlayerRocketCount;
+    instance.playedDanger = false;
+    instance.playedMissilesDepleated = false;
+
     instance.currentWave++;
 
     //TODO CH  CONSIDER ADJUSTING WEAPON COUNTS PER LEVEL.

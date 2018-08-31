@@ -39,7 +39,7 @@ public class InGameUIManager : MonoBehaviour
   *****************************************************************************/
   public void updatePlayerRocketCountText(int value)
     {
-    playerRocketCountText.text = "Rockets: " + value.ToString();
+    playerRocketCountText.text = "Missiles: " + value.ToString();
     }
 
   /*****************************************************************************

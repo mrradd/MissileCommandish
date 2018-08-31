@@ -9,9 +9,11 @@ using UnityEngine;
 [RequireComponent(typeof(AudioSource))]
 public class RandomSoundManager : MonoBehaviour
   {
-  /** Audio source. */          public AudioSource audioSource;
-  /** Played sound flag. */     public bool        playedSound = false;
-  /** List of launch sounds. */ public AudioClip[] rocketLaunchSounds;
+  /** Audio source. */
+  public AudioSource audioSource;
+
+  /** List of launch sounds. */
+  public AudioClip[] audioClips;
 
   /*****************************************************************************
    * Unity Methods
@@ -28,14 +30,6 @@ public class RandomSoundManager : MonoBehaviour
     }
 
   /*****************************************************************************
-   * Update
-  *****************************************************************************/
-  private void Update()
-    {
-    
-    }
-
-  /*****************************************************************************
    * Methods
   *****************************************************************************/
   /*****************************************************************************
@@ -44,20 +38,7 @@ public class RandomSoundManager : MonoBehaviour
   *****************************************************************************/
   public void playSound()
     {
-    if(!playedSound)
-      {
-      playedSound = true;
-      int i = (int)Random.Range(0, rocketLaunchSounds.Length);
-      audioSource.PlayOneShot(rocketLaunchSounds[i]);
-      }
-    }
-
-  /*****************************************************************************
-   * reset *
-   * Resets the flag to allow for playing on update.
-  *****************************************************************************/
-  public void reset()
-    {
-    playedSound = false;
+    int i = (int)Random.Range(0, audioClips.Length);
+    audioSource.PlayOneShot(audioClips[i]); 
     }
   }
