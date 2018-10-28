@@ -77,6 +77,12 @@ public class GameManager : MonoBehaviour
   /** Max number of Enemy weapons. */
   public int maxEnemyWeaponCount = 20;
 
+  /** Qty of mirvs per level. */
+  public int mirvCount = 0;
+
+  /** Qty of bombers per level. */
+  public int bomberCount = 0;
+
   /** Max number of Plyer weapons. */
   public int maxPlayerRocketCount = 30;
 
@@ -391,6 +397,9 @@ public class GameManager : MonoBehaviour
     instance.playedMissilesDepleated = false;
 
     instance.currentWave++;
+
+    instance.mirvCount   = (instance.currentWave / 3) + 2;
+    instance.bomberCount = (instance.currentWave / 2) + 2;
 
     //TODO CH  CONSIDER ADJUSTING WEAPON COUNTS PER LEVEL.
 

@@ -8,6 +8,8 @@ using UnityEngine;
 *******************************************************************************/
 public class AIController : MonoBehaviour
   {
+  public int mirvAmmo;
+
   /*****************************************************************************
    * Unity Methods
   *****************************************************************************/
@@ -34,23 +36,32 @@ public class AIController : MonoBehaviour
     int trigger = (int)Random.Range(0f, 125.0f);
     if(trigger == 1 || GameManager.instance.gameLost || GameManager.instance.playerRocketCounter <= 0)
       {
-      trigger = (int)Random.Range(0f, 100.0f);
+      trigger = (int)Random.Range(1f, 100.0f);
 
-      ///** Launch Enemy Rocket. */
-      //if(trigger >= 1 && trigger <= 66)
-      //  {
-      //  int index = (int)Random.Range(0f, GameManager.enemyRocketSpawners.Length);
-      //  GameManager.enemyRocketSpawners[index].spawn();        
-      //  }
-
-      ///** Launch MIRV. */
-      //else if(trigger >= 67 && trigger <= 100)
-        //{
-        //int index = (int)Random.Range(0f, GameManager.mirvRocketSpawners.Length);
-        //GameManager.mirvRocketSpawners[index].spawn();
-        //}
+      /** Launch Enemy Rocket. */
+      if(trigger >= 1 && trigger <= 66)
+        {
         int index = (int)Random.Range(0f, GameManager.enemyRocketSpawners.Length);
-        GameManager.enemyRocketSpawners[index].spawn();
+        GameManager.enemyRocketSpawners[index].spawn();        
+        }
+
+      /** Launch bomber. */
+      else if(trigger >= 67 && trigger <= 89 && GameManager.instance.currentWave >= 3 && GameManager.instance.bomberCount > 0)
+        {
+        int index = (int)Random.Range(0f, GameManager.bomberSpawners.Length);
+        GameManager.bomberSpawners[index].spawn();
+        GameManager.instance.bomberCount--;
+        }
+
+      /** Launch MIRV. */
+      else if(trigger >= 90 && trigger <= 100 && GameManager.instance.currentWave >= 5 && GameManager.instance.mirvCount > 0)
+        {
+        int index = (int)Random.Range(0f, GameManager.mirvRocketSpawners.Length);
+        GameManager.mirvRocketSpawners[index].spawn();
+        GameManager.instance.mirvCount--;
+        }
+        //int index = (int)Random.Range(0f, GameManager.enemyRocketSpawners.Length);
+        //GameManager.enemyRocketSpawners[index].spawn();
       }
     }
   }

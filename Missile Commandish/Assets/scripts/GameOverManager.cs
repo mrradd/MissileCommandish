@@ -36,12 +36,14 @@ public class GameOverManager : MonoBehaviour
     finalScoreText.text = "Final Score\n" + PlayerPrefs.GetInt("PlayerScore").ToString();
 
     /** Set reason for losing text. */
-    if(citiesLost)
+    if(citiesLost && launchersLost)
+      reasonForLosingText.text = "All cities and launchers lost!";
+    else if(citiesLost)
       reasonForLosingText.text = "All cities lost!";
     else if(launchersLost)
       reasonForLosingText.text = "All launchers lost!";
-    else if(citiesLost && launchersLost)
-      reasonForLosingText.text = "All cities and launchers lost!";
+    else
+      reasonForLosingText.text = "Game Over";
     }
 
   /*****************************************************************************

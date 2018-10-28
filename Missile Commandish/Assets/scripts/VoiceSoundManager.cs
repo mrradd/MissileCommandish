@@ -9,7 +9,7 @@ using UnityEngine;
 
 public class VoiceSoundManager : MonoBehaviour
   {
-  /** Audio source. */
+  /** Audio source. Set later before use. */
   public AudioSource audioSource;
 
   /** Sound clips */
