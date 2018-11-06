@@ -35,6 +35,9 @@ public class GameManager : MonoBehaviour
   /** Main Camera. */
   public Camera mainCamera;
 
+  /** Main Camera Shaker. */
+  public GameObject mainCameraShaker;
+
   /** Main game. */
   public GameObject mainGameObject;
 
@@ -68,6 +71,9 @@ public class GameManager : MonoBehaviour
   /** Active Enemy threats counter. */
   public int activeEnemyWeapons = 0;
 
+  /** Qty of bombers per level. */
+  public int bomberCount = 0;
+
   /** Current wave/level. */
   public int currentWave = 1;
 
@@ -80,9 +86,6 @@ public class GameManager : MonoBehaviour
   /** Qty of mirvs per level. */
   public int mirvCount = 0;
 
-  /** Qty of bombers per level. */
-  public int bomberCount = 0;
-
   /** Max number of Plyer weapons. */
   public int maxPlayerRocketCount = 30;
 
@@ -91,6 +94,12 @@ public class GameManager : MonoBehaviour
 
   /** Current Player Score. */
   public int playerScore = 0;
+
+  /** Threshold to meet to regen a building. */
+  public int reviveBuildingThreshold = 3000;
+
+  /** Counter tracking points until building is revived. */
+  public int reviveBuildingCounter = 0;
 
   [Header("Bonus Values")]
   /** Bonus points for remaining cities. */
@@ -225,6 +234,12 @@ public class GameManager : MonoBehaviour
       }
     }
 
+  /** Returns the Main Camera Shaker. */
+  public static CameraShaker getMainCameraShaker()
+    {
+    return instance.mainCameraShaker.GetComponent<CameraShaker>();
+    }
+
   /*****************************************************************************
    * Unity Methods
   *****************************************************************************/
@@ -303,7 +318,7 @@ public class GameManager : MonoBehaviour
     {
     instance.mNoCitiesLeft = activeCityCount <= 0;
     instance.mNoLaunchersLeft = activeLauncherCount <= 0;
-    return instance.mNoCitiesLeft || instance.mNoLaunchersLeft;
+    return instance.mNoCitiesLeft && instance.mNoLaunchersLeft;
     }
 
   /*****************************************************************************
@@ -476,6 +491,7 @@ public class GameManager : MonoBehaviour
   public static void updatePlayerScore(int value)
     {
     instance.playerScore = instance.playerScore + value;
+    instance.reviveBuildingCounter = instance.reviveBuildingCounter + value;
     instance.inGameUIManager.updatePlayerScoreText(instance.playerScore);
     }
 

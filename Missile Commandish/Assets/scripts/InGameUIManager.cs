@@ -59,6 +59,6 @@ public class InGameUIManager : MonoBehaviour
   *****************************************************************************/
   public void updateThreatCount(int value)
     {
-    threatsText.text = "Threats: " + value.ToString();
+    threatsText.text = "Incoming: " + value.ToString();
     }
   }

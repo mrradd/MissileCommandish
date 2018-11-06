@@ -8,6 +8,9 @@ using UnityEngine;
 *******************************************************************************/
 public class Building : MonoBehaviour
   {
+  /** Amount of time to shake the camera for. */
+  public float cameraShakeTime;
+
   /** Explosion animation to instantiate on death. */
   public GameObject explosion;
 
@@ -32,6 +35,8 @@ public class Building : MonoBehaviour
 
     /** Set the name of the flaming building for future reference. */
     flameObj.name = gameObject.name + "-Flames";
+
+    GameManager.getMainCameraShaker().incrementShakeTimer(cameraShakeTime);
 
     /** Deactivate building. */
     gameObject.SetActive(false);
