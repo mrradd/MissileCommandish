@@ -372,13 +372,6 @@ public class GameManager : MonoBehaviour
       {
       Debug.Log("levelCleared");
 
-      /** Restore a building. */
-      if(instance.reviveBuildingScore >= instance.reviveBuildingScoreThreshold)
-        {
-        restoreBuilding();
-        instance.reviveBuildingScore = 0;
-        }
-
       instance.levelClearedUIManager.updateText();
       toggleCamera(3);
       }
@@ -418,6 +411,7 @@ public class GameManager : MonoBehaviour
       {
       if(!instance.launchers[i].gameObject.activeSelf)
         {
+        Debug.Log("Launcher restored.");
         instance.launchers[i].gameObject.SetActive(true);
         Destroy(instance.launchers[i].GetComponent<Building>().destroyedVersion);
         buildingRestored = true;
@@ -433,6 +427,7 @@ public class GameManager : MonoBehaviour
         {
         if(!instance.cities[i].gameObject.activeSelf)
           {
+          Debug.Log("City restored.");
           instance.cities[i].gameObject.SetActive(true);
           Destroy(instance.cities[i].GetComponent<Building>().destroyedVersion);
           buildingRestored = true;
@@ -441,6 +436,9 @@ public class GameManager : MonoBehaviour
           }
         }
       }
+
+    if(!buildingRestored)
+      Debug.Log("Didn't restore building.");
     }
 
   /*****************************************************************************
@@ -462,12 +460,14 @@ public class GameManager : MonoBehaviour
   public static void startNextLevel()
     {
     Debug.Log("revive building score: " + instance.reviveBuildingScore);
-            
+
     instance.mTransitionTimer        = 0f;
     instance.enemyWeaponCounter      = instance.maxEnemyWeaponCount;
     instance.playerRocketCounter     = instance.maxPlayerRocketCount;
     instance.playedDanger            = false;
     instance.playedMissilesDepleated = false;
+    instance.cityRestored            = false;
+    instance.launcherRestored        = false;
 
     instance.currentWave++;
 

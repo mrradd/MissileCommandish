@@ -3,8 +3,11 @@
   <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="Unity.Editor" />
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets/scripts/LevelClearedUIManager.cs">
     <Files>
-      <File FileName="Assets/scripts/GameManager.cs" Line="431" Column="40" />
-      <File FileName="Assets/scripts/LevelClearedUIManager.cs" Line="22" Column="31" />
+      <File FileName="Assets/scripts/GameManager.cs" Line="462" Column="52" />
+      <File FileName="Assets/scripts/LevelClearedUIManager.cs" Line="83" Column="50" />
+      <File FileName="Assets/scripts/Bomb.cs" Line="24" Column="19" />
+      <File FileName="Assets/scripts/EnemyRocket.cs" Line="32" Column="19" />
+      <File FileName="Assets/scripts/AIController.cs" Line="23" Column="8" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
