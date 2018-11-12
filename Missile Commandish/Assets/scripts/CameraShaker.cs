@@ -68,7 +68,7 @@ public class CameraShaker : MonoBehaviour
       }
 
     /** Reset camera after shaking. */
-    else if(Camera.main.transform.localPosition != mCameraOriginalPosition)
+    else if(cameraTarget && cameraTarget.transform.localPosition != mCameraOriginalPosition)
       cameraTarget.transform.localPosition = mCameraOriginalPosition;
     }
   }

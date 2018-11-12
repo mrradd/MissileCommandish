@@ -262,6 +262,7 @@ public class GameManager : MonoBehaviour
   *****************************************************************************/
   private void Start()
     {
+    Debug.Log(Screen.width + "x" + Screen.height);
     instance.enemyWeaponCounter  = instance.maxEnemyWeaponCount;
     instance.playerRocketCounter = instance.maxPlayerRocketCount;
 
@@ -318,18 +319,21 @@ public class GameManager : MonoBehaviour
     {
     instance.mNoCitiesLeft = activeCityCount <= 0;
     instance.mNoLaunchersLeft = activeLauncherCount <= 0;
-    return instance.mNoCitiesLeft && instance.mNoLaunchersLeft;
+    return instance.mNoCitiesLeft || instance.mNoLaunchersLeft;
     }
 
   /*****************************************************************************
    * checkWin *
-   * Verifies if the Player won.
+   * Verifies if the Player won. (Only checks if main camera is active meaning
+   * the game is being played.
   *****************************************************************************/
   public static bool checkWin()
     {
-    return instance.enemyWeaponCounter <= 0 && activeCityCount > 0 &&
-                   activeLauncherCount > 0 && instance.activeEnemyWeapons <= 0 &&
-                   instance.mainCamera.gameObject.activeSelf;
+    return instance.mainCamera.gameObject.activeSelf &&
+           instance.enemyWeaponCounter <= 0          &&
+           activeCityCount > 0                       &&
+           activeLauncherCount > 0                   &&
+           instance.activeEnemyWeapons <= 0;
     }
 
   /*****************************************************************************
