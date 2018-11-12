@@ -1,12 +1,16 @@
 ﻿<Properties StartupConfiguration="{6C091239-DAB8-778A-8662-C15EA5EF5834}|">
   <MonoDevelop.Ide.ItemProperties.Missile_220Commandish PreferredExecutionTarget="Unity.Editor" />
   <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="Unity.Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/scripts/CameraShaker.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/scripts/GameManager.cs">
     <Files>
-      <File FileName="Assets/scripts/GameManager.cs" Line="334" Column="35" />
+      <File FileName="Assets/scripts/GameManager.cs" Line="530" Column="1" />
       <File FileName="Assets/scripts/CameraShaker.cs" Line="69" Column="5" />
       <File FileName="Assets/scripts/Weapon.cs" Line="4" Column="1" />
       <File FileName="Assets/scripts/SpawnPoint.cs" Line="21" Column="21" />
+      <File FileName="Assets/scripts/InputController.cs" Line="23" Column="36" />
+      <File FileName="Assets/scripts/Building.cs" Line="22" Column="3" />
+      <File FileName="Assets/scripts/AIController.cs" Line="76" Column="113" />
+      <File FileName="Assets/scripts/LevelClearedUIManager.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />

@@ -1613,7 +1613,7 @@ Prefab:
     - target: {fileID: 114780088854221446, guid: 78b28f5346eaf4291867134080773727,
         type: 2}
       propertyPath: maxPlayerRocketCount
-      value: 30
+      value: 42
       objectReference: {fileID: 0}
     - target: {fileID: 114780088854221446, guid: 78b28f5346eaf4291867134080773727,
         type: 2}
@@ -1629,13 +1629,33 @@ Prefab:
     - target: {fileID: 114780088854221446, guid: 78b28f5346eaf4291867134080773727,
         type: 2}
       propertyPath: maxEnemyWeaponCount
-      value: 20
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 114780088854221446, guid: 78b28f5346eaf4291867134080773727,
         type: 2}
       propertyPath: mainCameraShaker
       value: 
       objectReference: {fileID: 1373310513}
+    - target: {fileID: 114780088854221446, guid: 78b28f5346eaf4291867134080773727,
+        type: 2}
+      propertyPath: launcherBonus
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 114780088854221446, guid: 78b28f5346eaf4291867134080773727,
+        type: 2}
+      propertyPath: rocketBonus
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 114780088854221446, guid: 78b28f5346eaf4291867134080773727,
+        type: 2}
+      propertyPath: reviveBuildingThreshold
+      value: 3200
+      objectReference: {fileID: 0}
+    - target: {fileID: 114780088854221446, guid: 78b28f5346eaf4291867134080773727,
+        type: 2}
+      propertyPath: reviveBuildingScoreThreshold
+      value: 8000
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 78b28f5346eaf4291867134080773727, type: 2}
   m_IsPrefabAsset: 0

@@ -52,7 +52,7 @@ public class AIController : MonoBehaviour
       for(int i = 0; i < launchCount; i++)
         {
         /** Make sure there is enough ammo. */
-        if(GameManager.instance.enemyWeaponCounter > 0)
+        if(GameManager.instance.enemyWeaponCounter <= 0)
           return;
         
         trigger = (int)Random.Range(1f, 100.0f);

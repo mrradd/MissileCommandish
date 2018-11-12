@@ -67,6 +67,9 @@ public class GameManager : MonoBehaviour
   /** Spawn points for Player Rockets. */
   public GameObject[] launchers;
 
+  /** Destroyed buildings. */
+  public List<Building> destroyedBuildings = new List<Building>();
+
   [Header("Stats")]
   /** Active Enemy threats counter. */
   public int activeEnemyWeapons = 0;
@@ -96,10 +99,10 @@ public class GameManager : MonoBehaviour
   public int playerScore = 0;
 
   /** Threshold to meet to regen a building. */
-  public int reviveBuildingThreshold = 3000;
+  public int reviveBuildingScoreThreshold = 3000;
 
   /** Counter tracking points until building is revived. */
-  public int reviveBuildingCounter = 0;
+  public int reviveBuildingScore = 0;
 
   [Header("Bonus Values")]
   /** Bonus points for remaining cities. */
@@ -392,6 +395,43 @@ public class GameManager : MonoBehaviour
     }
 
   /*****************************************************************************
+   * restoreBuilding *
+   * Restores a destroyed building from the destroyed building list in fifo
+   * order.
+  *****************************************************************************/
+  public static void restoreBuilding()
+    {
+    bool buildingRestored = false;
+
+    /** Try to restore a launcher. */
+    for(int i = 0; i < instance.launchers.Length; i++)
+      {
+      if(!instance.launchers[i].gameObject.activeSelf)
+        {
+        instance.launchers[i].gameObject.SetActive(true);
+        Destroy(instance.launchers[i].GetComponent<Building>().destroyedVersion);
+        buildingRestored = true;
+        break;
+        }
+      }
+
+    /** Try to restore a city. */
+    if(!buildingRestored)
+      {
+      for(int i = 0; i < instance.cities.Length; i++)
+        {
+        if(!instance.cities[i].gameObject.activeSelf)
+          {
+          instance.cities[i].gameObject.SetActive(true);
+          Destroy(instance.cities[i].GetComponent<Building>().destroyedVersion);
+          buildingRestored = true;
+          break;
+          }
+        }
+      }
+    }
+
+  /*****************************************************************************
    * saveFinalStats *
    * Saves the final stats like score and reason for losing.
   *****************************************************************************/
@@ -409,10 +449,18 @@ public class GameManager : MonoBehaviour
   *****************************************************************************/
   public static void startNextLevel()
     {
-    instance.mTransitionTimer    = 0f;
-    instance.enemyWeaponCounter  = instance.maxEnemyWeaponCount;
-    instance.playerRocketCounter = instance.maxPlayerRocketCount;
-    instance.playedDanger = false;
+    Debug.Log("revive building score: " + instance.reviveBuildingScore);
+    /** Restore a building. */
+    if(instance.reviveBuildingScore >= instance.reviveBuildingScoreThreshold)
+      {
+      restoreBuilding();
+      instance.reviveBuildingScore = 0;
+      }
+            
+    instance.mTransitionTimer        = 0f;
+    instance.enemyWeaponCounter      = instance.maxEnemyWeaponCount;
+    instance.playerRocketCounter     = instance.maxPlayerRocketCount;
+    instance.playedDanger            = false;
     instance.playedMissilesDepleated = false;
 
     instance.currentWave++;
@@ -495,7 +543,7 @@ public class GameManager : MonoBehaviour
   public static void updatePlayerScore(int value)
     {
     instance.playerScore = instance.playerScore + value;
-    instance.reviveBuildingCounter = instance.reviveBuildingCounter + value;
+    instance.reviveBuildingScore = instance.reviveBuildingScore + value;
     instance.inGameUIManager.updatePlayerScoreText(instance.playerScore);
     }
 

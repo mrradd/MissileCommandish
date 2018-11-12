@@ -11,6 +11,9 @@ public class Building : MonoBehaviour
   /** Amount of time to shake the camera for. */
   public float cameraShakeTime;
 
+  /** Destroyed version of the building. This is set later. */
+  public GameObject destroyedVersion;
+
   /** Explosion animation to instantiate on death. */
   public GameObject explosion;
 
@@ -31,10 +34,10 @@ public class Building : MonoBehaviour
     pos.y += 2.5f;
 
     /** Instantiate flaming building animation object. */
-    GameObject flameObj = Instantiate(flamingAnimation, pos, Quaternion.identity);
+    destroyedVersion = Instantiate(flamingAnimation, pos, Quaternion.identity);
 
     /** Set the name of the flaming building for future reference. */
-    flameObj.name = gameObject.name + "-Flames";
+    destroyedVersion.name = gameObject.name + "-Flames";
 
     GameManager.getMainCameraShaker().incrementShakeTimer(cameraShakeTime);
 

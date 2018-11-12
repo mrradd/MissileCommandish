@@ -20,7 +20,8 @@ public class InputController : MonoBehaviour
       GameManager.instance.voiceSoundManager.playMissilesDepleated();
     if(Input.GetKeyDown(KeyCode.D))
       GameManager.instance.voiceSoundManager.playDanger();
-
+    if(Input.GetKeyDown(KeyCode.R))
+      GameManager.restoreBuilding();
 
     if(!GameManager.instance.gamePaused)
       {
