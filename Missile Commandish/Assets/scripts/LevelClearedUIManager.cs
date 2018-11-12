@@ -9,17 +9,23 @@ using UnityEngine.UI;
 *******************************************************************************/
 public class LevelClearedUIManager : MonoBehaviour
   {
-  /** Player's current score. */
-  public Text totalScoreText;
-
   /** Bonus from cities. */
   public Text cityBonusText;
+
+  /** Notifies city restored. */
+  public Text cityRestoredText;
 
   /** Bonus from launchers. */
   public Text launcherBonusText;
 
+  /** Notifies launcher restored. */
+  public Text launcherRestoredText;
+
   /** Bonus from rockets. */
   public Text rocketBonusText;
+
+  /** Player's current score. */
+  public Text totalScoreText;
 
   /*****************************************************************************
    * Methods
@@ -69,6 +75,9 @@ public class LevelClearedUIManager : MonoBehaviour
     cityBonusText.text     = GameManager.instance.cityBonus     + " x " + GameManager.activeCityCount              + " = " + cityBonus;
     launcherBonusText.text = GameManager.instance.launcherBonus + " x " + GameManager.activeLauncherCount          + " = " + launcherBonus;
     rocketBonusText.text   = GameManager.instance.rocketBonus   + " x " + GameManager.instance.playerRocketCounter + " = " + rocketBonus;
+
+    cityRestoredText.gameObject.SetActive(GameManager.instance.cityRestored);
+    launcherRestoredText.gameObject.SetActive(GameManager.instance.launcherRestored);
 
     totalScoreText.text = "Total Score: " + GameManager.instance.playerScore;
     }

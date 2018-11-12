@@ -135,6 +135,8 @@ public class GameManager : MonoBehaviour
   public bool gameLost;
   public bool playedMissilesDepleated;
   public bool playedDanger;
+  public bool launcherRestored;
+  public bool cityRestored;
 
   [Header("Audio")]
   public VoiceSoundManager voiceSoundManager;
@@ -369,6 +371,14 @@ public class GameManager : MonoBehaviour
     if(instance.mTransitionTimer >= instance.levelClearedTimeLimit && instance.mainCamera.gameObject.activeSelf)
       {
       Debug.Log("levelCleared");
+
+      /** Restore a building. */
+      if(instance.reviveBuildingScore >= instance.reviveBuildingScoreThreshold)
+        {
+        restoreBuilding();
+        instance.reviveBuildingScore = 0;
+        }
+
       instance.levelClearedUIManager.updateText();
       toggleCamera(3);
       }
@@ -411,6 +421,7 @@ public class GameManager : MonoBehaviour
         instance.launchers[i].gameObject.SetActive(true);
         Destroy(instance.launchers[i].GetComponent<Building>().destroyedVersion);
         buildingRestored = true;
+        instance.launcherRestored = true;
         break;
         }
       }
@@ -425,6 +436,7 @@ public class GameManager : MonoBehaviour
           instance.cities[i].gameObject.SetActive(true);
           Destroy(instance.cities[i].GetComponent<Building>().destroyedVersion);
           buildingRestored = true;
+          instance.cityRestored = true;
           break;
           }
         }
@@ -450,12 +462,6 @@ public class GameManager : MonoBehaviour
   public static void startNextLevel()
     {
     Debug.Log("revive building score: " + instance.reviveBuildingScore);
-    /** Restore a building. */
-    if(instance.reviveBuildingScore >= instance.reviveBuildingScoreThreshold)
-      {
-      restoreBuilding();
-      instance.reviveBuildingScore = 0;
-      }
             
     instance.mTransitionTimer        = 0f;
     instance.enemyWeaponCounter      = instance.maxEnemyWeaponCount;
