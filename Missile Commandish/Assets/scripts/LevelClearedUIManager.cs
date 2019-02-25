@@ -28,6 +28,17 @@ public class LevelClearedUIManager : MonoBehaviour
   public Text totalScoreText;
 
   /*****************************************************************************
+   * Unity Methods
+  *****************************************************************************/
+  protected void Update()
+    {
+    if (Input.GetKeyDown(KeyCode.Escape))
+      {
+      handleContinue();
+      }
+    }
+
+  /*****************************************************************************
    * Methods
   *****************************************************************************/
   /*****************************************************************************
@@ -76,15 +87,9 @@ public class LevelClearedUIManager : MonoBehaviour
     launcherBonusText.text = GameManager.instance.launcherBonus + " x " + GameManager.activeLauncherCount          + " = " + launcherBonus;
     rocketBonusText.text   = GameManager.instance.rocketBonus   + " x " + GameManager.instance.playerRocketCounter + " = " + rocketBonus;
 
-    /** Restore a building. */
-    if(GameManager.instance.reviveBuildingScore >= GameManager.instance.reviveBuildingScoreThreshold)
-      {
-      GameManager.restoreBuilding();
-      GameManager.instance.reviveBuildingScore = 0;
-      }
-
     cityRestoredText.gameObject.SetActive(GameManager.instance.cityRestored);
-    launcherRestoredText.gameObject.SetActive(GameManager.instance.launcherRestored);
+    //launcherRestoredText.gameObject.SetActive(GameManager.instance.launcherRestored);
+    launcherRestoredText.gameObject.SetActive(false);
 
     totalScoreText.text = "Total Score: " + GameManager.instance.playerScore;
     }

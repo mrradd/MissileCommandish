@@ -16,12 +16,16 @@ public class InputController : MonoBehaviour
   *****************************************************************************/
   private void Update()
     {
+    /*
     if(Input.GetKeyDown(KeyCode.M))
       GameManager.instance.voiceSoundManager.playMissilesDepleated();
     if(Input.GetKeyDown(KeyCode.D))
       GameManager.instance.voiceSoundManager.playDanger();
     if(Input.GetKeyDown(KeyCode.R))
-      GameManager.restoreBuilding();
+      GameManager.restoreCity();
+    if(Input.GetKeyDown(KeyCode.T))
+      GameManager.restoreLaunchers();
+    */
 
     if(!GameManager.instance.gamePaused)
       {

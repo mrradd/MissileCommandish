@@ -51,7 +51,12 @@ public class GameOverManager : MonoBehaviour
   *****************************************************************************/
   private void Update()
     {
-    if(!playedGameOverSound)
+    if (Input.GetKeyDown(KeyCode.Escape))
+      {
+      mainMenu();
+      }
+
+    if (!playedGameOverSound)
       {
       playedGameOverSound = voiceSoundManager.playGameOver();
       }

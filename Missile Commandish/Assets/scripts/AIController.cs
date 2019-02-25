@@ -41,7 +41,7 @@ public class AIController : MonoBehaviour
 
     mTBLCounter += Time.deltaTime;
 
-    if(trigger == 1 || mTBLCounter >= timeBetweenLaunches || GameManager.instance.gameLost ||
+    if(trigger == 1 || mTBLCounter >= timeBetweenLaunches || GameManager.instance.gameLost || GameManager.activeLauncherCount <= 0 ||
        GameManager.instance.playerRocketCounter <= 0)
       {
       mTBLCounter = 0f;

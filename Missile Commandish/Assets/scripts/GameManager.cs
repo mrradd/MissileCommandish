@@ -273,10 +273,10 @@ public class GameManager : MonoBehaviour
 
     toggleCamera(1);
 
-    instance.inGameUIManager.updatePlayerScoreText(instance.playerScore);
-    instance.inGameUIManager.updateThreatCount(instance.enemyWeaponCounter);
+    instance.inGameUIManager.updatePlayerScoreText();
+    instance.inGameUIManager.updateThreatCount();
     instance.inGameUIManager.updatePlayerRocketCountText(instance.maxPlayerRocketCount);
-
+    instance.inGameUIManager.updateCurrentWaveText();
 
     /** HACK: For some reason I couldn't get the voice sounds prefab AudioSource
      * to be seen as active, so I am setting one here. */
@@ -297,7 +297,8 @@ public class GameManager : MonoBehaviour
         }
 
       /** Play danger warning. */
-      if(!instance.playedDanger && (activeCityCount <= 1 || activeLauncherCount <= 1))
+      //if(!instance.playedDanger && (activeCityCount <= 1 || activeLauncherCount <= 1))
+      if (!instance.playedDanger && activeCityCount <= 1)
         {
         instance.playedDanger = instance.voiceSoundManager.playDanger();
         }
@@ -323,8 +324,9 @@ public class GameManager : MonoBehaviour
   public static bool checkLose()
     {
     instance.mNoCitiesLeft = activeCityCount <= 0;
-    instance.mNoLaunchersLeft = activeLauncherCount <= 0;
-    return instance.mNoCitiesLeft || instance.mNoLaunchersLeft;
+    //instance.mNoLaunchersLeft = activeLauncherCount <= 0;
+    //return instance.mNoCitiesLeft || instance.mNoLaunchersLeft;
+    return instance.mNoCitiesLeft;
     }
 
   /*****************************************************************************
@@ -337,7 +339,7 @@ public class GameManager : MonoBehaviour
     return instance.mainCamera.gameObject.activeSelf &&
            instance.enemyWeaponCounter <= 0          &&
            activeCityCount > 0                       &&
-           activeLauncherCount > 0                   &&
+           //activeLauncherCount > 0                   &&
            instance.activeEnemyWeapons <= 0;
     }
 
@@ -373,6 +375,16 @@ public class GameManager : MonoBehaviour
       Debug.Log("levelCleared");
 
       instance.levelClearedUIManager.updateText();
+
+      /** Restore a building. */
+      if (GameManager.instance.reviveBuildingScore >= GameManager.instance.reviveBuildingScoreThreshold)
+        {
+        restoreCity();
+        instance.reviveBuildingScore = 0;
+        }
+
+      restoreLaunchers();
+
       toggleCamera(3);
       }
     }
@@ -398,27 +410,12 @@ public class GameManager : MonoBehaviour
     }
 
   /*****************************************************************************
-   * restoreBuilding *
-   * Restores a destroyed building from the destroyed building list in fifo
-   * order.
+   * restoreCity *
+   * Tries to restore a destroyed City.
   *****************************************************************************/
-  public static void restoreBuilding()
+  public static void restoreCity()
     {
     bool buildingRestored = false;
-
-    /** Try to restore a launcher. */
-    for(int i = 0; i < instance.launchers.Length; i++)
-      {
-      if(!instance.launchers[i].gameObject.activeSelf)
-        {
-        Debug.Log("Launcher restored.");
-        instance.launchers[i].gameObject.SetActive(true);
-        Destroy(instance.launchers[i].GetComponent<Building>().destroyedVersion);
-        buildingRestored = true;
-        instance.launcherRestored = true;
-        break;
-        }
-      }
 
     /** Try to restore a city. */
     if(!buildingRestored)
@@ -438,7 +435,27 @@ public class GameManager : MonoBehaviour
       }
 
     if(!buildingRestored)
-      Debug.Log("Didn't restore building.");
+      Debug.Log("Didn't restore city.");
+    }
+
+  /*****************************************************************************
+   * restoreLaunchers *
+   * Restors all destroyed Launchers.
+  *****************************************************************************/
+  public static void restoreLaunchers()
+    {
+    /** Try to restore a launcher. */
+    for (int i = 0; i < instance.launchers.Length; i++)
+      {
+      if (!instance.launchers[i].gameObject.activeSelf)
+        {
+        Debug.Log("Launcher restored.");
+        instance.launchers[i].gameObject.SetActive(true);
+        Destroy(instance.launchers[i].GetComponent<Building>().destroyedVersion);
+        //instance.launcherRestored = true;
+        //break;
+        }
+      }
     }
 
   /*****************************************************************************
@@ -467,7 +484,7 @@ public class GameManager : MonoBehaviour
     instance.playedDanger            = false;
     instance.playedMissilesDepleated = false;
     instance.cityRestored            = false;
-    instance.launcherRestored        = false;
+    //instance.launcherRestored        = false;
 
     instance.currentWave++;
 
@@ -476,8 +493,9 @@ public class GameManager : MonoBehaviour
 
     //TODO CH  CONSIDER ADJUSTING WEAPON COUNTS PER LEVEL.
 
-    instance.inGameUIManager.updateThreatCount(instance.enemyWeaponCounter);
-    instance.inGameUIManager.updatePlayerRocketCountText(instance.playerRocketCounter);
+    instance.inGameUIManager.updateThreatCount();
+    instance.inGameUIManager.updatePlayerRocketCountText(instance.maxPlayerRocketCount);
+    instance.inGameUIManager.updateCurrentWaveText();
 
     toggleCamera(1);
     }
@@ -538,7 +556,7 @@ public class GameManager : MonoBehaviour
   public static void updateEnemyWeaponCount(int value)
     {
     instance.enemyWeaponCounter = instance.enemyWeaponCounter + value;
-    instance.inGameUIManager.updateThreatCount(instance.enemyWeaponCounter);
+    instance.inGameUIManager.updateThreatCount();
     }
 
   /*****************************************************************************
@@ -550,7 +568,7 @@ public class GameManager : MonoBehaviour
     {
     instance.playerScore = instance.playerScore + value;
     instance.reviveBuildingScore = instance.reviveBuildingScore + value;
-    instance.inGameUIManager.updatePlayerScoreText(instance.playerScore);
+    instance.inGameUIManager.updatePlayerScoreText();
     }
 
   /*****************************************************************************

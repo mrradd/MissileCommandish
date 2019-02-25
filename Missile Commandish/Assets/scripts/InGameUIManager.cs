@@ -18,6 +18,20 @@ public class InGameUIManager : MonoBehaviour
   /** Enemy Threats text. */
   public Text threatsText;
 
+  /** Current wave text. */
+  public Text currentWaveText;
+
+  /*****************************************************************************
+   * Unity Methods
+  *****************************************************************************/
+  protected void Update()
+    {
+    if(Input.GetKeyDown(KeyCode.Escape))
+      {
+      handlePause();
+      }
+    }
+
   /*****************************************************************************
    * Methods
   *****************************************************************************/
@@ -33,32 +47,39 @@ public class InGameUIManager : MonoBehaviour
     }
 
   /*****************************************************************************
+   * updateThreatCount *
+   * Updates the current wave text.
+  *****************************************************************************/
+  public void updateCurrentWaveText()
+    {
+    currentWaveText.text = "Wave: " + GameManager.instance.currentWave;
+    }
+
+  /*****************************************************************************
    * updatePlayerRocketCountText *
    * Updates the Player Rocket count text.
-   * @param  value  Number value to display.
+   * @param  val  Value to print for qty of rockets.
   *****************************************************************************/
-  public void updatePlayerRocketCountText(int value)
+  public void updatePlayerRocketCountText(int val)
     {
-    playerRocketCountText.text = "Missiles: " + value.ToString();
+    playerRocketCountText.text = "Missiles: " + val;
     }
 
   /*****************************************************************************
    * updatePlayerScoreText *
    * Updates the Player score text.
-   * @param  value  Number value to display.
   *****************************************************************************/
-  public void updatePlayerScoreText(int value)
+  public void updatePlayerScoreText()
     {
-    playerScoreText.text = value.ToString();
+    playerScoreText.text = GameManager.instance.playerScore.ToString();
     }
 
   /*****************************************************************************
    * updateThreatCount *
    * Updates the Enemy threat count text.
-   * @param  value  Number value to display.
   *****************************************************************************/
-  public void updateThreatCount(int value)
+  public void updateThreatCount()
     {
-    threatsText.text = "Incoming: " + value.ToString();
+    threatsText.text = "Incoming: " + GameManager.instance.enemyWeaponCounter;
     }
-  }
+}
