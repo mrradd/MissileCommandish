@@ -131,6 +131,7 @@ MonoBehaviour:
   explosion: {fileID: 1352525403961662, guid: cef0cde2296af43b48a8e7c804623560, type: 3}
   weaponData: {fileID: 114707286832143858}
   weaponDestroyer: {fileID: 114449858407629746}
+  reticle: {fileID: 0}
 --- !u!114 &114336614627559546
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -50,7 +50,7 @@ public class GameManager : MonoBehaviour
   /** UI manager for the pause menu. */
   public PauseMenuUIManager pauseMenuUIManager;
 
-  [Header("Enemy Spawnpoints")]
+  [Header("Spawnpoints")]
   /** Spawn points for Bombers. */
   public SpawnPoint[] bomberSpawnPoints;
 
@@ -59,6 +59,9 @@ public class GameManager : MonoBehaviour
 
   /** Spawn points for MIRVs. */
   public SpawnPoint[] mirvSpawnPoints;
+
+  /** Reticle spawner. */
+  public SpawnPoint reticleSpawner;
 
   [Header("Buildings")]
   /** City list. */
@@ -382,6 +385,8 @@ public class GameManager : MonoBehaviour
         restoreCity();
         instance.reviveBuildingScore = 0;
         }
+
+      instance.levelClearedUIManager.displayRestoredText();
 
       restoreLaunchers();
 

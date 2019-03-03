@@ -42,6 +42,18 @@ public class LevelClearedUIManager : MonoBehaviour
    * Methods
   *****************************************************************************/
   /*****************************************************************************
+   * displayRestoredText *
+   * Displays the city/launcher restored text.
+  *****************************************************************************/
+  public void displayRestoredText()
+    {
+    cityRestoredText.gameObject.SetActive(GameManager.instance.cityRestored);
+    //launcherRestoredText.gameObject.SetActive(GameManager.instance.launcherRestored);
+    //Doing this, because we don't need to display it anymore since launchers are always respawned. Leaving it anyway.
+    launcherRestoredText.gameObject.SetActive(false);
+    }
+
+  /*****************************************************************************
    * handleQuit *
    * Handler for when the Quit button is pressed.
   *****************************************************************************/
@@ -86,10 +98,6 @@ public class LevelClearedUIManager : MonoBehaviour
     cityBonusText.text     = GameManager.instance.cityBonus     + " x " + GameManager.activeCityCount              + " = " + cityBonus;
     launcherBonusText.text = GameManager.instance.launcherBonus + " x " + GameManager.activeLauncherCount          + " = " + launcherBonus;
     rocketBonusText.text   = GameManager.instance.rocketBonus   + " x " + GameManager.instance.playerRocketCounter + " = " + rocketBonus;
-
-    cityRestoredText.gameObject.SetActive(GameManager.instance.cityRestored);
-    //launcherRestoredText.gameObject.SetActive(GameManager.instance.launcherRestored);
-    launcherRestoredText.gameObject.SetActive(false);
 
     totalScoreText.text = "Total Score: " + GameManager.instance.playerScore;
     }

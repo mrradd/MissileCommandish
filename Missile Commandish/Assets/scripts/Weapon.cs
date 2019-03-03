@@ -63,7 +63,7 @@ public class Weapon : MonoBehaviour
    * playExplosionAnimation *
    * Plays the explosion animation.
   *****************************************************************************/
-  protected void playExplosionAnimation()
+  protected virtual void playExplosionAnimation()
     {
     /** Instantiate Explosion animation object. */
     Instantiate(explosion, gameObject.transform.position, Quaternion.identity);

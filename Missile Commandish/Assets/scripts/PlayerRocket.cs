@@ -8,6 +8,8 @@ using UnityEngine;
 *******************************************************************************/
 public class PlayerRocket : Rocket
   {
+  public GameObject reticle;
+
   /*****************************************************************************
    * Unity Methods *
   *****************************************************************************/
@@ -21,6 +23,15 @@ public class PlayerRocket : Rocket
     }
 
   /*****************************************************************************
+   * Start *
+  *****************************************************************************/
+  protected override void Update()
+    {
+    base.Update();
+    reticle.transform.position = weaponData.target;
+    }
+
+  /*****************************************************************************
    * OnCollisionEnter2D *
   *****************************************************************************/
   protected override void OnTriggerEnter2D(Collider2D collision)
@@ -31,6 +42,18 @@ public class PlayerRocket : Rocket
   /*****************************************************************************
    * Methods 
   *****************************************************************************/
+  /*****************************************************************************
+   * playExplosionAnimation *
+   * Plays the explosion animation.
+  *****************************************************************************/
+  protected override void playExplosionAnimation()
+    {
+    Destroy(reticle);
+
+    /** Instantiate Explosion animation object. */
+    Instantiate(explosion, gameObject.transform.position, Quaternion.identity);
+    }
+
   /*****************************************************************************
    * updateWeaponCounts *
    * Updates the weapon counts.

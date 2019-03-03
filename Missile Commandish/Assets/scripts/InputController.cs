@@ -60,9 +60,9 @@ public class InputController : MonoBehaviour
       /** Find the active Launcher closest to the target point to fire from. */
       if(inPlayArea)
         {
-        SpawnPoint launcherToUse = null;
-        float shortestDist = 1000f;
-        GameObject[] spawnPoints = GameManager.instance.launchers;
+        SpawnPoint   launcherToUse = null;
+        float        shortestDist  = 1000f;
+        GameObject[] spawnPoints   = GameManager.instance.launchers;
 
         foreach(GameObject l in spawnPoints)
           {
@@ -70,14 +70,16 @@ public class InputController : MonoBehaviour
           if(shortestDist > d && l.activeInHierarchy)
             {
             launcherToUse = l.GetComponent<SpawnPoint>();
-            shortestDist = d;
+            shortestDist  = d;
             }
           }
 
         /** Launch a rocket. */
         if(launcherToUse != null)
           {
-          launcherToUse.spawn();
+          GameObject rocket = launcherToUse.spawn();
+          GameObject reticle = GameManager.instance.reticleSpawner.spawn();
+          rocket.GetComponent<PlayerRocket>().reticle = reticle;
           }
         }      
       }

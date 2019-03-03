@@ -47,7 +47,7 @@ public class AIController : MonoBehaviour
       mTBLCounter = 0f;
 
       /** Launch a random number of weapons. */
-      float qtyToLaunch = Mathf.Floor((GameManager.instance.currentWave / 3 + 1));
+      float qtyToLaunch = Mathf.Floor((GameManager.instance.currentWave / 3 + 2));
       int   launchCount = (int)Random.Range(1f, qtyToLaunch > 5f ? 5f : qtyToLaunch);
       for(int i = 0; i < launchCount; i++)
         {
