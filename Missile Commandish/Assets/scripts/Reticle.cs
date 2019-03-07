@@ -31,10 +31,10 @@ public class Reticle : MonoBehaviour
 
     while (time > 0)     //While the time is more than zero...
       {
-      transform.Rotate(0, 0, Time.deltaTime * speed);
+      transform.Rotate(Vector3.back * speed * Time.deltaTime, Space.Self);
 
       time -= Time.deltaTime;     //Decrease the time- value one unit per second.
-
+ 
       yield return null;     //Loop the method.
       }
     }
