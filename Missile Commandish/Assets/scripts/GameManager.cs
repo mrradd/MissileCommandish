@@ -284,7 +284,21 @@ public class GameManager : MonoBehaviour
     /** HACK: For some reason I couldn't get the voice sounds prefab AudioSource
      * to be seen as active, so I am setting one here. */
     voiceSoundManager.audioSource = audioSource;
-    }
+
+    instance.gamePaused = true;
+
+    if(PlayerPrefs.GetInt("CameFromGameOverScreen") > 0)
+      {
+      GameObject.Find("Ad").GetComponent<UnityAdsPlacement>().ShowAd(delegate ()
+        {
+        Debug.Log("Starting game after ad.");
+        PlayerPrefs.SetInt("CameFromGameOverScreen", 0);
+        instance.gamePaused = false;
+        });
+      }
+    else
+      instance.gamePaused = false;
+  }
 
   /*****************************************************************************
    * Update *
@@ -401,6 +415,7 @@ public class GameManager : MonoBehaviour
   public static void mainMenu()
     {
     Debug.Log("mainMenu");
+    PlayerPrefs.SetInt("CameFromGameOverScreen", 0);
     SceneManager.LoadScene("MainMenuScene");
     }
 
@@ -411,6 +426,7 @@ public class GameManager : MonoBehaviour
   public static void restartGame()
     {
     Debug.Log("restartGame");
+    PlayerPrefs.SetInt("CameFromGameOverScreen", 0);
     SceneManager.LoadScene("MainGameScene");
     }
 

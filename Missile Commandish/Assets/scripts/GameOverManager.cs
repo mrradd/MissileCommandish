@@ -10,12 +10,14 @@ using UnityEngine.SceneManagement;
 *******************************************************************************/
 public class GameOverManager : MonoBehaviour
   {
-  public AudioSource audioSource;
-  public Text finalScoreText;
-  public Text reasonForLosingText;
+  public AudioSource       audioSource;
+  public Text              finalScoreText;
+  public Text              reasonForLosingText;
   public VoiceSoundManager voiceSoundManager;
+  public bool              playedGameOverSound;
 
-  public bool playedGameOverSound;
+  /** Instance of the GameManager. */
+  public static GameOverManager instance;
 
   /*****************************************************************************
    * Unity Methods
@@ -25,17 +27,25 @@ public class GameOverManager : MonoBehaviour
   *****************************************************************************/
   private void Start()
     {
+    if (!instance)
+      instance = this;
+    else
+      {
+      Debug.LogError("There can only be one instance of GameOverManager.");
+      Destroy(gameObject);
+      }
+
     /** HACK: For some reason I couldn't get the voice sounds prefab AudioSource
      * to be seen as active, so I am setting one here. */
     voiceSoundManager.audioSource = audioSource;
 
     bool citiesLost = PlayerPrefs.GetInt("NoCitiesLeft") > 0;
-    bool launchersLost = PlayerPrefs.GetInt("NoLaunchersLeft") > 0;
+    //bool launchersLost = PlayerPrefs.GetInt("NoLaunchersLeft") > 0;
 
     /** Set final score. */
     finalScoreText.text = "Final Score\n" + PlayerPrefs.GetInt("PlayerScore").ToString();
 
-    /** Set reason for losing text. */
+    /** Set reason for losing text.
     if(citiesLost && launchersLost)
       reasonForLosingText.text = "All cities and launchers lost!";
     else if(citiesLost)
@@ -44,7 +54,14 @@ public class GameOverManager : MonoBehaviour
       reasonForLosingText.text = "All launchers lost!";
     else
       reasonForLosingText.text = "Game Over";
-    }
+    */
+
+    /** Set reason for losing text. */
+    if (citiesLost)
+      reasonForLosingText.text = "All cities lost!";
+    else
+      reasonForLosingText.text = "Game Over";
+  }
 
   /*****************************************************************************
    * Update
@@ -66,22 +83,24 @@ public class GameOverManager : MonoBehaviour
    * Methods
   *****************************************************************************/
   /*****************************************************************************
-   * restartGame *
-   * Starts a new game.
-  *****************************************************************************/
-  public void restartGame()
-    {
-    Debug.Log("go::restartGame");
-    SceneManager.LoadScene("MainGameScene");
-    }
-
-  /*****************************************************************************
    * mainMenu *
    * Goes to the main menu.
   *****************************************************************************/
   public void mainMenu()
     {
     Debug.Log("go::mainMenu");
+    PlayerPrefs.SetInt("CameFromGameOverScreen", 1);
     SceneManager.LoadScene("MainMenuScene");
-    }
   }
+
+  /*****************************************************************************
+   * restartGame *
+   * Starts a new game.
+  *****************************************************************************/
+  public void restartGame()
+    {
+    Debug.Log("go::restartGame");
+    PlayerPrefs.SetInt("CameFromGameOverScreen", 1);
+    SceneManager.LoadScene("MainGameScene");
+    }
+}
