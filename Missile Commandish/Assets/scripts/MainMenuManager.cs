@@ -15,9 +15,16 @@ public class MainMenuManager : MonoBehaviour
    * Unity Methods
   *****************************************************************************/
   protected void Start()
-    {
-    Debug.Log(GetUniqueID());
+    {  
+    long x = DateTime.Now.Ticks;
+    long y = Convert.ToInt64(PlayerPrefs.GetString("LastTimePlayed"));
+    DateTime yy = new DateTime(y);
+    DateTime xx = new DateTime(x);
+    TimeSpan xy = xx - yy;
+    Debug.Log(xy.Minutes);
+    PlayerPrefs.SetString("LastTimePlayed", DateTime.Now.Ticks.ToString());
     }
+
   protected void Update()
     {
     if(Input.GetKeyDown(KeyCode.Escape))
@@ -49,33 +56,4 @@ public class MainMenuManager : MonoBehaviour
     PlayerPrefs.SetInt("CameFromGameOverScreen", 0);
     Application.Quit();
     }
-
-  public static string GetUniqueID()
-  {
-    string key = "ID";
-
-    var random = new System.Random();
-    DateTime epochStart = new System.DateTime(1970, 1, 1, 8, 0, 0, System.DateTimeKind.Utc);
-    double timestamp = (System.DateTime.UtcNow - epochStart).TotalSeconds;
-
-    string uniqueID = Application.systemLanguage                            //Language
-            + "-" + Application.platform                                            //Device    
-            + "-" + String.Format("{0:X}", Convert.ToInt32(timestamp))                //Time
-            + "-" + String.Format("{0:X}", Convert.ToInt32(Time.time * 1000000))        //Time in game
-            + "-" + String.Format("{0:X}", random.Next(1000000000));                //random number
-
-    Debug.Log("Generated Unique ID: " + uniqueID);
-
-    if (PlayerPrefs.HasKey(key))
-    {
-      uniqueID = PlayerPrefs.GetString(key);
-    }
-    else
-    {
-      PlayerPrefs.SetString(key, uniqueID);
-      PlayerPrefs.Save();
-    }
-
-    return uniqueID;
   }
-}
