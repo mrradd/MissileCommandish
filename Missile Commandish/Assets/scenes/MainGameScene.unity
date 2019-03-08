@@ -1878,6 +1878,12 @@ PrefabInstance:
       propertyPath: reticleSpawner
       value: 
       objectReference: {fileID: 688406669059563377}
+    - target: {fileID: 114780088854221446, guid: 78b28f5346eaf4291867134080773727,
+        type: 3}
+      propertyPath: pointsToast
+      value: 
+      objectReference: {fileID: 4357204630402896820, guid: 2c634194c82ab894c8328daf64e4625b,
+        type: 3}
     - target: {fileID: 4170565528592472, guid: 78b28f5346eaf4291867134080773727, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -2052,6 +2058,24 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 962cd24ed783a440798c33021d3df889, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &1788243430 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1019219149426102, guid: 88c436200342e4dacb7cbc21a934e6b2,
+    type: 3}
+  m_PrefabInstance: {fileID: 301460184}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1788243431
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1788243430}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a5f5f6c193bea240a655a3b8313e211, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &1791384280 stripped

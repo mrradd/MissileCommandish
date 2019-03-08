@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 /*******************************************************************************
  * class GameManager *
@@ -49,6 +50,9 @@ public class GameManager : MonoBehaviour
 
   /** UI manager for the pause menu. */
   public PauseMenuUIManager pauseMenuUIManager;
+
+  /** Points toast. */
+  public Text pointsToast;
 
   [Header("Spawnpoints")]
   /** Spawn points for Bombers. */
@@ -305,6 +309,7 @@ public class GameManager : MonoBehaviour
   *****************************************************************************/
   private void Update()
     {
+    
     if(!instance.gamePaused)
       {
       /** Play no missile warning. */
