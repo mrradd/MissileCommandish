@@ -151,6 +151,8 @@ MonoBehaviour:
   explosion: {fileID: 1875439062609962, guid: 18c5854905d4748f3bd995156ec112e7, type: 3}
   weaponData: {fileID: 114770913742624668}
   weaponDestroyer: {fileID: 114825256142461528}
+  textToast: {fileID: 4357204630402896820, guid: 2c634194c82ab894c8328daf64e4625b,
+    type: 3}
 --- !u!60 &60371721233420828
 PolygonCollider2D:
   m_ObjectHideFlags: 0

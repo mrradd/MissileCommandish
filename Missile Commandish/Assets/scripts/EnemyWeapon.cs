@@ -1,25 +1,19 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 /*******************************************************************************
- * class EnemyRocket *
- * Handles Enemy Rocket functionality.
+ * class EnemyWeapon *
+ * Base class for Enemy Weapons.
 *******************************************************************************/
-public class EnemyRocket : EnemyWeapon
-{
+public class EnemyWeapon : Weapon
+  {
+  public Text textToast;
+
   /*****************************************************************************
    * Unity Methods *
   *****************************************************************************/
-  /*****************************************************************************
-   * Start *
-  *****************************************************************************/
-  protected override void Start()
-    {
-    base.Start();
-    updateWeaponCounts();
-    }
-
   /*****************************************************************************
    * OnCollisionEnter2D *
   *****************************************************************************/
@@ -28,28 +22,28 @@ public class EnemyRocket : EnemyWeapon
     base.OnTriggerEnter2D(collision);
 
     /** Check if collided into a Player Rocket. */
-    if(collision.gameObject.tag == GameManager.PLAYER_ROCKET_TAG)
-      GameManager.updatePlayerScore(weaponData.pointsValue * 2);
+    if (collision.gameObject.tag == GameManager.PLAYER_ROCKET_TAG)
+      spawnPointsValueText(weaponData.pointsValue * 2);
 
     /** Check if collided into a Player Rocket Explosion. */
-    else if(collision.gameObject.tag == GameManager.PLAYER_EXPLOSION_TAG)
-      GameManager.updatePlayerScore(weaponData.pointsValue);
+    else if (collision.gameObject.tag == GameManager.PLAYER_EXPLOSION_TAG)
+      spawnPointsValueText(weaponData.pointsValue);
 
     /** Check if collided into an Enemy Explosion. */
-    else if(collision.gameObject.tag == GameManager.ENEMY_EXPLOSION_TAG)
-      GameManager.updatePlayerScore(weaponData.pointsValue / 2);
+    else if (collision.gameObject.tag == GameManager.ENEMY_EXPLOSION_TAG)
+      spawnPointsValueText(weaponData.pointsValue / 2);
     }
 
   /*****************************************************************************
    * Methods 
   *****************************************************************************/
   /*****************************************************************************
-   * updateWeaponCounts *
-   * Updates the weapon counts.
+   * spawnPointsValueText *
+   * Spawns a Text object with the points value as its label.
   *****************************************************************************/
-  protected override void updateWeaponCounts()
+  public void spawnPointsValueText(int pointsValue)
     {
-    GameManager.updateActiveEnemyWeaponCount(1);
-    GameManager.updateEnemyWeaponCount(-1);
+    Text text = Instantiate(textToast, new Vector3(transform.position.x, transform.position.y, 0) , Quaternion.identity);
+    text.text = pointsValue.ToString();
     }
-  }
+}

@@ -7,8 +7,8 @@ using UnityEngine;
  * Flies across the screen, finds the bombs target, and when it gets to the
  * target point it drops a bomb. Handles its own destruction.
 *******************************************************************************/
-public class Bomber : Weapon
-  {
+public class Bomber : EnemyWeapon
+{
   /** Spawner for bomb launching. */ public SpawnPoint spawnPoint;
   /** Bomb target. */                public Vector3    bombTarget;
 

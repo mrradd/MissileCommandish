@@ -6,7 +6,7 @@ using UnityEngine;
  * class PlayerRocket *
  * Handles Player Rocket functionality.
 *******************************************************************************/
-public class PlayerRocket : Rocket
+public class PlayerRocket : Weapon
   {
   public GameObject reticle;
 

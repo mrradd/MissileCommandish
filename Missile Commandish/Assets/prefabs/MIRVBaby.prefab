@@ -4841,6 +4841,8 @@ MonoBehaviour:
   explosion: {fileID: 1875439062609962, guid: 18c5854905d4748f3bd995156ec112e7, type: 3}
   weaponData: {fileID: 114776204765487154}
   weaponDestroyer: {fileID: 114126865973531532}
+  textToast: {fileID: 4357204630402896820, guid: 2c634194c82ab894c8328daf64e4625b,
+    type: 3}
 --- !u!114 &114126865973531532
 MonoBehaviour:
   m_ObjectHideFlags: 0

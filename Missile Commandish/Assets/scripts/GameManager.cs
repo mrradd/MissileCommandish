@@ -24,6 +24,9 @@ public class GameManager : MonoBehaviour
   /** UI manager for the game. */
   public InGameUIManager inGameUIManager;
 
+  /** In Game UI Canvas. */
+  public Canvas inGameUICanvas;
+
   /** Level Cleared Camera. */
   public Camera levelClearedCamera;
 
@@ -66,6 +69,9 @@ public class GameManager : MonoBehaviour
 
   /** Reticle spawner. */
   public SpawnPoint reticleSpawner;
+
+  /** Points toast spawner. */
+  public PointsToastSpawner pointsToastSpawner;
 
   [Header("Buildings")]
   /** City list. */
@@ -289,10 +295,11 @@ public class GameManager : MonoBehaviour
      * to be seen as active, so I am setting one here. */
     voiceSoundManager.audioSource = audioSource;
 
-    instance.gamePaused = true;
+    instance.gamePaused = false;
 
     if(PlayerPrefs.GetInt("CameFromGameOverScreen") > 0)
       {
+      instance.gamePaused = true;
       GameObject.Find("Ad").GetComponent<UnityAdsPlacement>().ShowAd(delegate ()
         {
         Debug.Log("Starting game after ad.");
@@ -300,8 +307,6 @@ public class GameManager : MonoBehaviour
         instance.gamePaused = false;
         });
       }
-    else
-      instance.gamePaused = false;
   }
 
   /*****************************************************************************

@@ -102,6 +102,8 @@ MonoBehaviour:
   explosion: {fileID: 1875439062609962, guid: 18c5854905d4748f3bd995156ec112e7, type: 3}
   weaponData: {fileID: 114584472327880894}
   weaponDestroyer: {fileID: 114521023967904560}
+  textToast: {fileID: 4357204630402896820, guid: 2c634194c82ab894c8328daf64e4625b,
+    type: 3}
   spawnPoint: {fileID: 114424701401124654}
   bombTarget: {x: 0, y: 0, z: 0}
 --- !u!114 &114742815852648322

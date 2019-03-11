@@ -3,53 +3,53 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /*******************************************************************************
- * class EnemyRocket *
- * Handles Enemy Rocket functionality.
+ * class TextToast *
+ * A Text object that is appended to the Main Game Canvas. It spawns at its
+ * target, floatin up slowly, displaying its given value, and destroys itself
+ * after a given time.
 *******************************************************************************/
-public class EnemyRocket : EnemyWeapon
-{
+public class TextToast : MonoBehaviour
+  {
+  public float destroyTimer = 2;
+  public int   speed = 10;
+  protected bool mIsSet = false;
+
   /*****************************************************************************
    * Unity Methods *
   *****************************************************************************/
   /*****************************************************************************
    * Start *
   *****************************************************************************/
-  protected override void Start()
+  void Start()
     {
-    base.Start();
-    updateWeaponCounts();
+    Destroy(gameObject, destroyTimer);
+    
+    transform.SetParent(GameManager.instance.inGameUICanvas.transform);
     }
 
   /*****************************************************************************
-   * OnCollisionEnter2D *
+   * Update *
   *****************************************************************************/
-  protected override void OnTriggerEnter2D(Collider2D collision)
+  void Update()
     {
-    base.OnTriggerEnter2D(collision);
+    if(!mIsSet)
+      {
+      transform.localScale = new Vector3(.75f, .75f, .75f);
+      mIsSet = true;
+      }
 
-    /** Check if collided into a Player Rocket. */
-    if(collision.gameObject.tag == GameManager.PLAYER_ROCKET_TAG)
-      GameManager.updatePlayerScore(weaponData.pointsValue * 2);
-
-    /** Check if collided into a Player Rocket Explosion. */
-    else if(collision.gameObject.tag == GameManager.PLAYER_EXPLOSION_TAG)
-      GameManager.updatePlayerScore(weaponData.pointsValue);
-
-    /** Check if collided into an Enemy Explosion. */
-    else if(collision.gameObject.tag == GameManager.ENEMY_EXPLOSION_TAG)
-      GameManager.updatePlayerScore(weaponData.pointsValue / 2);
+    moveUp();
     }
 
   /*****************************************************************************
-   * Methods 
+   * Methods *
   *****************************************************************************/
   /*****************************************************************************
-   * updateWeaponCounts *
-   * Updates the weapon counts.
+   * moveUp *
   *****************************************************************************/
-  protected override void updateWeaponCounts()
+  protected void moveUp()
     {
-    GameManager.updateActiveEnemyWeaponCount(1);
-    GameManager.updateEnemyWeaponCount(-1);
+    transform.position = new Vector3(transform.position.x, transform.position.y + Time.deltaTime * speed, 0);
     }
+
   }

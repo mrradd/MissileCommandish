@@ -6,8 +6,8 @@ using UnityEngine;
  * class Bomb *
  * Drops from a bomber onto a target.
 *******************************************************************************/
-public class Bomb : Weapon
-  {
+public class Bomb : EnemyWeapon
+{
 
   /*****************************************************************************
    * Unity Methods *
