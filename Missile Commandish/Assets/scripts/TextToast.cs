@@ -10,9 +10,9 @@ using UnityEngine;
 *******************************************************************************/
 public class TextToast : MonoBehaviour
   {
-  public float destroyTimer = 2;
-  public int   speed = 10;
-  protected bool mIsSet = false;
+  public float   destroyTimer = 2;
+  public int     speed        = 7;
+  protected bool mIsSet       = false;
 
   /*****************************************************************************
    * Unity Methods *

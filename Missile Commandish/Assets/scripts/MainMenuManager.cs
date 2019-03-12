@@ -14,17 +14,16 @@ public class MainMenuManager : MonoBehaviour
   /*****************************************************************************
    * Unity Methods
   *****************************************************************************/
+  /*****************************************************************************
+   * Start
+  *****************************************************************************/
   protected void Start()
     {  
-    long x = DateTime.Now.Ticks;
-    long y = Convert.ToInt64(PlayerPrefs.GetString("LastTimePlayed"));
-    DateTime yy = new DateTime(y);
-    DateTime xx = new DateTime(x);
-    TimeSpan xy = xx - yy;
-    Debug.Log(xy.Minutes);
-    PlayerPrefs.SetString("LastTimePlayed", DateTime.Now.Ticks.ToString());
     }
 
+  /*****************************************************************************
+   * Update
+  *****************************************************************************/
   protected void Update()
     {
     if(Input.GetKeyDown(KeyCode.Escape))

@@ -89,7 +89,6 @@ public class GameOverManager : MonoBehaviour
   public void mainMenu()
     {
     Debug.Log("go::mainMenu");
-    PlayerPrefs.SetInt("CameFromGameOverScreen", 1);
     SceneManager.LoadScene("MainMenuScene");
   }
 
@@ -100,7 +99,6 @@ public class GameOverManager : MonoBehaviour
   public void restartGame()
     {
     Debug.Log("go::restartGame");
-    PlayerPrefs.SetInt("CameFromGameOverScreen", 1);
     SceneManager.LoadScene("MainGameScene");
     }
 }

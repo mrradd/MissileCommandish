@@ -7,15 +7,15 @@ using UnityEngine.Monetization;
 public class UnityAdsPlacement : MonoBehaviour
   {
 
-  public string placementId = "video";
+  public string placementId = "rewardedVideo";
 
-  public delegate void TestDelegate();
+  public delegate void AdDelegate(ShowResult result);
 
-  TestDelegate method;
+  AdDelegate method;
 
-  public void ShowAd(TestDelegate test)
+  public void ShowAd(AdDelegate cb)
     {
-    method = test;
+    method = cb;
     StartCoroutine(ShowAdWhenReady());
     }
 
@@ -39,7 +39,7 @@ public class UnityAdsPlacement : MonoBehaviour
     {
     if (result == ShowResult.Finished)
       {
-      method();
+      method(result);
       }
     }
 }

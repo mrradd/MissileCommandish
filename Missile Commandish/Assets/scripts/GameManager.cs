@@ -21,11 +21,11 @@ public class GameManager : MonoBehaviour
   public static GameManager instance;
 
   [Header("Misc")]
-  /** UI manager for the game. */
-  public InGameUIManager inGameUIManager;
-
   /** In Game UI Canvas. */
   public Canvas inGameUICanvas;
+
+  /** UI manager for the game. */
+  public InGameUIManager inGameUIManager;
 
   /** Level Cleared Camera. */
   public Camera levelClearedCamera;
@@ -69,9 +69,6 @@ public class GameManager : MonoBehaviour
 
   /** Reticle spawner. */
   public SpawnPoint reticleSpawner;
-
-  /** Points toast spawner. */
-  public PointsToastSpawner pointsToastSpawner;
 
   [Header("Buildings")]
   /** City list. */
@@ -148,7 +145,7 @@ public class GameManager : MonoBehaviour
   public bool gameLost;
   public bool playedMissilesDepleated;
   public bool playedDanger;
-  public bool launcherRestored;
+  //public bool launcherRestored;
   public bool cityRestored;
 
   [Header("Audio")]
@@ -297,16 +294,6 @@ public class GameManager : MonoBehaviour
 
     instance.gamePaused = false;
 
-    if(PlayerPrefs.GetInt("CameFromGameOverScreen") > 0)
-      {
-      instance.gamePaused = true;
-      GameObject.Find("Ad").GetComponent<UnityAdsPlacement>().ShowAd(delegate ()
-        {
-        Debug.Log("Starting game after ad.");
-        PlayerPrefs.SetInt("CameFromGameOverScreen", 0);
-        instance.gamePaused = false;
-        });
-      }
   }
 
   /*****************************************************************************
@@ -351,8 +338,6 @@ public class GameManager : MonoBehaviour
   public static bool checkLose()
     {
     instance.mNoCitiesLeft = activeCityCount <= 0;
-    //instance.mNoLaunchersLeft = activeLauncherCount <= 0;
-    //return instance.mNoCitiesLeft || instance.mNoLaunchersLeft;
     return instance.mNoCitiesLeft;
     }
 
@@ -366,7 +351,6 @@ public class GameManager : MonoBehaviour
     return instance.mainCamera.gameObject.activeSelf &&
            instance.enemyWeaponCounter <= 0          &&
            activeCityCount > 0                       &&
-           //activeLauncherCount > 0                   &&
            instance.activeEnemyWeapons <= 0;
     }
 
@@ -402,15 +386,6 @@ public class GameManager : MonoBehaviour
       Debug.Log("levelCleared");
 
       instance.levelClearedUIManager.updateText();
-
-      /** Restore a building. */
-      if (GameManager.instance.reviveBuildingScore >= GameManager.instance.reviveBuildingScoreThreshold)
-        {
-        restoreCity();
-        instance.reviveBuildingScore = 0;
-        }
-
-      instance.levelClearedUIManager.displayRestoredText();
 
       restoreLaunchers();
 
@@ -458,7 +433,7 @@ public class GameManager : MonoBehaviour
           Debug.Log("City restored.");
           instance.cities[i].gameObject.SetActive(true);
           Destroy(instance.cities[i].GetComponent<Building>().destroyedVersion);
-          buildingRestored = true;
+          buildingRestored      = true;
           instance.cityRestored = true;
           break;
           }
@@ -483,8 +458,6 @@ public class GameManager : MonoBehaviour
         Debug.Log("Launcher restored.");
         instance.launchers[i].gameObject.SetActive(true);
         Destroy(instance.launchers[i].GetComponent<Building>().destroyedVersion);
-        //instance.launcherRestored = true;
-        //break;
         }
       }
     }
@@ -515,7 +488,6 @@ public class GameManager : MonoBehaviour
     instance.playedDanger            = false;
     instance.playedMissilesDepleated = false;
     instance.cityRestored            = false;
-    //instance.launcherRestored        = false;
 
     instance.currentWave++;
 

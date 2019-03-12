@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Monetization;
 using UnityEngine.UI;
 
 /*******************************************************************************
@@ -17,9 +18,6 @@ public class LevelClearedUIManager : MonoBehaviour
 
   /** Bonus from launchers. */
   public Text launcherBonusText;
-
-  /** Notifies launcher restored. */
-  public Text launcherRestoredText;
 
   /** Bonus from rockets. */
   public Text rocketBonusText;
@@ -42,15 +40,30 @@ public class LevelClearedUIManager : MonoBehaviour
    * Methods
   *****************************************************************************/
   /*****************************************************************************
-   * displayRestoredText *
-   * Displays the city/launcher restored text.
+   * displayAd *
+   * Displays an ad and tries to reward the player.
   *****************************************************************************/
-  public void displayRestoredText()
+  public void displayAd()
     {
-    cityRestoredText.gameObject.SetActive(GameManager.instance.cityRestored);
-    //launcherRestoredText.gameObject.SetActive(GameManager.instance.launcherRestored);
-    //Doing this, because we don't need to display it anymore since launchers are always respawned. Leaving it anyway.
-    launcherRestoredText.gameObject.SetActive(false);
+    if(!GameManager.instance.cityRestored)
+      {
+      GameObject.Find("Ad").GetComponent<UnityAdsPlacement>().ShowAd(delegate (ShowResult result)
+        {
+        switch(result)
+          {
+          case ShowResult.Finished:
+            {
+            Debug.Log("Ad finished.");
+            GameManager.restoreCity();
+            cityRestoredText.gameObject.SetActive(GameManager.instance.cityRestored);
+            break;
+            }
+          case ShowResult.Skipped: { Debug.Log("Ad skipped."); break; }
+          case ShowResult.Failed: { Debug.Log("Ad failed."); break; }
+          default: { Debug.Log("No city restored for ad."); break; }
+          }
+        });      
+      }
     }
 
   /*****************************************************************************
@@ -98,6 +111,8 @@ public class LevelClearedUIManager : MonoBehaviour
     cityBonusText.text     = GameManager.instance.cityBonus     + " x " + GameManager.activeCityCount              + " = " + cityBonus;
     launcherBonusText.text = GameManager.instance.launcherBonus + " x " + GameManager.activeLauncherCount          + " = " + launcherBonus;
     rocketBonusText.text   = GameManager.instance.rocketBonus   + " x " + GameManager.instance.playerRocketCounter + " = " + rocketBonus;
+
+    cityRestoredText.gameObject.SetActive(false);
 
     totalScoreText.text = "Total Score: " + GameManager.instance.playerScore;
     }
