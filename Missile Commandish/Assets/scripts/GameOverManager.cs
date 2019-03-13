@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.Monetization;
 
 /*******************************************************************************
  * class GameOverManager *
@@ -83,6 +84,29 @@ public class GameOverManager : MonoBehaviour
    * Methods
   *****************************************************************************/
   /*****************************************************************************
+   * displayAd *
+   * Displays an ad and tries to reward the player.
+  *****************************************************************************/
+  public void displayAd()
+    {
+    GameObject.Find("Ad").GetComponent<UnityAdsPlacement>().ShowAd(delegate (ShowResult result)
+      {
+      switch(result)
+        {
+        case ShowResult.Finished:
+          {
+          Debug.Log("Ad finished.");
+          restartGame();
+          break;
+          }
+        case ShowResult.Skipped: { Debug.Log("Ad skipped."); break; }
+        case ShowResult.Failed: { Debug.Log("Ad failed."); break; }
+        default: { Debug.Log("No city restored for ad."); break; }
+        }
+      });
+    }
+
+  /*****************************************************************************
    * mainMenu *
    * Goes to the main menu.
   *****************************************************************************/
@@ -90,7 +114,7 @@ public class GameOverManager : MonoBehaviour
     {
     Debug.Log("go::mainMenu");
     SceneManager.LoadScene("MainMenuScene");
-  }
+    }
 
   /*****************************************************************************
    * restartGame *
@@ -99,6 +123,7 @@ public class GameOverManager : MonoBehaviour
   public void restartGame()
     {
     Debug.Log("go::restartGame");
+    PlayerPrefs.SetInt("CameFromGameOverScreen", 1);
     SceneManager.LoadScene("MainGameScene");
     }
 }

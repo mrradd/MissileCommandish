@@ -16,6 +16,8 @@ public class InputController : MonoBehaviour
   *****************************************************************************/
   private void Update()
     {
+    if(Input.GetKeyDown(KeyCode.N))
+      GameManager.instance.destroyAllButOneCity();
     /*
     if(Input.GetKeyDown(KeyCode.M))
       GameManager.instance.voiceSoundManager.playMissilesDepleated();

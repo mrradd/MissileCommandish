@@ -277,24 +277,25 @@ public class GameManager : MonoBehaviour
   *****************************************************************************/
   private void Start()
     {
-    Debug.Log(Screen.width + "x" + Screen.height);
-    instance.enemyWeaponCounter  = instance.maxEnemyWeaponCount;
-    instance.playerRocketCounter = instance.maxPlayerRocketCount;
+    //Debug.Log(Screen.width + "x" + Screen.height);
+    //instance.enemyWeaponCounter  = instance.maxEnemyWeaponCount;
+    //instance.playerRocketCounter = instance.maxPlayerRocketCount;
 
-    toggleCamera(1);
+    //toggleCamera(1);
 
-    instance.inGameUIManager.updatePlayerScoreText();
-    instance.inGameUIManager.updateThreatCount();
-    instance.inGameUIManager.updatePlayerRocketCountText(instance.maxPlayerRocketCount);
-    instance.inGameUIManager.updateCurrentWaveText();
+    //instance.inGameUIManager.updatePlayerScoreText();
+    //instance.inGameUIManager.updateThreatCount();
+    //instance.inGameUIManager.updatePlayerRocketCountText(instance.maxPlayerRocketCount);
+    //instance.inGameUIManager.updateCurrentWaveText();
 
     /** HACK: For some reason I couldn't get the voice sounds prefab AudioSource
      * to be seen as active, so I am setting one here. */
     voiceSoundManager.audioSource = audioSource;
 
     instance.gamePaused = false;
+    startNextLevel();
 
-  }
+    }
 
   /*****************************************************************************
    * Update *
@@ -355,6 +356,25 @@ public class GameManager : MonoBehaviour
     }
 
   /*****************************************************************************
+   * destroyAllButOneCity *
+   * Destroys all cities but 1 random one.
+  *****************************************************************************/
+  public void destroyAllButOneCity()
+    {
+    int toSpare = (int)Mathf.Round(Random.Range(0f, 3f));
+
+    /** Destory cities. */
+    for(int i = 0; i < instance.cities.Length; i++)
+      {
+      if(i == toSpare)
+        continue;
+      
+      Debug.Log("City " + i + " destoryed.");
+      instance.cities[i].GetComponent<Building>().initDestroyedVesion(false);
+      }
+    }
+
+  /*****************************************************************************
    * gameOver *
    * Transitions to the Game Over screen.
   *****************************************************************************/
@@ -411,7 +431,6 @@ public class GameManager : MonoBehaviour
   public static void restartGame()
     {
     Debug.Log("restartGame");
-    PlayerPrefs.SetInt("CameFromGameOverScreen", 0);
     SceneManager.LoadScene("MainGameScene");
     }
 
@@ -469,6 +488,7 @@ public class GameManager : MonoBehaviour
   public static void saveFinalStats()
     {
     PlayerPrefs.SetInt("PlayerScore", instance.playerScore);
+    PlayerPrefs.SetInt("LastWavePlayed", instance.currentWave);
     PlayerPrefs.SetInt("NoCitiesLeft", instance.mNoCitiesLeft ? 1 : 0);
     PlayerPrefs.SetInt("NoLaunchersLeft", instance.mNoLaunchersLeft ? 1 : 0);
     PlayerPrefs.Save();
@@ -480,7 +500,20 @@ public class GameManager : MonoBehaviour
   *****************************************************************************/
   public static void startNextLevel()
     {
-    Debug.Log("revive building score: " + instance.reviveBuildingScore);
+    if(PlayerPrefs.GetInt("CameFromGameOverScreen") == 1)
+      {
+      PlayerPrefs.SetInt("CameFromGameOverScreen", 0);
+      instance.playerScore = PlayerPrefs.GetInt("PlayerScore");
+      instance.currentWave = PlayerPrefs.GetInt("LastWavePlayed");
+      instance.inGameUIManager.updatePlayerScoreText();
+
+      /** Only start out with one city. */
+      instance.destroyAllButOneCity();
+      }
+    else
+      {
+      instance.currentWave++;
+      }
 
     instance.mTransitionTimer        = 0f;
     instance.enemyWeaponCounter      = instance.maxEnemyWeaponCount;
@@ -488,8 +521,6 @@ public class GameManager : MonoBehaviour
     instance.playedDanger            = false;
     instance.playedMissilesDepleated = false;
     instance.cityRestored            = false;
-
-    instance.currentWave++;
 
     instance.mirvCount   = (instance.currentWave / 3) + 2;
     instance.bomberCount = (instance.currentWave / 2) + 2;

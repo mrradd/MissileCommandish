@@ -21,16 +21,35 @@ public class Building : MonoBehaviour
   public GameObject flamingAnimation;
 
   /*****************************************************************************
+   * Unity Methods *
+  *****************************************************************************/
+  /*****************************************************************************
    * OnTriggerEnter2D *
   *****************************************************************************/
   protected virtual void OnTriggerEnter2D(Collider2D collision)
+    {
+    initDestroyedVesion(true);
+    }
+
+  /*****************************************************************************
+   * Methods *
+  *****************************************************************************/
+  /*****************************************************************************
+   * initDestroyedVesion *
+   * Initializes the destroyed version of the building.
+  *****************************************************************************/
+  public void initDestroyedVesion(bool playExplosion)
     {
     /** Adjust the position of the flaming building object. */
     Vector3 pos = gameObject.transform.position;
 
     /** Instantiate explosion animation object. */
-    Instantiate(explosion, pos, Quaternion.identity);
-
+    if(playExplosion)
+      {
+      Instantiate(explosion, pos, Quaternion.identity);
+      GameManager.getMainCameraShaker().incrementShakeTimer(cameraShakeTime);
+      }
+     
     pos.y += 2.5f;
 
     /** Instantiate flaming building animation object. */
@@ -39,9 +58,7 @@ public class Building : MonoBehaviour
     /** Set the name of the flaming building for future reference. */
     destroyedVersion.name = gameObject.name + "-Flames";
 
-    GameManager.getMainCameraShaker().incrementShakeTimer(cameraShakeTime);
-
     /** Deactivate building. */
-    gameObject.SetActive(false);
+    gameObject.SetActive(false);    
     }
   }

@@ -10,6 +10,9 @@ using UnityEngine.UI;
 *******************************************************************************/
 public class LevelClearedUIManager : MonoBehaviour
   {
+  /** Button to display ad and restore city. */
+  public Button restoreCityButton;
+
   /** Bonus from cities. */
   public Text cityBonusText;
 
@@ -45,7 +48,7 @@ public class LevelClearedUIManager : MonoBehaviour
   *****************************************************************************/
   public void displayAd()
     {
-    if(!GameManager.instance.cityRestored)
+    if(!GameManager.instance.cityRestored && GameManager.activeCityCount < GameManager.instance.cities.Length)
       {
       GameObject.Find("Ad").GetComponent<UnityAdsPlacement>().ShowAd(delegate (ShowResult result)
         {
@@ -56,6 +59,7 @@ public class LevelClearedUIManager : MonoBehaviour
             Debug.Log("Ad finished.");
             GameManager.restoreCity();
             cityRestoredText.gameObject.SetActive(GameManager.instance.cityRestored);
+            restoreCityButton.gameObject.SetActive(false);
             break;
             }
           case ShowResult.Skipped: { Debug.Log("Ad skipped."); break; }
@@ -102,6 +106,8 @@ public class LevelClearedUIManager : MonoBehaviour
   *****************************************************************************/
   public void updateText()
     {
+    restoreCityButton.gameObject.SetActive(!GameManager.instance.cityRestored && GameManager.activeCityCount < GameManager.instance.cities.Length);
+
     int cityBonus     = GameManager.instance.cityBonus     * GameManager.activeCityCount;
     int launcherBonus = GameManager.instance.launcherBonus * GameManager.activeLauncherCount;
     int rocketBonus   = GameManager.instance.rocketBonus   * GameManager.instance.playerRocketCounter;

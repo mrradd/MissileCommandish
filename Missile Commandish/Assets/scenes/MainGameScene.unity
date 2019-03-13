@@ -1846,7 +1846,7 @@ PrefabInstance:
     - target: {fileID: 114780088854221446, guid: 78b28f5346eaf4291867134080773727,
         type: 3}
       propertyPath: maxEnemyWeaponCount
-      value: 5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 114780088854221446, guid: 78b28f5346eaf4291867134080773727,
         type: 3}
@@ -1889,6 +1889,11 @@ PrefabInstance:
       propertyPath: inGameUICanvas
       value: 
       objectReference: {fileID: 1788243434}
+    - target: {fileID: 114780088854221446, guid: 78b28f5346eaf4291867134080773727,
+        type: 3}
+      propertyPath: currentWave
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4170565528592472, guid: 78b28f5346eaf4291867134080773727, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -1964,6 +1969,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: LevelClearedMenu
       objectReference: {fileID: 0}
+    - target: {fileID: 114991377027109024, guid: d27ce7c67397f4252b74db00935dc2ee,
+        type: 3}
+      propertyPath: restoreCityButton
+      value: 
+      objectReference: {fileID: 1985550437416504420}
     - target: {fileID: 4378495878064474, guid: d27ce7c67397f4252b74db00935dc2ee, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1
@@ -2642,6 +2652,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d105fdfe6d27d4c1eb2dd5622e1217e7, type: 3}
+--- !u!114 &1985550437416504420 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1985550436148203422, guid: d105fdfe6d27d4c1eb2dd5622e1217e7,
+    type: 3}
+  m_PrefabInstance: {fileID: 1985550437416504419}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1392445389, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &8519735094830444025
 PrefabInstance:
   m_ObjectHideFlags: 0
