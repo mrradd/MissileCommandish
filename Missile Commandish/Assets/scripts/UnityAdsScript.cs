@@ -6,8 +6,8 @@ using UnityEngine.Monetization;
 public class UnityAdsScript : MonoBehaviour
   {
 
-  public string gameId   = "3071059"; //Android
-  public bool   testMode = true;
+  public string gameId   = "3081374"; //Android
+  public bool   testMode = false;
 
   void Start()
     {

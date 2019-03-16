@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEngine.Analytics;
 
 /*******************************************************************************
  * class GameManager *
@@ -13,6 +14,7 @@ using UnityEngine.UI;
 *******************************************************************************/
 public class GameManager : MonoBehaviour
   {
+  
   public static string ENEMY_EXPLOSION_TAG  = "EnemyExplosion";
   public static string PLAYER_EXPLOSION_TAG = "PlayerExplosion";
   public static string PLAYER_ROCKET_TAG    = "PlayerRocket";
@@ -199,6 +201,7 @@ public class GameManager : MonoBehaviour
     {
     get
       {
+      
       List<GameObject> list = new List<GameObject>();
 
       for(int i = 0; ; i++)
@@ -405,6 +408,15 @@ public class GameManager : MonoBehaviour
       {
       Debug.Log("levelCleared");
 
+      Analytics.CustomEvent("level_cleared", new Dictionary<string, object>
+        {
+        {"points",            instance.playerScore},
+        {"wave",              instance.currentWave},
+        {"rockets_remaining", instance.playerRocketCounter},
+        {"active_cities",     GameManager.activeCityCount},
+        {"active_launchers",  GameManager.activeLauncherCount}
+        });
+
       instance.levelClearedUIManager.updateText();
 
       restoreLaunchers();
@@ -420,7 +432,7 @@ public class GameManager : MonoBehaviour
   public static void mainMenu()
     {
     Debug.Log("mainMenu");
-    PlayerPrefs.SetInt("CameFromGameOverScreen", 0);
+    PlayerPrefs.SetInt("ContinuingGame", 0);
     SceneManager.LoadScene("MainMenuScene");
     }
 
@@ -431,6 +443,7 @@ public class GameManager : MonoBehaviour
   public static void restartGame()
     {
     Debug.Log("restartGame");
+    PlayerPrefs.SetInt("ContinuingGame", 0);
     SceneManager.LoadScene("MainGameScene");
     }
 
@@ -500,19 +513,32 @@ public class GameManager : MonoBehaviour
   *****************************************************************************/
   public static void startNextLevel()
     {
-    if(PlayerPrefs.GetInt("CameFromGameOverScreen") == 1)
+    if(PlayerPrefs.GetInt("ContinuingGame") == 1)
       {
-      PlayerPrefs.SetInt("CameFromGameOverScreen", 0);
+      PlayerPrefs.SetInt("ContinuingGame", 0);
       instance.playerScore = PlayerPrefs.GetInt("PlayerScore");
       instance.currentWave = PlayerPrefs.GetInt("LastWavePlayed");
       instance.inGameUIManager.updatePlayerScoreText();
 
       /** Only start out with one city. */
       instance.destroyAllButOneCity();
+
+      Analytics.CustomEvent("continuing_game", new Dictionary<string, object>
+        {
+        {"points", instance.playerScore},
+        {"wave", instance.currentWave}
+        });
       }
     else
       {
       instance.currentWave++;
+
+      Analytics.CustomEvent("start_level", new Dictionary<string, object>
+        {
+        {"points", instance.playerScore},
+        {"wave", instance.currentWave},
+        {"active_cities", GameManager.activeCityCount}
+        });
       }
 
     instance.mTransitionTimer        = 0f;

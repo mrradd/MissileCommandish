@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using UnityEngine.Monetization;
+using UnityEngine.Analytics;
 
 /*******************************************************************************
  * class GameOverManager *
@@ -62,7 +63,13 @@ public class GameOverManager : MonoBehaviour
       reasonForLosingText.text = "All cities lost!";
     else
       reasonForLosingText.text = "Game Over";
-  }
+
+    Analytics.CustomEvent("gameover", new Dictionary<string, object>
+      {
+      {"points", PlayerPrefs.GetInt("PlayerScore")},
+      {"wave",   PlayerPrefs.GetInt("LastWavePlayed")}
+      });
+    }
 
   /*****************************************************************************
    * Update
@@ -95,8 +102,15 @@ public class GameOverManager : MonoBehaviour
         {
         case ShowResult.Finished:
           {
+          Analytics.CustomEvent("gameover_ad_finished", new Dictionary<string, object>
+            {
+            {"points", PlayerPrefs.GetInt("PlayerScore")},
+            {"wave",   PlayerPrefs.GetInt("LastWavePlayed")}
+            });
+
           Debug.Log("Ad finished.");
-          restartGame();
+          PlayerPrefs.SetInt("ContinuingGame", 1);
+          SceneManager.LoadScene("MainGameScene");
           break;
           }
         case ShowResult.Skipped: { Debug.Log("Ad skipped."); break; }
@@ -113,6 +127,7 @@ public class GameOverManager : MonoBehaviour
   public void mainMenu()
     {
     Debug.Log("go::mainMenu");
+    PlayerPrefs.SetInt("ContinuingGame", 0);
     SceneManager.LoadScene("MainMenuScene");
     }
 
@@ -123,7 +138,7 @@ public class GameOverManager : MonoBehaviour
   public void restartGame()
     {
     Debug.Log("go::restartGame");
-    PlayerPrefs.SetInt("CameFromGameOverScreen", 1);
+    PlayerPrefs.SetInt("ContinuingGame", 0);
     SceneManager.LoadScene("MainGameScene");
     }
 }

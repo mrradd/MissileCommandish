@@ -1,12 +1,10 @@
 ﻿<Properties StartupConfiguration="{6C091239-DAB8-778A-8662-C15EA5EF5834}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/scripts/GameManager.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/scripts/LevelClearedUIManager.cs">
     <Files>
-      <File FileName="Assets/scripts/GameManager.cs" Line="532" Column="51" />
-      <File FileName="Assets/scripts/LevelClearedUIManager.cs" Line="45" Column="4" />
-      <File FileName="Assets/scripts/GameOverManager.cs" Line="126" Column="53" />
-      <File FileName="Assets/scripts/AIController.cs" Line="41" Column="5" />
-      <File FileName="Assets/scripts/InputController.cs" Line="20" Column="51" />
-      <File FileName="Assets/scripts/Building.cs" Line="52" Column="6" />
+      <File FileName="Assets/scripts/GameManager.cs" Line="413" Column="30" />
+      <File FileName="Assets/scripts/GameOverManager.cs" Line="110" Column="9" />
+      <File FileName="Assets/scripts/LevelClearedUIManager.cs" Line="90" Column="31" />
+      <File FileName="Assets/scripts/MainMenuManager.cs" Line="45" Column="45" />
       <File FileName="Assets/scripts/InGameUIManager.cs" Line="72" Column="38" />
     </Files>
   </MonoDevelop.Ide.Workbench>

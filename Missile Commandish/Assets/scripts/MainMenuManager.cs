@@ -42,6 +42,7 @@ public class MainMenuManager : MonoBehaviour
   public void playGame()
     {
     Debug.Log("playGame");
+    PlayerPrefs.SetInt("ContinuingGame", 0);
     SceneManager.LoadScene("MainGameScene");
     }
 
@@ -52,7 +53,7 @@ public class MainMenuManager : MonoBehaviour
   public void quit()
     {
     Debug.Log("quit");
-    PlayerPrefs.SetInt("CameFromGameOverScreen", 0);
+    PlayerPrefs.SetInt("ContinuingGame", 0);
     Application.Quit();
     }
   }

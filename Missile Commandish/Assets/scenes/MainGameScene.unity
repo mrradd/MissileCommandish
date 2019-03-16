@@ -1846,7 +1846,7 @@ PrefabInstance:
     - target: {fileID: 114780088854221446, guid: 78b28f5346eaf4291867134080773727,
         type: 3}
       propertyPath: maxEnemyWeaponCount
-      value: 1
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 114780088854221446, guid: 78b28f5346eaf4291867134080773727,
         type: 3}
@@ -1892,6 +1892,11 @@ PrefabInstance:
     - target: {fileID: 114780088854221446, guid: 78b28f5346eaf4291867134080773727,
         type: 3}
       propertyPath: currentWave
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114780088854221446, guid: 78b28f5346eaf4291867134080773727,
+        type: 3}
+      propertyPath: playerScore
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4170565528592472, guid: 78b28f5346eaf4291867134080773727, type: 3}

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Analytics;
 using UnityEngine.Monetization;
 using UnityEngine.UI;
 
@@ -57,6 +58,13 @@ public class LevelClearedUIManager : MonoBehaviour
           case ShowResult.Finished:
             {
             Debug.Log("Ad finished.");
+            Analytics.CustomEvent("level_cleared_ad_finished", new Dictionary<string, object>
+              {
+              {"points",        GameManager.instance.playerScore},
+              {"wave",          GameManager.instance.currentWave},
+              {"active_cities", GameManager.activeCityCount}
+              });
+
             GameManager.restoreCity();
             cityRestoredText.gameObject.SetActive(GameManager.instance.cityRestored);
             restoreCityButton.gameObject.SetActive(false);
