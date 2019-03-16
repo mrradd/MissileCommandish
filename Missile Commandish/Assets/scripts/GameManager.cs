@@ -548,8 +548,9 @@ public class GameManager : MonoBehaviour
     instance.playedMissilesDepleated = false;
     instance.cityRestored            = false;
 
-    instance.mirvCount   = (instance.currentWave / 3) + 2;
-    instance.bomberCount = (instance.currentWave / 2) + 2;
+    int limit = (instance.currentWave / 3) + 2;
+    instance.mirvCount   = limit > 10 ? 10 : limit;
+    instance.bomberCount = limit > 10 ? 10 : limit;
 
     //TODO CH  CONSIDER ADJUSTING WEAPON COUNTS PER LEVEL.
 

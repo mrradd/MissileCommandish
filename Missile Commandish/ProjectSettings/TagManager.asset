@@ -13,6 +13,7 @@ TagManager:
   - Bomb
   - PlayerExplosionParticle
   - BuildingExplosion
+  - EnemyExplosion
   layers:
   - Default
   - TransparentFX
