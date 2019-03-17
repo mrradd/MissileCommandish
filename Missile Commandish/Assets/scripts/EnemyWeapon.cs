@@ -15,6 +15,15 @@ public class EnemyWeapon : Weapon
    * Unity Methods *
   *****************************************************************************/
   /*****************************************************************************
+   * Start *
+  *****************************************************************************/
+  protected override void Start()
+    {
+    base.Start();
+    weaponData.speed += GameManager.instance.speedMod;
+    }
+
+  /*****************************************************************************
    * OnCollisionEnter2D *
   *****************************************************************************/
   protected override void OnTriggerEnter2D(Collider2D collision)

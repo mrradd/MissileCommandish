@@ -1899,6 +1899,16 @@ PrefabInstance:
       propertyPath: playerScore
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114780088854221446, guid: 78b28f5346eaf4291867134080773727,
+        type: 3}
+      propertyPath: speedModStep
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114780088854221446, guid: 78b28f5346eaf4291867134080773727,
+        type: 3}
+      propertyPath: speedModMax
+      value: 60
+      objectReference: {fileID: 0}
     - target: {fileID: 4170565528592472, guid: 78b28f5346eaf4291867134080773727, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

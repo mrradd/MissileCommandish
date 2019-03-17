@@ -1,16 +1,10 @@
 ﻿<Properties StartupConfiguration="{6C091239-DAB8-778A-8662-C15EA5EF5834}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/scripts/EnemyRocket.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/scripts/EnemyWeapon.cs">
     <Files>
-      <File FileName="Assets/scripts/GameManager.cs" Line="553" Column="52" />
-      <File FileName="Assets/scripts/GameOverManager.cs" Line="110" Column="9" />
-      <File FileName="Assets/scripts/LevelClearedUIManager.cs" Line="60" Column="39" />
-      <File FileName="Assets/scripts/MainMenuManager.cs" Line="45" Column="45" />
-      <File FileName="Assets/scripts/InGameUIManager.cs" Line="72" Column="38" />
-      <File FileName="Assets/scripts/AIController.cs" Line="51" Column="27" />
-      <File FileName="Assets/scripts/EnemyExplosion.cs" Line="1" Column="1" />
-      <File FileName="Assets/scripts/Weapon.cs" Line="39" Column="26" />
-      <File FileName="Assets/scripts/EnemyWeapon.cs" Line="25" Column="66" />
-      <File FileName="Assets/scripts/EnemyRocket.cs" Line="31" Column="48" />
+      <File FileName="Assets/scripts/GameManager.cs" Line="660" Column="69" />
+      <File FileName="Assets/scripts/InputController.cs" Line="19" Column="24" />
+      <File FileName="Assets/scripts/Building.cs" Line="31" Column="5" />
+      <File FileName="Assets/scripts/EnemyWeapon.cs" Line="35" Column="20" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.ItemProperties.Missile_220Commandish PreferredExecutionTarget="Unity.Editor" />
@@ -18,7 +12,9 @@
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="Unity.Editor" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore />
+    <BreakpointStore>
+      <Breakpoint file="/Users/ansible/workspace/MissileCommandish/Missile Commandish/Assets/scripts/GameManager.cs" relfile="Assets/scripts/GameManager.cs" line="661" column="1" />
+    </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MultiItemStartupConfigurations />
 </Properties>

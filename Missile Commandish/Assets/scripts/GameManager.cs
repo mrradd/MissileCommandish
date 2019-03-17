@@ -59,6 +59,11 @@ public class GameManager : MonoBehaviour
   /** Points toast. */
   public Text pointsToast;
 
+  [Header("Speed Modifier")]
+  public int speedMod;
+  public int speedModStep;
+  public int speedModMax;
+
   [Header("Spawnpoints")]
   /** Spawn points for Bombers. */
   public SpawnPoint[] bomberSpawnPoints;
@@ -296,6 +301,9 @@ public class GameManager : MonoBehaviour
     voiceSoundManager.audioSource = audioSource;
 
     instance.gamePaused = false;
+
+    speedMod = 0;
+
     startNextLevel();
 
     }
@@ -552,7 +560,7 @@ public class GameManager : MonoBehaviour
     instance.mirvCount   = limit > 10 ? 10 : limit;
     instance.bomberCount = limit > 10 ? 10 : limit;
 
-    //TODO CH  CONSIDER ADJUSTING WEAPON COUNTS PER LEVEL.
+    updateSpeedModifier();
 
     instance.inGameUIManager.updateThreatCount();
     instance.inGameUIManager.updatePlayerRocketCountText(instance.maxPlayerRocketCount);
@@ -641,5 +649,15 @@ public class GameManager : MonoBehaviour
     {
     instance.playerRocketCounter = instance.playerRocketCounter + value;
     instance.inGameUIManager.updatePlayerRocketCountText(instance.playerRocketCounter);
+    }
+
+  /*****************************************************************************
+   * updateSpeedModifier *
+   * Updates the speed modifier for weapons.
+  *****************************************************************************/
+  public static void updateSpeedModifier()
+    {
+    instance.speedMod += (instance.speedMod + instance.speedModStep) > instance.speedModMax ? 0 : instance.speedModStep;
+    Debug.Log("SpeedMod: " + instance.speedMod);
     }
   }
