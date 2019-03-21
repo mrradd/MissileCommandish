@@ -4799,7 +4799,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pointsValue: 300
-  speed: 30
+  speed: 15
   target: {x: 0, y: 0, z: 0}
 --- !u!114 &114488220508809284
 MonoBehaviour:

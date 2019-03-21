@@ -6,11 +6,14 @@ using UnityEngine.Monetization;
 public class UnityAdsScript : MonoBehaviour
   {
 
-  public string gameId   = "3081374"; //Android
+  public string androidGameId = "3081374";
+  public string iosGameID = "3081375";
   public bool   testMode = false;
 
   void Start()
     {
-    Monetization.Initialize(gameId, testMode);
+    /** Assuming we are only on android or ios. */
+    string id = Application.platform == RuntimePlatform.Android ? androidGameId : iosGameID;
+    Monetization.Initialize(id, testMode);
     }
   }

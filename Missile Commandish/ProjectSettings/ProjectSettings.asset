@@ -154,8 +154,10 @@ PlayerSettings:
   androidMaxAspectRatio: 2.1
   applicationIdentifier:
     Android: com.ConradHorton.MissileCommandish
-  buildNumber: {}
-  AndroidBundleVersionCode: 11
+    iOS: com.conradhorton.missilecommandish
+  buildNumber:
+    iOS: 13
+  AndroidBundleVersionCode: 13
   AndroidMinSdkVersion: 16
   AndroidTargetSdkVersion: 0
   AndroidPreferredInstallLocation: 1
@@ -693,7 +695,7 @@ PlayerSettings:
   apiCompatibilityLevel: 2
   cloudProjectId: 42b9b811-eda4-4a27-b7db-f4a8eaca7dff
   framebufferDepthMemorylessMode: 0
-  projectName: Missile Commandish (1)
+  projectName: Missile Commandish
   organizationId: conrad-horton
   cloudEnabled: 0
   enableNativePlatformBackendsForNewInputSystem: 0

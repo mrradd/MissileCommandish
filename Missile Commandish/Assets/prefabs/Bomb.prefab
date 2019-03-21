@@ -157,7 +157,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pointsValue: 200
-  speed: 20
+  speed: 10
   target: {x: 0, y: 0, z: 0}
 --- !u!50 &50530579022615388
 Rigidbody2D:
