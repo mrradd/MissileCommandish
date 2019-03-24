@@ -71,4 +71,13 @@ public class CameraShaker : MonoBehaviour
     else if(cameraTarget && cameraTarget.transform.localPosition != mCameraOriginalPosition)
       cameraTarget.transform.localPosition = mCameraOriginalPosition;
     }
+
+  /*****************************************************************************
+   * zeroOutShakeTimer *
+   * Sets shake timer to zero.
+  *****************************************************************************/
+  public void zeroOutShakeTimer()
+    {
+    mShakeTimer = 0;
+    }
   }

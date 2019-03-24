@@ -11,9 +11,6 @@ using UnityEngine.UI;
 *******************************************************************************/
 public class LevelClearedUIManager : MonoBehaviour
   {
-  /** Button to display ad and restore city. */
-  public Button restoreCityButton;
-
   /** Bonus from cities. */
   public Text cityBonusText;
 
@@ -22,6 +19,12 @@ public class LevelClearedUIManager : MonoBehaviour
 
   /** Bonus from launchers. */
   public Text launcherBonusText;
+
+  /** Level cleared text. */
+  public Text levelClearedText;
+
+  /** Button to display ad and restore city. */
+  public Button restoreCityButton;
 
   /** Bonus from rockets. */
   public Text rocketBonusText;
@@ -127,6 +130,8 @@ public class LevelClearedUIManager : MonoBehaviour
     rocketBonusText.text   = GameManager.instance.rocketBonus   + " x " + GameManager.instance.playerRocketCounter + " = " + rocketBonus;
 
     cityRestoredText.gameObject.SetActive(false);
+
+    levelClearedText.text = "Wave " + GameManager.instance.currentWave + " Cleared!";
 
     totalScoreText.text = "Total Score: " + GameManager.instance.playerScore;
     }

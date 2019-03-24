@@ -94,6 +94,9 @@ public class GameManager : MonoBehaviour
   /** Qty of bombers per level. */
   public int bomberCount = 0;
 
+  /** Max number of bombers. */
+  public int bomberMax;
+
   /** Current wave/level. */
   public int currentWave = 1;
 
@@ -105,6 +108,9 @@ public class GameManager : MonoBehaviour
 
   /** Qty of mirvs per level. */
   public int mirvCount = 0;
+
+  /** Max mirvs per level. */
+  public int mirvMax;
 
   /** Max number of Plyer weapons. */
   public int maxPlayerRocketCount = 30;
@@ -302,10 +308,7 @@ public class GameManager : MonoBehaviour
 
     instance.gamePaused = false;
 
-    speedMod = 0;
-
     startNextLevel();
-
     }
 
   /*****************************************************************************
@@ -557,14 +560,16 @@ public class GameManager : MonoBehaviour
     instance.cityRestored            = false;
 
     int limit = (instance.currentWave / 3) + 2;
-    instance.mirvCount   = limit > 10 ? 10 : limit;
-    instance.bomberCount = limit > 10 ? 10 : limit;
-
-    updateSpeedModifier();
+    instance.mirvCount   = limit > instance.mirvMax ? instance.mirvMax : limit;
+    instance.bomberCount = limit > instance.bomberMax ? instance.bomberMax : limit;
 
     instance.inGameUIManager.updateThreatCount();
     instance.inGameUIManager.updatePlayerRocketCountText(instance.maxPlayerRocketCount);
     instance.inGameUIManager.updateCurrentWaveText();
+
+    updateSpeedModifier();
+
+    getMainCameraShaker().zeroOutShakeTimer();
 
     toggleCamera(1);
     }
@@ -657,7 +662,8 @@ public class GameManager : MonoBehaviour
   *****************************************************************************/
   public static void updateSpeedModifier()
     {
-    instance.speedMod += (instance.speedMod + instance.speedModStep) > instance.speedModMax ? 0 : instance.speedModStep;
+    int mod = instance.currentWave * instance.speedModStep;
+    instance.speedMod = mod > instance.speedModMax ? instance.speedMod : mod;
     Debug.Log("SpeedMod: " + instance.speedMod);
     }
   }

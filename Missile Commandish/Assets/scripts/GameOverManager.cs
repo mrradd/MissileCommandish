@@ -12,11 +12,12 @@ using UnityEngine.Analytics;
 *******************************************************************************/
 public class GameOverManager : MonoBehaviour
   {
-  public AudioSource       audioSource;
-  public Text              finalScoreText;
-  public Text              reasonForLosingText;
+  public AudioSource audioSource;
+  public Text finalScoreText;
+  public bool playedGameOverSound;
+  public Text reasonForLosingText;
   public VoiceSoundManager voiceSoundManager;
-  public bool              playedGameOverSound;
+  public Text waveText;
 
   /** Instance of the GameManager. */
   public static GameOverManager instance;
@@ -46,6 +47,8 @@ public class GameOverManager : MonoBehaviour
 
     /** Set final score. */
     finalScoreText.text = "Final Score\n" + PlayerPrefs.GetInt("PlayerScore").ToString();
+
+    waveText.text = "Wave\n" + PlayerPrefs.GetInt("LastWavePlayed").ToString();
 
     /** Set reason for losing text.
     if(citiesLost && launchersLost)
