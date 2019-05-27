@@ -121,7 +121,7 @@ public class GameManager : MonoBehaviour
   public int playerScore = 0;
 
   /** Threshold to meet to regen a building. */
-  public int reviveBuildingScoreThreshold = 3000;
+  public int reviveBuildingScoreThreshold = 5000;
 
   /** Counter tracking points until building is revived. */
   public int reviveBuildingScore = 0;
@@ -157,7 +157,6 @@ public class GameManager : MonoBehaviour
   public bool gameLost;
   public bool playedMissilesDepleated;
   public bool playedDanger;
-  //public bool launcherRestored;
   public bool cityRestored;
 
   [Header("Audio")]
