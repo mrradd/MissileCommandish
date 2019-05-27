@@ -15,11 +15,11 @@ public class InGameUIManager : MonoBehaviour
   /** Player score text. */
   public Text playerScoreText;
 
-  /** Enemy Threats text. */
-  public Text threatsText;
-
   /** Current wave text. */
   public Text currentWaveText;
+
+  /** Current high score text. */
+  public Text highScoreText;
 
   /*****************************************************************************
    * Unity Methods
@@ -47,7 +47,7 @@ public class InGameUIManager : MonoBehaviour
     }
 
   /*****************************************************************************
-   * updateThreatCount *
+   * updateCurrentWaveText *
    * Updates the current wave text.
   *****************************************************************************/
   public void updateCurrentWaveText()
@@ -73,13 +73,4 @@ public class InGameUIManager : MonoBehaviour
     {
     playerScoreText.text = GameManager.instance.playerScore.ToString();
     }
-
-  /*****************************************************************************
-   * updateThreatCount *
-   * Updates the Enemy threat count text.
-  *****************************************************************************/
-  public void updateThreatCount()
-    {
-    threatsText.text = "Incoming: " + GameManager.instance.enemyWeaponCounter;
-    }
-}
+  }

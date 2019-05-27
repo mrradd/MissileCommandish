@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using UnityEngine.Analytics;
 
 /*******************************************************************************
  * class GameManager *
@@ -291,17 +290,6 @@ public class GameManager : MonoBehaviour
   *****************************************************************************/
   private void Start()
     {
-    //Debug.Log(Screen.width + "x" + Screen.height);
-    //instance.enemyWeaponCounter  = instance.maxEnemyWeaponCount;
-    //instance.playerRocketCounter = instance.maxPlayerRocketCount;
-
-    //toggleCamera(1);
-
-    //instance.inGameUIManager.updatePlayerScoreText();
-    //instance.inGameUIManager.updateThreatCount();
-    //instance.inGameUIManager.updatePlayerRocketCountText(instance.maxPlayerRocketCount);
-    //instance.inGameUIManager.updateCurrentWaveText();
-
     /** HACK: For some reason I couldn't get the voice sounds prefab AudioSource
      * to be seen as active, so I am setting one here. */
     voiceSoundManager.audioSource = audioSource;
@@ -316,7 +304,6 @@ public class GameManager : MonoBehaviour
   *****************************************************************************/
   private void Update()
     {
-    
     if(!instance.gamePaused)
       {
       /** Play no missile warning. */
@@ -326,7 +313,6 @@ public class GameManager : MonoBehaviour
         }
 
       /** Play danger warning. */
-      //if(!instance.playedDanger && (activeCityCount <= 1 || activeLauncherCount <= 1))
       if (!instance.playedDanger && activeCityCount <= 1)
         {
         instance.playedDanger = instance.voiceSoundManager.playDanger();
@@ -336,10 +322,14 @@ public class GameManager : MonoBehaviour
     if(instance.mainCamera.gameObject.activeSelf)
       {
       if(checkWin())
+        {
         levelCleared();
+        }
 
       if(checkLose())
+        {
         gameOver();
+        }
       }
     }
 
@@ -418,15 +408,6 @@ public class GameManager : MonoBehaviour
     if(instance.mTransitionTimer >= instance.levelClearedTimeLimit && instance.mainCamera.gameObject.activeSelf)
       {
       Debug.Log("levelCleared");
-
-      Analytics.CustomEvent("level_cleared", new Dictionary<string, object>
-        {
-        {"points",            instance.playerScore},
-        {"wave",              instance.currentWave},
-        {"rockets_remaining", instance.playerRocketCounter},
-        {"active_cities",     GameManager.activeCityCount},
-        {"active_launchers",  GameManager.activeLauncherCount}
-        });
 
       instance.levelClearedUIManager.updateText();
 
@@ -533,23 +514,10 @@ public class GameManager : MonoBehaviour
 
       /** Only start out with one city. */
       instance.destroyAllButOneCity();
-
-      Analytics.CustomEvent("continuing_game", new Dictionary<string, object>
-        {
-        {"points", instance.playerScore},
-        {"wave", instance.currentWave}
-        });
       }
     else
       {
       instance.currentWave++;
-
-      Analytics.CustomEvent("start_level", new Dictionary<string, object>
-        {
-        {"points", instance.playerScore},
-        {"wave", instance.currentWave},
-        {"active_cities", GameManager.activeCityCount}
-        });
       }
 
     instance.mTransitionTimer        = 0f;
@@ -563,7 +531,6 @@ public class GameManager : MonoBehaviour
     instance.mirvCount   = limit > instance.mirvMax ? instance.mirvMax : limit;
     instance.bomberCount = limit > instance.bomberMax ? instance.bomberMax : limit;
 
-    instance.inGameUIManager.updateThreatCount();
     instance.inGameUIManager.updatePlayerRocketCountText(instance.maxPlayerRocketCount);
     instance.inGameUIManager.updateCurrentWaveText();
 
@@ -630,7 +597,6 @@ public class GameManager : MonoBehaviour
   public static void updateEnemyWeaponCount(int value)
     {
     instance.enemyWeaponCounter = instance.enemyWeaponCounter + value;
-    instance.inGameUIManager.updateThreatCount();
     }
 
   /*****************************************************************************

@@ -4,7 +4,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using UnityEngine.Monetization;
-using UnityEngine.Analytics;
 
 /*******************************************************************************
  * class GameOverManager *
@@ -18,6 +17,13 @@ public class GameOverManager : MonoBehaviour
   public Text reasonForLosingText;
   public VoiceSoundManager voiceSoundManager;
   public Text waveText;
+  public Text score1Text;
+  public Text score2Text;
+  public Text score3Text;
+  public Text score4Text;
+  public Text score5Text;
+  public InputField initialsInput;
+
 
   /** Instance of the GameManager. */
   public static GameOverManager instance;
@@ -43,35 +49,14 @@ public class GameOverManager : MonoBehaviour
     voiceSoundManager.audioSource = audioSource;
 
     bool citiesLost = PlayerPrefs.GetInt("NoCitiesLeft") > 0;
-    //bool launchersLost = PlayerPrefs.GetInt("NoLaunchersLeft") > 0;
 
     /** Set final score. */
     finalScoreText.text = "Final Score\n" + PlayerPrefs.GetInt("PlayerScore").ToString();
 
     waveText.text = "Wave\n" + PlayerPrefs.GetInt("LastWavePlayed").ToString();
 
-    /** Set reason for losing text.
-    if(citiesLost && launchersLost)
-      reasonForLosingText.text = "All cities and launchers lost!";
-    else if(citiesLost)
-      reasonForLosingText.text = "All cities lost!";
-    else if(launchersLost)
-      reasonForLosingText.text = "All launchers lost!";
-    else
-      reasonForLosingText.text = "Game Over";
-    */
-
     /** Set reason for losing text. */
-    if (citiesLost)
-      reasonForLosingText.text = "All cities lost!";
-    else
-      reasonForLosingText.text = "Game Over";
-
-    Analytics.CustomEvent("gameover", new Dictionary<string, object>
-      {
-      {"points", PlayerPrefs.GetInt("PlayerScore")},
-      {"wave",   PlayerPrefs.GetInt("LastWavePlayed")}
-      });
+    reasonForLosingText.text = "All Your Base Are Belong to Us!";
     }
 
   /*****************************************************************************
@@ -93,36 +78,6 @@ public class GameOverManager : MonoBehaviour
   /*****************************************************************************
    * Methods
   *****************************************************************************/
-  /*****************************************************************************
-   * displayAd *
-   * Displays an ad and tries to reward the player.
-  *****************************************************************************/
-  public void displayAd()
-    {
-    GameObject.Find("Ad").GetComponent<UnityAdsPlacement>().ShowAd(delegate (ShowResult result)
-      {
-      switch(result)
-        {
-        case ShowResult.Finished:
-          {
-          Analytics.CustomEvent("gameover_ad_finished", new Dictionary<string, object>
-            {
-            {"points", PlayerPrefs.GetInt("PlayerScore")},
-            {"wave",   PlayerPrefs.GetInt("LastWavePlayed")}
-            });
-
-          Debug.Log("Ad finished.");
-          PlayerPrefs.SetInt("ContinuingGame", 1);
-          SceneManager.LoadScene("MainGameScene");
-          break;
-          }
-        case ShowResult.Skipped: { Debug.Log("Ad skipped."); break; }
-        case ShowResult.Failed: { Debug.Log("Ad failed."); break; }
-        default: { Debug.Log("No city restored for ad."); break; }
-        }
-      });
-    }
-
   /*****************************************************************************
    * mainMenu *
    * Goes to the main menu.

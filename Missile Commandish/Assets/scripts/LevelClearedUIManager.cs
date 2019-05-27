@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Analytics;
 using UnityEngine.Monetization;
 using UnityEngine.UI;
 
@@ -23,9 +22,6 @@ public class LevelClearedUIManager : MonoBehaviour
   /** Level cleared text. */
   public Text levelClearedText;
 
-  /** Button to display ad and restore city. */
-  public Button restoreCityButton;
-
   /** Bonus from rockets. */
   public Text rocketBonusText;
 
@@ -46,41 +42,6 @@ public class LevelClearedUIManager : MonoBehaviour
   /*****************************************************************************
    * Methods
   *****************************************************************************/
-  /*****************************************************************************
-   * displayAd *
-   * Displays an ad and tries to reward the player.
-  *****************************************************************************/
-  public void displayAd()
-    {
-    if(!GameManager.instance.cityRestored && GameManager.activeCityCount < GameManager.instance.cities.Length)
-      {
-      GameObject.Find("Ad").GetComponent<UnityAdsPlacement>().ShowAd(delegate (ShowResult result)
-        {
-        switch(result)
-          {
-          case ShowResult.Finished:
-            {
-            Debug.Log("Ad finished.");
-            Analytics.CustomEvent("level_cleared_ad_finished", new Dictionary<string, object>
-              {
-              {"points",        GameManager.instance.playerScore},
-              {"wave",          GameManager.instance.currentWave},
-              {"active_cities", GameManager.activeCityCount}
-              });
-
-            GameManager.restoreCity();
-            cityRestoredText.gameObject.SetActive(GameManager.instance.cityRestored);
-            restoreCityButton.gameObject.SetActive(false);
-            break;
-            }
-          case ShowResult.Skipped: { Debug.Log("Ad skipped."); break; }
-          case ShowResult.Failed: { Debug.Log("Ad failed."); break; }
-          default: { Debug.Log("No city restored for ad."); break; }
-          }
-        });      
-      }
-    }
-
   /*****************************************************************************
    * handleQuit *
    * Handler for when the Quit button is pressed.
@@ -117,8 +78,6 @@ public class LevelClearedUIManager : MonoBehaviour
   *****************************************************************************/
   public void updateText()
     {
-    restoreCityButton.gameObject.SetActive(!GameManager.instance.cityRestored && GameManager.activeCityCount < GameManager.instance.cities.Length);
-
     int cityBonus     = GameManager.instance.cityBonus     * GameManager.activeCityCount;
     int launcherBonus = GameManager.instance.launcherBonus * GameManager.activeLauncherCount;
     int rocketBonus   = GameManager.instance.rocketBonus   * GameManager.instance.playerRocketCounter;
