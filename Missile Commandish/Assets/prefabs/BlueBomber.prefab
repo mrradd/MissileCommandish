@@ -161,7 +161,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponData: {fileID: 114584472327880894}
   timeLimit: 2
-  collisionOverride: 1
+  collisionOverride: 0
 --- !u!114 &114867635079620000
 MonoBehaviour:
   m_ObjectHideFlags: 0

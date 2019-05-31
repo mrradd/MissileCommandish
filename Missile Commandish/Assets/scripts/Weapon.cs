@@ -27,10 +27,14 @@ public class Weapon : MonoBehaviour
 	protected virtual void Start ()
     {
     if(!weaponData)
+      {
       weaponData = gameObject.GetComponent<WeaponData>();
-
+      }
+      
     if(!weaponDestroyer)
+      {
       weaponDestroyer = gameObject.GetComponent<WeaponDestroyer>();
+      }
 	  }
 
   /*****************************************************************************

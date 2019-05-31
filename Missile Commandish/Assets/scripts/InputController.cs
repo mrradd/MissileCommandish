@@ -16,8 +16,8 @@ public class InputController : MonoBehaviour
   *****************************************************************************/
   private void Update()
     {
-    if(Input.GetKeyDown(KeyCode.Equals))
-      GameManager.updateSpeedModifier();
+    if(Input.GetKeyDown(KeyCode.X))
+      PlayerPrefs.DeleteAll();
       
     /*
     if(Input.GetKeyDown(KeyCode.M))

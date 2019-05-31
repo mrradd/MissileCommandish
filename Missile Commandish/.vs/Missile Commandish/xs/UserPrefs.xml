@@ -1,12 +1,11 @@
 ﻿<Properties StartupConfiguration="{6C091239-DAB8-778A-8662-C15EA5EF5834}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/scripts/HighScoreList.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/scripts/InputController.cs">
     <Files>
-      <File FileName="Assets/scripts/GameManager.cs" Line="328" Column="7" />
-      <File FileName="Assets/scripts/InGameUIManager.cs" Line="50" Column="27" />
-      <File FileName="Assets/scripts/HighScoreEntry.cs" Line="19" Column="3" />
-      <File FileName="Assets/scripts/GameOverManager.cs" Line="6" Column="32" />
-      <File FileName="Assets/scripts/LevelClearedUIManager.cs" Line="3" Column="19" />
-      <File FileName="Assets/scripts/HighScoreList.cs" Line="6" Column="2" />
+      <File FileName="Assets/scripts/GameOverManager.cs" Line="161" Column="10" />
+      <File FileName="Assets/scripts/HighScoreEntry.cs" Line="5" Column="1" />
+      <File FileName="Assets/scripts/HighScoreList.cs" Line="18" Column="1" />
+      <File FileName="Assets/scripts/GameManager.cs" Line="106" Column="38" />
+      <File FileName="Assets/scripts/InputController.cs" Line="20" Column="31" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.ItemProperties.Missile_220Commandish PreferredExecutionTarget="Unity.Editor" />

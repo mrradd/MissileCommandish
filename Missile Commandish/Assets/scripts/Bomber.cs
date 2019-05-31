@@ -18,20 +18,6 @@ public class Bomber : EnemyWeapon
    * Unity Methods *
   *****************************************************************************/
   /*****************************************************************************
-   * OnCollisionEnter2D *
-  *****************************************************************************/
-  protected override void OnTriggerEnter2D(Collider2D collision)
-    {
-    /** Check if collided into a Player Rocket. */
-    //if(collision.gameObject.tag == GameManager.PLAYER_ROCKET_TAG)
-    //  {
-      base.OnTriggerEnter2D(collision);
-      GameManager.updatePlayerScore(weaponData.pointsValue);
-      weaponDestroyer.destroy();
-    //  }
-    }
-
-  /*****************************************************************************
    * Start *
   *****************************************************************************/
   protected override void Start()
