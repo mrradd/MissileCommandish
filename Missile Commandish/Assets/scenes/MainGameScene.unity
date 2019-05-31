@@ -668,7 +668,7 @@ PrefabInstance:
         type: 3}
       propertyPath: highScoreText
       value: 
-      objectReference: {fileID: 1432553095}
+      objectReference: {fileID: 0}
     - target: {fileID: 4301582866784550, guid: 88c436200342e4dacb7cbc21a934e6b2, type: 3}
       propertyPath: m_LocalPosition.y
       value: -38.46
@@ -705,6 +705,41 @@ PrefabInstance:
         type: 3}
       propertyPath: m_SortingOrder
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114227234208137780, guid: 88c436200342e4dacb7cbc21a934e6b2,
+        type: 3}
+      propertyPath: cameraShakeTime
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114965871817211744, guid: 88c436200342e4dacb7cbc21a934e6b2,
+        type: 3}
+      propertyPath: cameraShakeTime
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114815356004657838, guid: 88c436200342e4dacb7cbc21a934e6b2,
+        type: 3}
+      propertyPath: cameraShakeTime
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 114602666292963646, guid: 88c436200342e4dacb7cbc21a934e6b2,
+        type: 3}
+      propertyPath: cameraShakeTime
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 114935657462759564, guid: 88c436200342e4dacb7cbc21a934e6b2,
+        type: 3}
+      propertyPath: cameraShakeTime
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 114599383269851978, guid: 88c436200342e4dacb7cbc21a934e6b2,
+        type: 3}
+      propertyPath: cameraShakeTime
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114682643807821490, guid: 88c436200342e4dacb7cbc21a934e6b2,
+        type: 3}
+      propertyPath: cameraShakeTime
+      value: 0.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 88c436200342e4dacb7cbc21a934e6b2, type: 3}
@@ -1545,85 +1580,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 8519735094830444025}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1432553093
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1432553094}
-  - component: {fileID: 1432553096}
-  - component: {fileID: 1432553095}
-  m_Layer: 5
-  m_Name: TxtHighScore
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &1432553094
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1432553093}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.99998176, y: 0.99998176, z: 0.99998176}
-  m_Children: []
-  m_Father: {fileID: 649721261}
-  m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.13250001, y: 0.06477778}
-  m_AnchorMax: {x: 0.13250001, y: 0.06477778}
-  m_AnchoredPosition: {x: 0.3499756, y: 0.010009766}
-  m_SizeDelta: {x: 212.7, y: 22.700012}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1432553095
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1432553093}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
-      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_FontData:
-    m_Font: {fileID: 12800000, guid: deaeba9a8ebf1482eb137abe8db47638, type: 3}
-    m_FontSize: 14
-    m_FontStyle: 0
-    m_BestFit: 0
-    m_MinSize: 10
-    m_MaxSize: 40
-    m_Alignment: 4
-    m_AlignByGeometry: 0
-    m_RichText: 1
-    m_HorizontalOverflow: 0
-    m_VerticalOverflow: 0
-    m_LineSpacing: 1
-  m_Text: High Score 999999999
---- !u!222 &1432553096
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1432553093}
-  m_CullTransparentMesh: 0
 --- !u!114 &1475845604 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 114048670924272050, guid: 88c436200342e4dacb7cbc21a934e6b2,
@@ -2011,7 +1967,7 @@ PrefabInstance:
     - target: {fileID: 114780088854221446, guid: 78b28f5346eaf4291867134080773727,
         type: 3}
       propertyPath: reviveBuildingScoreThreshold
-      value: 4500
+      value: 5500
       objectReference: {fileID: 0}
     - target: {fileID: 114780088854221446, guid: 78b28f5346eaf4291867134080773727,
         type: 3}

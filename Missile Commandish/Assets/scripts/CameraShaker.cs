@@ -42,11 +42,15 @@ public class CameraShaker : MonoBehaviour
 
   /*****************************************************************************
    * incrementShakeTimer *
-   * Increases the time left for shaking by the given value.
+   * Increases the time left for shaking by the given value. Limits the amount
+   * of time to shake for.
    * 
    * @param  seconds  Amount of time to increase the timer by.
   *****************************************************************************/
-  public void incrementShakeTimer(float seconds) { mShakeTimer += seconds; }
+  public void incrementShakeTimer(float seconds)
+    {
+    mShakeTimer += mShakeTimer + seconds >= 2f ? 0 : seconds;
+    }
 
   /*****************************************************************************
    * shake *

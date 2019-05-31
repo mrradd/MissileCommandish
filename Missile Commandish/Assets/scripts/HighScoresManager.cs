@@ -6,11 +6,15 @@ using UnityEngine.SceneManagement;
 using System;
 
 /*******************************************************************************
- * class MainMenuManager *
- * Handles Main Menu functionality.
+ * class HighScoreManager *
+ * Handles High Score screen functionality.
 *******************************************************************************/
-public class MainMenuManager : MonoBehaviour
+public class HighScoresManager : MonoBehaviour
   {
+  public Text[] highScores;
+
+  protected HighScoreList mHighScoreList;
+
   /*****************************************************************************
    * Unity Methods
   *****************************************************************************/
@@ -18,7 +22,8 @@ public class MainMenuManager : MonoBehaviour
    * Start
   *****************************************************************************/
   protected void Start()
-    {  
+    {
+    initHighScoreList();
     }
 
   /*****************************************************************************
@@ -28,7 +33,7 @@ public class MainMenuManager : MonoBehaviour
     {
     if(Input.GetKeyDown(KeyCode.Escape))
       {
-      quit();
+      SceneManager.LoadScene("MainMenuScene");
       }
     }
 
@@ -36,34 +41,41 @@ public class MainMenuManager : MonoBehaviour
    * Methods
   *****************************************************************************/
   /*****************************************************************************
-   * highScores *
-   * Goes to the high score scene.
+   * getPlaceText *
+   * Gets the text for the passed in integer up to 5.
+   * @param  place  Place to get text version of.
   *****************************************************************************/
-  public void highScores()
+  protected string getPlaceText(int place)
     {
-    Debug.Log("high scores");
-    SceneManager.LoadScene("HighScoreScene");
+    return place == 1 ? "1st" :
+           place == 2 ? "2nd" :
+           place == 3 ? "3rd" :
+           place == 4 ? "4th" : "5th";
+    }
+
+  /*****************************************************************************
+   * initHighScoreList *
+   * Initializes the score text list.
+  *****************************************************************************/
+  protected void initHighScoreList()
+    {
+    /** Init high score stuff. */
+    mHighScoreList = mHighScoreList ?? new HighScoreList();
+    for(int i = 0; i < mHighScoreList.highScores.Count; i++)
+      {
+      HighScoreEntry hse = mHighScoreList.highScores[i];
+
+      highScores[i].text = getPlaceText(hse.place) + " " + hse.name + " - " + hse.score;
+      }
     }
 
   /*****************************************************************************
    * playGame *
    * Starts a new game.
   *****************************************************************************/
-  public void playGame()
+  public void mainMenu()
     {
-    Debug.Log("playGame");
-    PlayerPrefs.SetInt("ContinuingGame", 0);
-    SceneManager.LoadScene("MainGameScene");
-    }
-
-  /*****************************************************************************
-   * quit *
-   * Quits the game.
-  *****************************************************************************/
-  public void quit()
-    {
-    Debug.Log("quit");
-    PlayerPrefs.SetInt("ContinuingGame", 0);
-    Application.Quit();
+    Debug.Log("mainMenu");
+    SceneManager.LoadScene("MainMenuScene");
     }
   }

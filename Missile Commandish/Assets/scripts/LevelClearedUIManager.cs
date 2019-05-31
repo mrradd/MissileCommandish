@@ -88,7 +88,9 @@ public class LevelClearedUIManager : MonoBehaviour
     launcherBonusText.text = GameManager.instance.launcherBonus + " x " + GameManager.activeLauncherCount          + " = " + launcherBonus;
     rocketBonusText.text   = GameManager.instance.rocketBonus   + " x " + GameManager.instance.playerRocketCounter + " = " + rocketBonus;
 
-    cityRestoredText.gameObject.SetActive(false);
+    GameManager.restoreCity();
+
+    cityRestoredText.gameObject.SetActive(GameManager.instance.cityRestored);
 
     levelClearedText.text = "Wave " + GameManager.instance.currentWave + " Cleared!";
 

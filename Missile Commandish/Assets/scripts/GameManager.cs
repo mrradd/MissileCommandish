@@ -447,8 +447,11 @@ public class GameManager : MonoBehaviour
     bool buildingRestored = false;
 
     /** Try to restore a city. */
-    if(!buildingRestored)
+    if(instance.reviveBuildingScore >= instance.reviveBuildingScoreThreshold && !buildingRestored)
       {
+      /** Reset the revive building score even if no city restored. */
+      instance.reviveBuildingScore = 0;
+
       for(int i = 0; i < instance.cities.Length; i++)
         {
         if(!instance.cities[i].gameObject.activeSelf)
@@ -504,20 +507,22 @@ public class GameManager : MonoBehaviour
   *****************************************************************************/
   public static void startNextLevel()
     {
-    if(PlayerPrefs.GetInt("ContinuingGame") == 1)
-      {
-      PlayerPrefs.SetInt("ContinuingGame", 0);
-      instance.playerScore = PlayerPrefs.GetInt("PlayerScore");
-      instance.currentWave = PlayerPrefs.GetInt("LastWavePlayed");
-      instance.inGameUIManager.updatePlayerScoreText();
+    //if(PlayerPrefs.GetInt("ContinuingGame") == 1)
+    //  {
+    //  PlayerPrefs.SetInt("ContinuingGame", 0);
+    //  instance.playerScore = PlayerPrefs.GetInt("PlayerScore");
+    //  instance.currentWave = PlayerPrefs.GetInt("LastWavePlayed");
+    //  instance.inGameUIManager.updatePlayerScoreText();
 
-      /** Only start out with one city. */
-      instance.destroyAllButOneCity();
-      }
-    else
-      {
-      instance.currentWave++;
-      }
+    //  /** Only start out with one city. */
+    //  instance.destroyAllButOneCity();
+    //  }
+    //else
+      //{
+      //instance.currentWave++;
+      //}
+
+    instance.currentWave++;
 
     instance.mTransitionTimer        = 0f;
     instance.enemyWeaponCounter      = instance.maxEnemyWeaponCount;

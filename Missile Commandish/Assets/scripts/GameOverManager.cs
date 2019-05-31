@@ -201,6 +201,8 @@ public class GameOverManager : MonoBehaviour
           newPlace++;
           }
 
+        PlayerPrefs.Save();
+
         instance.newHighScoreText.gameObject.SetActive(false);
         instance.initialsInput.gameObject.SetActive(false);
 
