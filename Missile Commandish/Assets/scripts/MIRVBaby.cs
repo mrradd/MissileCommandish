@@ -15,12 +15,4 @@ public class MIRVBaby : EnemyRocket
   /*****************************************************************************
    * Methods 
   *****************************************************************************/
-  /*****************************************************************************
-   * updateWeaponCounts *
-   * Updates the weapon counts.
-  *****************************************************************************/
-  protected override void updateWeaponCounts()
-    {
-    GameManager.updateActiveEnemyWeaponCount(1);
-    }
   }

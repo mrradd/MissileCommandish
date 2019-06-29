@@ -20,7 +20,7 @@ public class EnemyExplosion : Explosion
     if(animator.GetCurrentAnimatorStateInfo(0).IsName("ExplosionEnd"))
       {
       GameManager.updateActiveEnemyWeaponCount(-1);
-      Debug.Log(GameManager.instance.activeEnemyWeapons);
+      Debug.Log("Active: " + GameManager.instance.activeEnemyWeapons);
       Destroy(gameObject);
       }
     }

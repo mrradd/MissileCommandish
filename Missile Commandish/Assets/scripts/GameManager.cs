@@ -353,9 +353,9 @@ public class GameManager : MonoBehaviour
   public static bool checkWin()
     {
     return instance.mainCamera.gameObject.activeSelf &&
-           instance.enemyWeaponCounter <= 0          &&
+           instance.enemyWeaponCounter < 1          &&
            activeCityCount > 0                       &&
-           instance.activeEnemyWeapons <= 0;
+           instance.activeEnemyWeapons < 1;
     }
 
   /*****************************************************************************
@@ -387,12 +387,29 @@ public class GameManager : MonoBehaviour
 
     instance.mTransitionTimer += Time.deltaTime;
 
-    if(instance.mTransitionTimer >= instance.levelClearedTimeLimit && instance.activeEnemyWeapons <= 0)
+    if(instance.getActiveClonesCount() < 1 && instance.mTransitionTimer >= instance.levelClearedTimeLimit && instance.activeEnemyWeapons <= 0)
       {
       Debug.Log("gameOver");
       saveFinalStats();
       SceneManager.LoadScene("GameOverScene");
       }
+    }
+
+  /*****************************************************************************
+   * getActiveClonesCount *
+   * Queries to see if there are any clones currently active.
+  *****************************************************************************/
+  public int getActiveClonesCount()
+    {
+    GameObject[] playerRockets    = GameObject.FindGameObjectsWithTag("PlayerRocket");
+    GameObject[] enemyRockets     = GameObject.FindGameObjectsWithTag("EnemyRocket");
+    GameObject[] playerExplosions = GameObject.FindGameObjectsWithTag("PlayerExplosion");
+    GameObject[] enemyExplosions  = GameObject.FindGameObjectsWithTag("EnemyExplosion");
+    GameObject[] bombs            = GameObject.FindGameObjectsWithTag("Bomb");
+    GameObject[] bombers          = GameObject.FindGameObjectsWithTag("BlueBomber");
+    GameObject[] reticles         = GameObject.FindGameObjectsWithTag("Reticle");
+
+    return playerRockets.Length + enemyRockets.Length + playerExplosions.Length + enemyExplosions.Length + bombs.Length + bombers.Length + reticles.Length;
     }
 
   /*****************************************************************************
@@ -404,7 +421,7 @@ public class GameManager : MonoBehaviour
     instance.mTransitionTimer += Time.deltaTime;
 
     /** Delay level cleared, so the transition is not abrupt. */
-    if(instance.mTransitionTimer >= instance.levelClearedTimeLimit && instance.mainCamera.gameObject.activeSelf)
+    if(instance.getActiveClonesCount() < 1 && instance.mTransitionTimer >= instance.levelClearedTimeLimit && instance.mainCamera.gameObject.activeSelf)
       {
       Debug.Log("levelCleared");
 
