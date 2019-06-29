@@ -461,10 +461,8 @@ public class GameManager : MonoBehaviour
   *****************************************************************************/
   public static void restoreCity()
     {
-    bool buildingRestored = false;
-
     /** Try to restore a city. */
-    if(instance.reviveBuildingScore >= instance.reviveBuildingScoreThreshold && !buildingRestored)
+    if(instance.reviveBuildingScore >= instance.reviveBuildingScoreThreshold && !instance.cityRestored)
       {
       /** Reset the revive building score even if no city restored. */
       instance.reviveBuildingScore = 0;
@@ -476,14 +474,13 @@ public class GameManager : MonoBehaviour
           Debug.Log("City restored.");
           instance.cities[i].gameObject.SetActive(true);
           Destroy(instance.cities[i].GetComponent<Building>().destroyedVersion);
-          buildingRestored      = true;
           instance.cityRestored = true;
           break;
           }
         }
       }
 
-    if(!buildingRestored)
+    if(!instance.cityRestored)
       Debug.Log("Didn't restore city.");
     }
 
@@ -496,12 +493,9 @@ public class GameManager : MonoBehaviour
     /** Try to restore a launcher. */
     for (int i = 0; i < instance.launchers.Length; i++)
       {
-      if (!instance.launchers[i].gameObject.activeSelf)
-        {
-        Debug.Log("Launcher restored.");
-        instance.launchers[i].gameObject.SetActive(true);
-        Destroy(instance.launchers[i].GetComponent<Building>().destroyedVersion);
-        }
+      Debug.Log("Launcher restored.");
+      instance.launchers[i].gameObject.SetActive(true);
+      Destroy(instance.launchers[i].GetComponent<Building>().destroyedVersion);
       }
     }
 
@@ -524,21 +518,6 @@ public class GameManager : MonoBehaviour
   *****************************************************************************/
   public static void startNextLevel()
     {
-    //if(PlayerPrefs.GetInt("ContinuingGame") == 1)
-    //  {
-    //  PlayerPrefs.SetInt("ContinuingGame", 0);
-    //  instance.playerScore = PlayerPrefs.GetInt("PlayerScore");
-    //  instance.currentWave = PlayerPrefs.GetInt("LastWavePlayed");
-    //  instance.inGameUIManager.updatePlayerScoreText();
-
-    //  /** Only start out with one city. */
-    //  instance.destroyAllButOneCity();
-    //  }
-    //else
-      //{
-      //instance.currentWave++;
-      //}
-
     instance.currentWave++;
 
     instance.mTransitionTimer        = 0f;
