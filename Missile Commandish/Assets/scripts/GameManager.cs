@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -372,7 +373,6 @@ public class GameManager : MonoBehaviour
       if(i == toSpare)
         continue;
       
-      Debug.Log("City " + i + " destoryed.");
       instance.cities[i].GetComponent<Building>().initDestroyedVesion(false);
       }
     }
@@ -439,9 +439,16 @@ public class GameManager : MonoBehaviour
   *****************************************************************************/
   public static void mainMenu()
     {
-    Debug.Log("mainMenu");
     PlayerPrefs.SetInt("ContinuingGame", 0);
-    SceneManager.LoadScene("MainMenuScene");
+
+    if(Application.platform == RuntimePlatform.WebGLPlayer)
+      {
+      SceneManager.LoadScene("MainMenuSceneWebGL");
+      }
+    else
+      {
+      SceneManager.LoadScene("MainMenuScene");
+      }
     }
 
   /*****************************************************************************
@@ -500,7 +507,7 @@ public class GameManager : MonoBehaviour
       }
 
     if(!instance.cityRestored)
-      Debug.Log("Didn't restore city.");
+      Debug.Log("Didn't restore city. restore score: " + instance.reviveBuildingScore);
     }
 
   /*****************************************************************************

@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using UnityEngine.Monetization;
+using UnityEditor;
 
 /*******************************************************************************
  * class GameOverManager *
@@ -133,7 +134,15 @@ public class GameOverManager : MonoBehaviour
     {
     Debug.Log("go::mainMenu");
     PlayerPrefs.SetInt("ContinuingGame", 0);
-    SceneManager.LoadScene("MainMenuScene");
+
+    if(Application.platform == RuntimePlatform.WebGLPlayer)
+      {
+      SceneManager.LoadScene("MainMenuSceneWebGL");
+      }
+    else
+      {
+      SceneManager.LoadScene("MainMenuScene");
+      }
     }
 
   /*****************************************************************************

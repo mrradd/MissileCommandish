@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/scenes/Splash.unity
+    guid: 3da1bb227bfdc4b28b7b3a929d47943a
+  - enabled: 1
     path: Assets/scenes/MainMenuScene.unity
     guid: f93efe6f29bfa43f089d903cf0704006
   - enabled: 1
@@ -17,4 +20,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/scenes/HighScoreScene.unity
     guid: f71fdf195ba2e40cb976029162c64704
+  - enabled: 1
+    path: Assets/scenes/MainMenuSceneWebGL.unity
+    guid: 885b99a15f896441a8d7da5883b59692
   m_configObjects: {}

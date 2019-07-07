@@ -41,7 +41,7 @@ public class MainMenuManager : MonoBehaviour
   *****************************************************************************/
   public void highScores()
     {
-    Debug.Log("high scores");
+    Debug.Log("menu::highScores");
     SceneManager.LoadScene("HighScoreScene");
     }
 
@@ -51,7 +51,7 @@ public class MainMenuManager : MonoBehaviour
   *****************************************************************************/
   public void playGame()
     {
-    Debug.Log("playGame");
+    Debug.Log("menu::playGame");
     PlayerPrefs.SetInt("ContinuingGame", 0);
     SceneManager.LoadScene("MainGameScene");
     }
@@ -62,7 +62,7 @@ public class MainMenuManager : MonoBehaviour
   *****************************************************************************/
   public void quit()
     {
-    Debug.Log("quit");
+    Debug.Log("menu::quit");
     PlayerPrefs.SetInt("ContinuingGame", 0);
     Application.Quit();
     }

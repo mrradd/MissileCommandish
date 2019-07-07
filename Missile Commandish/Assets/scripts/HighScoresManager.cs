@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System;
+using UnityEditor;
 
 /*******************************************************************************
  * class HighScoreManager *
@@ -33,7 +34,14 @@ public class HighScoresManager : MonoBehaviour
     {
     if(Input.GetKeyDown(KeyCode.Escape))
       {
-      SceneManager.LoadScene("MainMenuScene");
+      if(Application.platform == RuntimePlatform.WebGLPlayer)
+        {
+        SceneManager.LoadScene("MainMenuSceneWebGL");
+        }
+      else
+        {
+        SceneManager.LoadScene("MainMenuScene");
+        }
       }
     }
 
@@ -75,7 +83,15 @@ public class HighScoresManager : MonoBehaviour
   *****************************************************************************/
   public void mainMenu()
     {
-    Debug.Log("mainMenu");
-    SceneManager.LoadScene("MainMenuScene");
+    Debug.Log("hs::mainMenu");
+
+    if(Application.platform == RuntimePlatform.WebGLPlayer)
+      {
+      SceneManager.LoadScene("MainMenuSceneWebGL");
+      }
+    else
+      {
+      SceneManager.LoadScene("MainMenuScene");
+      }
     }
   }
