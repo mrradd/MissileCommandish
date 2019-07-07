@@ -8,7 +8,7 @@ using UnityEngine;
 *******************************************************************************/
 public class AIController : MonoBehaviour
   {
-  public    float timeBetweenLaunches = 3f;
+  public    float timeBetweenLaunches = 2f;
   protected float mTBLCounter         = 0f;
 
   /*****************************************************************************
@@ -46,9 +46,9 @@ public class AIController : MonoBehaviour
       {
       mTBLCounter = 0f;
 
-      /** Launch a random number of weapons. */
-      float qtyToLaunch = Mathf.Floor((GameManager.instance.currentWave / 3));
-      int launchCount = 1;//(int)Random.Range(1f, qtyToLaunch > 3f ? 3f : qtyToLaunch);
+      /** Launch a random number of weapons. save qty for 'hard mode'. */
+      //float qtyToLaunch = Mathf.Max(1, Mathf.Floor((GameManager.instance.currentWave / 3)));
+      int launchCount = 1; //(int)Random.Range(1f, qtyToLaunch > 4f ? 4f : qtyToLaunch);
       for(int i = 0; i < launchCount; i++)
         {
         /** Make sure there is enough ammo. */

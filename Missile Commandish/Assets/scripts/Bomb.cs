@@ -31,7 +31,6 @@ public class Bomb : EnemyWeapon
       {
       /** Handling destruction and active weapon count here since we do not want
         * to play explosion animation which normally handles it. */
-      GameManager.updateActiveEnemyWeaponCount(-1);
       weaponDestroyer.destroy();
       }
     }
@@ -39,12 +38,4 @@ public class Bomb : EnemyWeapon
   /*****************************************************************************
    * Methods 
   *****************************************************************************/
-  /*****************************************************************************
-   * updateWeaponCounts *
-   * Updates the weapon counts.
-  *****************************************************************************/
-  protected override void updateWeaponCounts()
-    {
-    GameManager.updateActiveEnemyWeaponCount(1);
-    }
   }

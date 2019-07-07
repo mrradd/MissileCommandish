@@ -28,7 +28,10 @@ public class Building : MonoBehaviour
   *****************************************************************************/
   protected virtual void OnTriggerEnter2D(Collider2D collision)
     {
-    initDestroyedVesion(true);
+    if(destroyedVersion == null)
+      {
+      initDestroyedVesion(true);  
+      }
     }
 
   /*****************************************************************************
@@ -40,6 +43,8 @@ public class Building : MonoBehaviour
   *****************************************************************************/
   public void initDestroyedVesion(bool playExplosion)
     {
+    Debug.Log("Building.initDestroyedVesion: " + gameObject.name);
+
     /** Adjust the position of the flaming building object. */
     Vector3 pos = gameObject.transform.position;
 

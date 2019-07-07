@@ -473,7 +473,26 @@ public class GameManager : MonoBehaviour
           {
           Debug.Log("City restored.");
           instance.cities[i].gameObject.SetActive(true);
-          Destroy(instance.cities[i].GetComponent<Building>().destroyedVersion);
+
+          /** Instance has destroyed version. */
+          if(instance.cities[i].GetComponent<Building>().destroyedVersion != null)
+            {
+            Destroy(instance.cities[i].GetComponent<Building>().destroyedVersion);  
+            Debug.Log("Destroyed city flames by reference: " + instance.cities[i].name);
+            }
+          else
+            {
+            /** Instance did not have destroyed version for some reason, so let's look for it. 
+            This is to hopefully solve the issue where a building is destroyed, and the flame object
+            is not destroyed. */
+            GameObject obj = GameObject.Find(instance.cities[i].name + "-Flames");
+            if(obj != null)
+              {
+              Destroy(obj);
+              Debug.Log("Destroyed city flames by name: " + instance.cities[i].name);
+              }
+            }
+
           instance.cityRestored = true;
           break;
           }
@@ -496,6 +515,25 @@ public class GameManager : MonoBehaviour
       Debug.Log("Launcher restored.");
       instance.launchers[i].gameObject.SetActive(true);
       Destroy(instance.launchers[i].GetComponent<Building>().destroyedVersion);
+
+      /** Instance has destroyed version. */
+      if(instance.launchers[i].GetComponent<Building>().destroyedVersion != null)
+        {
+        Destroy(instance.launchers[i].GetComponent<Building>().destroyedVersion);
+        Debug.Log("Destroyed launcher flames by reference: " + instance.launchers[i].name);
+        }
+      else
+        {
+        /** Instance did not have destroyed version for some reason, so let's look for it. 
+        This is to hopefully solve the issue where a building is destroyed, and the flame object
+        is not destroyed. */
+        GameObject obj = GameObject.Find(instance.launchers[i].name + "-Flames");
+        if(obj != null)
+          {
+          Debug.Log("Destroyed launcher flames by name: " + instance.launchers[i].name);
+          Destroy(obj);
+          }
+        }
       }
     }
 
@@ -577,16 +615,6 @@ public class GameManager : MonoBehaviour
         instance.levelClearedObject.SetActive(true);
         break;
       }
-    }
-
-  /*****************************************************************************
-   * updateActiveEnemyWeaponCount *
-   * Increments active Enemy Weapon counter by passed in value.
-   * @param  value  Value to adjust count by.
-  *****************************************************************************/
-  public static void updateActiveEnemyWeaponCount(int value)
-    {
-    instance.activeEnemyWeapons = instance.activeEnemyWeapons + value;
     }
 
   /*****************************************************************************

@@ -35,9 +35,6 @@ public class Bomber : EnemyWeapon
     /** Rocket reached the target. */
     if(gameObject.transform.position == weaponData.target && gameObject.activeSelf)
       {
-      /** Handling destruction and active weapon count here since we do not want
-        * to play explosion animation which normally handles it. */
-      GameManager.updateActiveEnemyWeaponCount(-1);
       weaponDestroyer.destroy();
       }
 
@@ -80,7 +77,6 @@ public class Bomber : EnemyWeapon
   *****************************************************************************/
   protected override void updateWeaponCounts()
     {
-    GameManager.updateActiveEnemyWeaponCount(1);
     GameManager.updateEnemyWeaponCount(-1);
     }
   }

@@ -29,7 +29,6 @@ public class EnemyRocket : EnemyWeapon
   *****************************************************************************/
   protected override void updateWeaponCounts()
     {
-    GameManager.updateActiveEnemyWeaponCount(1);
     GameManager.updateEnemyWeaponCount(-1);
     }
   }
