@@ -54,18 +54,11 @@ public class AIController : MonoBehaviour
         /** Make sure there is enough ammo. */
         if(GameManager.instance.enemyWeaponCounter <= 0)
           return;
-        
+
         trigger = (int)Random.Range(1f, 100.0f);
 
-        /** Launch Enemy Rocket. */
-        if(trigger >= 1 && trigger <= 66)
-          {
-          int index = (int)Random.Range(0f, GameManager.enemyRocketSpawners.Length);
-          GameManager.enemyRocketSpawners[index].spawn();
-          }
-
         /** Launch bomber. */
-        else if(trigger >= 67 && trigger <= 89 && GameManager.instance.currentWave >= 3 && GameManager.instance.bomberCount > 0)
+        if(trigger >= 67 && trigger <= 89 && GameManager.instance.currentWave >= 3 && GameManager.instance.bomberCount > 0)
           {
           int index = (int)Random.Range(0f, GameManager.bomberSpawners.Length);
           GameManager.bomberSpawners[index].spawn();
@@ -78,6 +71,13 @@ public class AIController : MonoBehaviour
           int index = (int)Random.Range(0f, GameManager.mirvRocketSpawners.Length);
           GameManager.mirvRocketSpawners[index].spawn();
           GameManager.instance.mirvCount--;
+          }
+
+        /** Launch Enemy Rocket. */
+        else
+          {
+          int index = (int)Random.Range(0f, GameManager.enemyRocketSpawners.Length);
+          GameManager.enemyRocketSpawners[index].spawn();
           }
         }
       }
