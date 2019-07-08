@@ -28,6 +28,46 @@ public class AIController : MonoBehaviour
   /*****************************************************************************
    * Methods
   *****************************************************************************/
+  protected void launch()
+    {
+    mTBLCounter = 0f;
+
+    /** Launch a random number of weapons. save qty for 'hard mode'. */
+    //float qtyToLaunch = Mathf.Max(1, Mathf.Floor((GameManager.instance.currentWave / 3)));
+    int launchCount = 1; //(int)Random.Range(1f, qtyToLaunch > 4f ? 4f : qtyToLaunch);
+    for(int i = 0; i < launchCount; i++)
+      {
+      /** Make sure there is enough ammo. */
+      if(GameManager.instance.enemyWeaponCounter <= 0)
+        return;
+
+      int trigger = (int)Random.Range(1f, 100.0f);
+
+      /** Launch bomber. */
+      if(trigger >= 67 && trigger <= 89 && GameManager.instance.currentWave >= 3 && GameManager.instance.bomberCount > 0)
+        {
+        int index = (int)Random.Range(0f, GameManager.bomberSpawners.Length);
+        GameManager.bomberSpawners[index].spawn();
+        GameManager.instance.bomberCount--;
+        }
+
+      /** Launch MIRV. */
+      else if(trigger >= 90 && trigger <= 100 && GameManager.instance.currentWave >= 6 && GameManager.instance.mirvCount > 0)
+        {
+        int index = (int)Random.Range(0f, GameManager.mirvRocketSpawners.Length);
+        GameManager.mirvRocketSpawners[index].spawn();
+        GameManager.instance.mirvCount--;
+        }
+
+      /** Launch Enemy Rocket. */
+      else
+        {
+        int index = (int)Random.Range(0f, GameManager.enemyRocketSpawners.Length);
+        GameManager.enemyRocketSpawners[index].spawn();
+        }
+      }
+    }
+
   /*****************************************************************************
    * spawnEnemyWeapon *
    * Randomly tries to spawn a random number of Enemy Weapons from a random Enemy
@@ -41,44 +81,20 @@ public class AIController : MonoBehaviour
 
     mTBLCounter += Time.deltaTime;
 
-    if(trigger == 1 || mTBLCounter >= timeBetweenLaunches || GameManager.instance.gameLost || GameManager.activeLauncherCount <= 0 ||
-       GameManager.instance.playerRocketCounter <= 0)
+    if(Application.platform != RuntimePlatform.WebGLPlayer)
       {
-      mTBLCounter = 0f;
-
-      /** Launch a random number of weapons. save qty for 'hard mode'. */
-      //float qtyToLaunch = Mathf.Max(1, Mathf.Floor((GameManager.instance.currentWave / 3)));
-      int launchCount = 1; //(int)Random.Range(1f, qtyToLaunch > 4f ? 4f : qtyToLaunch);
-      for(int i = 0; i < launchCount; i++)
+      if(trigger == 1 || mTBLCounter >= timeBetweenLaunches || GameManager.instance.gameLost || GameManager.activeLauncherCount <= 0 ||
+         GameManager.instance.playerRocketCounter <= 0)
         {
-        /** Make sure there is enough ammo. */
-        if(GameManager.instance.enemyWeaponCounter <= 0)
-          return;
+        launch();
+        }
+      }
 
-        trigger = (int)Random.Range(1f, 100.0f);
-
-        /** Launch bomber. */
-        if(trigger >= 67 && trigger <= 89 && GameManager.instance.currentWave >= 3 && GameManager.instance.bomberCount > 0)
-          {
-          int index = (int)Random.Range(0f, GameManager.bomberSpawners.Length);
-          GameManager.bomberSpawners[index].spawn();
-          GameManager.instance.bomberCount--;
-          }
-
-        /** Launch MIRV. */
-        else if(trigger >= 90 && trigger <= 100 && GameManager.instance.currentWave >= 6 && GameManager.instance.mirvCount > 0)
-          {
-          int index = (int)Random.Range(0f, GameManager.mirvRocketSpawners.Length);
-          GameManager.mirvRocketSpawners[index].spawn();
-          GameManager.instance.mirvCount--;
-          }
-
-        /** Launch Enemy Rocket. */
-        else
-          {
-          int index = (int)Random.Range(0f, GameManager.enemyRocketSpawners.Length);
-          GameManager.enemyRocketSpawners[index].spawn();
-          }
+    else
+      {
+      if(trigger == 1 || mTBLCounter >= timeBetweenLaunches)
+        {
+        launch();
         }
       }
     }
