@@ -33,7 +33,7 @@ public class AIController : MonoBehaviour
     mTBLCounter = 0f;
 
     /** Launch a random number of weapons. save qty for 'hard mode'. */
-    //float qtyToLaunch = Mathf.Max(1, Mathf.Floor((GameManager.instance.currentWave / 3)));
+    //float qtyToLaunch = Mathf.Max(1, Mathf.Floor((GameManager.instance.currentWave / 6)));
     int launchCount = 1; //(int)Random.Range(1f, qtyToLaunch > 4f ? 4f : qtyToLaunch);
     for(int i = 0; i < launchCount; i++)
       {
@@ -77,25 +77,31 @@ public class AIController : MonoBehaviour
   *****************************************************************************/
   protected void spawnEnemyWeapon()
     {
-    int trigger = (int)Random.Range(0f, 125.0f);
+    int trigger = (int)Random.Range(0f, 175.0f);
 
     mTBLCounter += Time.deltaTime;
 
-    if(Application.platform != RuntimePlatform.WebGLPlayer)
+    if(trigger == 1 || mTBLCounter >= timeBetweenLaunches || GameManager.instance.gameLost || GameManager.activeLauncherCount <= 0 ||
+       GameManager.instance.playerRocketCounter <= 0)
       {
-      if(trigger == 1 || mTBLCounter >= timeBetweenLaunches || GameManager.instance.gameLost || GameManager.activeLauncherCount <= 0 ||
-         GameManager.instance.playerRocketCounter <= 0)
-        {
-        launch();
-        }
+      launch();
       }
 
-    else
-      {
-      if(trigger == 1 || mTBLCounter >= timeBetweenLaunches)
-        {
-        launch();
-        }
-      }
+    //if(Application.platform != RuntimePlatform.WebGLPlayer)
+    //  {
+    //  if(trigger == 1 || mTBLCounter >= timeBetweenLaunches || GameManager.instance.gameLost || GameManager.activeLauncherCount <= 0 ||
+    //     GameManager.instance.playerRocketCounter <= 0)
+    //    {
+    //    launch();
+    //    }
+    //  }
+
+    //else
+      //{
+      //if(mTBLCounter >= timeBetweenLaunches)
+      //  {
+      //  launch();
+      //  }
+      //}
     }
   }
