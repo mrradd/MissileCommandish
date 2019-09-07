@@ -20,7 +20,8 @@ public class EnemyWeapon : Weapon
   protected override void Start()
     {
     base.Start();
-    weaponData.speed += GameManager.instance.speedMod;
+    int randomMod = (int)Random.Range(1f, 15.0f);
+    weaponData.speed += GameManager.instance.speedMod + randomMod;
     }
 
   /*****************************************************************************
